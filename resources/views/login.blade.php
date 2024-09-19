@@ -9,7 +9,7 @@
     <style>
         body {
             background-color: #2596be; /* Blue background */
-            background: url('images/IMG1.jpg') no-repeat center center fixed;
+            background: url('images/IMG2.jpeg') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Arial', sans-serif;
             color: #fff; /* White text */
