@@ -15,4 +15,9 @@ class FeedbackForm extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function FeedbackResponse()
+    {
+        return $this->hasMany(FeedbackResponse::class);
+    }
 }
