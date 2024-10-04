@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RWController;
 
 // Rute untuk tampilan utama
 Route::get('/', function () {
@@ -18,9 +20,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rute untuk dashboard admin
-Route::get('/dashboard', function () {
-    // Tambahkan logika atau rute ke kontroler dashboard admin di sini
-})->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Rute untuk dashboard petugas
 Route::get('/petugas/dashboard', function () {
@@ -28,8 +28,4 @@ Route::get('/petugas/dashboard', function () {
 })->name('Petugas.dashboard');
 
 // Rute untuk dashboard RW
-Route::get('/rw/dashboard', function () {
-    // Tambahkan logika atau rute ke kontroler dashboard RW di sini
-})->name('RW.dashboard');
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/rw/dashboard', [RWController::class, 'dashboard'])->name('RW.dashboard');
