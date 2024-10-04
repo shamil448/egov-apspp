@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 
 // Rute untuk tampilan utama
 Route::get('/', function () {
@@ -30,3 +31,5 @@ Route::get('/petugas/dashboard', function () {
 Route::get('/rw/dashboard', function () {
     // Tambahkan logika atau rute ke kontroler dashboard RW di sini
 })->name('RW.dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
