@@ -117,11 +117,11 @@
         .header .greenify {
             color: #000000;
             font-size: 26px;
-            margin-right: 20px; /* Jarak antara Greenify dan Government */
+            margin-right: 20px; /* Jarak antara Greenify dan Rukun Warga */
             font-family: 'Baskervville', serif; /* Mengatur font menjadi Baskerville */
         }
 
-        .header .government {
+        .header .RW {
             color: #000000;
             font-size: 26px;
             font-family: 'Baskervville', serif; /* Mengatur font menjadi Baskerville */
@@ -232,7 +232,7 @@
                 </div>
                 <div class="title-container">
                     <img src="{{ asset('images/woman.png') }}" alt="Woman Logo">
-                    <span class="government">Government</span>
+                    <span class="RW">Rukun Warga</span>
                 </div>
             </div>
 
