@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedback_response', function (Blueprint $table) {
+        Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('feedback_id')->constrained('feedback_form'); // Relasi ke feedback_form
-            $table->foreignId('user_id')->constrained('users'); // Relasi ke tabel users
-            $table->text('response_text');
+            $table->string('username');
+            $table->string('phone');
+            $table->enum('gender', ['male', 'female']);
+            $table->string('access_right');
+            $table->text('address');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('feedback_response');
+        Schema::dropIfExists('accounts');
     }
 };

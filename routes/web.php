@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -30,3 +32,6 @@ Route::get('/petugas/dashboard', function () {
 Route::get('/rw/dashboard', function () {
     // Tambahkan logika atau rute ke kontroler dashboard RW di sini
 })->name('RW.dashboard');
+
+Route::get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
+Route::post('/accounts', [AccountController::class, 'store'])->name('accounts.store');
