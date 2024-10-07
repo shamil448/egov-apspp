@@ -5,27 +5,41 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RWController;
 
-// Rute untuk tampilan utama
+// Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-// Rute untuk tampilan login
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+// --------------------------------------------
+// Rute Login dan Logout
+// --------------------------------------------
+Route::get('/login', [LoginController::class, 'index'])->name('login'); // Tampilan Login
+Route::post('/login', [LoginController::class, 'login'])->name('login.post'); // Proses Login
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout'); // Proses Logout
 
-// Rute untuk proses login
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-
-// Rute untuk logout
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-// Rute untuk dashboard admin
+// --------------------------------------------
+// Rute Dashboard
+// --------------------------------------------
+// Dashboard untuk Admin
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// Rute untuk dashboard petugas
+// Dashboard untuk Petugas
 Route::get('/petugas/dashboard', function () {
-    // Tambahkan logika atau rute ke kontroler dashboard petugas di sini
+    // Tambahkan logika untuk dashboard petugas
+    return view('petugas.dashboard');
 })->name('Petugas.dashboard');
 
-// Rute untuk dashboard RW
+// --------------------------------------------
+// Rute untuk RW (Rukun Warga)
+// --------------------------------------------
+// Dashboard RW
 Route::get('/rw/dashboard', [RWController::class, 'dashboard'])->name('RW.dashboard');
+
+// Rute untuk fitur Kirim Lokasi di RW
+Route::get('/rw/lokasi', [RWController::class, 'kirimLokasiForm'])->name('lokasi.form'); // Menampilkan form
+Route::post('/rw/lokasi', [RWController::class, 'kirimLokasi'])->name('lokasi.submit'); // Proses pengiriman data lokasi
+
+// --------------------------------------------
+// Rute untuk Jadwal RW
+// --------------------------------------------
+Route::get('/rw/jadwal', [RWController::class, 'jadwal'])->name('jadwal.store'); // Menampilkan jadwal

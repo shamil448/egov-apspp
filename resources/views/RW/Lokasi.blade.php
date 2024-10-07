@@ -1,8 +1,10 @@
-@extends('layouts.app')  <!-- Menggunakan layout yang benar -->
+@extends('layouts.app')
 
-@section('title', 'Dashboard - Greenify')
+@section('title', 'Kirim Lokasi')
 
 @section('content')
+    <div class="container">
+    @section('content')
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
@@ -48,30 +50,28 @@
                     <span class="RW">Rukun Warga</span>
                 </div>
             </div>
+        <div class="form-section">
+            <h2>Kirim Lokasi</h2>
 
-            <!-- Image Section -->
-            <div class="image-section">
-                <img src="{{ asset('images/BannerRW.png') }}" alt="Banner RW">
+            <label for="nama-perumahan">Nama Perumahan</label>
+            <input type="text" id="nama-perumahan" name="nama-perumahan" placeholder="Masukkan nama perumahan">
+
+            <label for="kirim-lokasi">Kirim Lokasi</label>
+            <input type="text" id="kirim-lokasi" name="kirim-lokasi" placeholder="Masukkan lokasi">
+
+            <label for="nama-kecamatan">Nama Kecamatan</label>
+            <input type="text" id="nama-kecamatan" name="nama-kecamatan" placeholder="Masukkan nama kecamatan">
+
+            <label for="nama-kelurahan">Nama Kelurahan</label>
+            <input type="text" id="nama-kelurahan" name="nama-kelurahan" placeholder="Masukkan nama kelurahan">
+
+            <div class="map-section">
+                <img src="https://via.placeholder.com/400x200?text=Google+Maps" alt="Google Maps">
             </div>
 
-            <!-- Icon Section -->
-            <div class="icon-section">
-                <div class="icon-item">
-                    <img src="{{ asset('images/LOKASI.png') }}" alt="Lokasi Icon">
-                    <p>Lokasi</p>
-                </div>
-                <div class="icon-item">
-                    <img src="{{ asset('images/JADWAL.png') }}" alt="Jadwal Icon">
-                    <p>Jadwal</p>
-                </div>
-                <div class="icon-item">
-                    <img src="{{ asset('images/PESAN.png') }}" alt="Pesan Icon">
-                    <p>Pesan</p>
-                </div>
-                <div class="icon-item">
-                    <img src="{{ asset('images/SARAN.png') }}" alt="Saran Icon">
-                    <p>Saran</p>
-                </div>
+            <div class="buttons">
+                <button class="submit">Kirim</button>
+                <button class="cancel">Batal</button>
             </div>
         </div>
     </div>
