@@ -1,6 +1,7 @@
 @ -1,37 +1,49 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -67,3 +68,6 @@ Route::post('/rw/lokasi', [RWController::class, 'kirimLokasi'])->name('lokasi.su
 // Rute untuk Jadwal RW
 // --------------------------------------------
 Route::get('/rw/jadwal', [RWController::class, 'jadwal'])->name('jadwal.store'); // Menampilkan jadwal
+
+Route::get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
+Route::post('/accounts', [AccountController::class, 'store'])->name('accounts.store');
