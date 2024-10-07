@@ -1,10 +1,6 @@
 @ -1,37 +1,49 @@
 <?php
 
-<<<<<<< HEAD
-use App\Http\Controllers\AccountController;
-=======
->>>>>>> 4374a1ab457d7ae1d6c5ebd8c50712e7fa251c35
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -31,7 +27,7 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 // Rute untuk dashboard petugas
-})->name('home');
+
 
 // --------------------------------------------
 // Rute Login dan Logout
@@ -67,8 +63,6 @@ Route::get('/rw/dashboard', [RWController::class, 'dashboard'])->name('RW.dashbo
 Route::get('/rw/lokasi', [RWController::class, 'kirimLokasiForm'])->name('lokasi.form'); // Menampilkan form
 Route::post('/rw/lokasi', [RWController::class, 'kirimLokasi'])->name('lokasi.submit'); // Proses pengiriman data lokasi
 
-Route::get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
-Route::post('/accounts', [AccountController::class, 'store'])->name('accounts.store');
 // --------------------------------------------
 // Rute untuk Jadwal RW
 // --------------------------------------------
