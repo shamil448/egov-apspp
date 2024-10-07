@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class RWController extends Controller
+{
+    // Fungsi untuk menampilkan halaman dashboard RW
+    public function dashboard()
+    {
+        return view('RW.dashboard'); // Mengembalikan view dashboard RW
+    }
+
+    // Fungsi untuk menampilkan form kirim lokasi
+    public function kirimLokasiForm()
+    {
+        return view('RW.lokasi'); // Menampilkan form input lokasi
+    }
+
+    // Fungsi untuk menangani form kirim lokasi
+    public function kirimLokasi(Request $request)
+    {
+        // Validasi data yang dikirim dari form
+        $validated = $request->validate([
+            'nama_perumahan' => 'required|string|max:255',
+            'kirim_lokasi' => 'required|string|max:255',
+            'nama_kecamatan' => 'required|string|max:255',
+            'nama_kelurahan' => 'required|string|max:255',
+        ]);
+
+        // Proses data yang telah divalidasi (contoh: simpan ke database)
+        // Contoh proses penyimpanan atau logika bisnis lainnya
+
+        // Redirect ke halaman sukses atau dashboard RW
+        return redirect()->route('RW.dashboard')->with('success', 'Lokasi berhasil dikirim!');
+    }
+    public function jadwal()
+{
+    return view('RW.jadwal'); // Mengembalikan view jadwal RW
+}
+
+}
+
