@@ -53,38 +53,43 @@
         <ul class="space-y-2">
             <li>
                 <a href="{{ route('rw.dashboard') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/1.jpeg" class="w-20 h-20" alt="Dashboard Icon">
-                    <span class="ml-3">Dashboard</span>
+                    <img src="/images/1.jpeg" class="w-12 h-12 sm:w-20 sm:h-20" alt="Dashboard Icon">
+                    <span class="ml-3 text-sm sm:text-base">Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('rw.lokasi') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/2.jpeg" class="w-20 h-20" alt="Kirim Lokasi Icon">
-                    <span class="ml-3">Kirim Lokasi</span>
+                    <img src="/images/2.jpeg" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
+                    <span class="ml-3 text-sm sm:text-base">Kirim Lokasi</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('rw.jadwal') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/3.jpeg" class="w-20 h-20" alt="Jadwal Icon">
-                    <span class="ml-3">Jadwal</span>
+                    <img src="/images/3.jpeg" class="w-12 h-12 sm:w-20 sm:h-20" alt="Jadwal Icon">
+                    <span class="ml-3 text-sm sm:text-base">Jadwal</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('rw.kritik-saran') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/4.jpeg" class="w-20 h-20" alt="Kritik & Saran Icon">
-                    <span class="ml-3">Kritik & Saran</span>
+                    <img src="/images/4.jpeg" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kritik & Saran Icon">
+                    <span class="ml-3 text-sm sm:text-base">Kritik & Saran</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('rw.inbox') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/5.jpeg" class="w-20 h-20" alt="Pesan Masuk Icon">
-                    <span class="flex-1 ml-3">Pesan Masuk</span>
-                    <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">3</span>
+                    <img src="/images/5.jpeg" class="w-12 h-12 sm:w-20 sm:h-20" alt="Pesan Masuk Icon">
+                    <span class="flex-1 ml-3 text-sm sm:text-base">Pesan Masuk</span>
+                    <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full">3</span>
                 </a>
             </li>
         </ul>
     </div>
 </aside>
+
+<!-- Main content -->
+<main class="p-4 sm:ml-64 mt-20">
+    <!-- Content goes here -->
+</main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script>
