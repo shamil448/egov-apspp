@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Login1Controller;
 use App\Http\Controllers\RWController;
+use App\Http\Controllers\UserController;
 
 // Rute untuk tampilan utama
 // Rute untuk halaman utama (Welcome Page)
@@ -72,6 +73,7 @@ Route::get('/rw/jadwal', [RWController::class, 'jadwal'])->name('jadwal.store');
 
 //shamil
 //routes fitur tambah akun
-Route::get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
-Route::post('/accounts', [AccountController::class, 'store'])->name('accounts.store');
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
 //shamil

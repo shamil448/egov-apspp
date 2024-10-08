@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('username'); // Nama Username
+            $table->string('phone_number')->unique(); // Nomor Handphone
+            $table->enum('gender', ['male', 'female', 'other']); // Gender
+            $table->enum('role', ['RW', 'Petugas', 'Pemerintah']); // Hak Akses: RW, Petugas, Pemerintah
+            $table->text('address'); // Alamat
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
