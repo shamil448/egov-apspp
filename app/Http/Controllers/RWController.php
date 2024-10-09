@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Message; // Asumsi model pesan bernama Message
 
 class RWController extends Controller
 {
@@ -35,10 +36,35 @@ class RWController extends Controller
         // Redirect ke halaman sukses atau dashboard RW
         return redirect()->route('RW.dashboard')->with('success', 'Lokasi berhasil dikirim!');
     }
+
+    // Fungsi untuk menampilkan jadwal RW
     public function jadwal()
-{
-    return view('RW.jadwal'); // Mengembalikan view jadwal RW
-}
+    {
+        return view('RW.jadwal'); // Mengembalikan view jadwal RW
+    }
+
+    // Fungsi untuk menampilkan form Kritik & Saran
+    public function kritikSaranForm()
+    {
+        return view('RW.kritiksaran'); // Mengembalikan view kritik & saran RW
+    }
+
+    // Fungsi untuk menangani form Kritik & Saran
+    public function submitKritikSaran(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kritik' => 'required|string',
+            'saran' => 'nullable|string',
+            'kepuasan' => 'required|integer|min:0|max:100',
+        ]);
+
+        // Proses data yang telah divalidasi (contoh: simpan ke database)
+        // Contoh: Feedback::create($request->all());
+
+        // Redirect atau tampilkan pesan sukses
+        return redirect()->route('rw.kritiksaran')->with('success', 'Kritik dan saran telah dikirim!');
+    }
 
 }
-

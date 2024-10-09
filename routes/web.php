@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Login1Controller;
 use App\Http\Controllers\RWController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
@@ -52,17 +51,20 @@ Route::get('/rw/jadwal', [RWController::class, 'jadwal'])->name('jadwal.store');
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
-//shamil
 
-// Rute untuk menampilkan form Kritik dan Saran
-Route::get('/rw/kritik-saran', [RWController::class, 'kritikSaranForm'])->name('rw.kritik-saran');
-
-// Rute untuk memproses pengiriman Kritik dan Saran
-Route::post('/rw/kritik-saran', [RWController::class, 'submitKritikSaran'])->name('rw.kritik-saran.submit');
+// --------------------------------------------
+// Rute Kritik & Saran
+// --------------------------------------------
+Route::get('/rw/kritiksaran', [RWController::class, 'kritikSaranForm'])->name('rw.kritik-saran'); // Tampilkan form kritik & saran
+Route::post('/rw/kritiksaran', [RWController::class, 'submitKritikSaran'])->name('rw.kritik-saran.submit'); // Proses kritik & saran
 
 // Rute untuk menampilkan inbox RW
 Route::get('/rw/inbox', [RWController::class, 'inbox'])->name('rw.inbox');
 
-Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
-
+// --------------------------------------------
+// Rute untuk Logout RW (Pastikan hanya menggunakan satu logout route)
+// --------------------------------------------
 Route::post('/logout', [RWController::class, 'destroy'])->name('logout');
+
+// Jadwal umum
+Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
