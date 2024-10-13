@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RWController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PemerintahController;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
@@ -68,3 +69,12 @@ Route::post('/logout', [RWController::class, 'destroy'])->name('logout');
 
 // Jadwal umum
 Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
+
+
+Route::get('/Pemerintah/dashboard', [PemerintahController::class, 'dashboard'])->name('pemerintah.dashboard');
+Route::get('/Pemerintah/laporanharian', [PemerintahController::class, 'laporanharian'])->name('pemerintah.laporanharian');
+Route::get('/Pemerintah/tambahakun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambahakun');
+Route::get('/Pemerintah/tambahedukasi', [PemerintahController::class, 'tambahEdukasi'])->name('pemerintah.tambahedukasi');
+Route::get('/Pemerintah/tpatps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
+Route::get('/Pemerintah/pelaporan', [PemerintahController::class, 'pelaporan'])->name('pemerintah.pelaporan');
+Route::get('/Pemerintah/logout', [PemerintahController::class, 'logout'])->name('pemerintah.logout');
