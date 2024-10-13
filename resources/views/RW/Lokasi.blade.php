@@ -1,4 +1,4 @@
-@include('components.dashboard')
+@include('components.RWdashboard')
 <div class="flex-2 p-6 bg-gray-100">
     <h2 class="text-2xl font-semibold mb-6">Kirim Lokasi</h2>
     <form action="{{ route('rw.lokasi') }}" method="POST" class="space-y-4">

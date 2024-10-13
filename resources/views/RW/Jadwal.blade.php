@@ -1,1 +1,1 @@
-@include('components.dashboard')
+@include('components.RWdashboard')

@@ -1,4 +1,4 @@
-@include('components.dashboard')
+@include('components.RWdashboard')
 
 <!-- Banner Section -->
 <div class="flex justify-center mb-1">

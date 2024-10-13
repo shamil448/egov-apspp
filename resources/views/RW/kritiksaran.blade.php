@@ -1,4 +1,4 @@
-@include('components.dashboard')
+@include('components.RWdashboard')
 <div class="flex flex-col items-center bg-gray-100 min-h-screen py-6">
         <div class="bg-white shadow-md rounded-md p-6 w-full max-w-2xl">
             <h2 class="text-2xl font-bold text-center mb-4">KRITIK & SARAN</h2>
