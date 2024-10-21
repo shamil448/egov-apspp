@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <title>Login Dashboard</title>
+    <title>Lupa Password</title>
     <style>
         body {
             background-color: #2596be;
@@ -40,29 +40,27 @@
             background-color: #218838;
             border-color: #1e7e34;
         }
-        .alert-danger {
+        .alert-danger, .alert-success {
             background-color: rgba(248, 215, 218, 0.9);
             color: #721c24;
             border: none;
             border-radius: 5px;
         }
-        .forgot-password {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .forgot-password a {
-            color: #ffc107;
-            text-decoration: none;
-        }
-        .forgot-password a:hover {
-            color: #ffca2c;
+        .alert-success {
+            background-color: rgba(212, 237, 218, 0.9);
+            color: #155724;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="login-container">
-            <h1>Login</h1>
+            <h1>Lupa Password</h1>
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
             @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -72,27 +70,16 @@
                 </ul>
             </div>
             @endif
-            <form action="{{ route('login.post') }}" method="POST">
+            <form action="{{ route('password.email') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" value="{{ old('email') }}" name="email" class="form-control">
+                    <input type="email" name="email" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <button name="submit" type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">Kirim Link Reset Password</button>
                 </div>
             </form>
-
-            <!-- Link Forgot Password -->
-            <div class="forgot-password">
-                <a href="{{ route('password.request') }}">Lupa Password?</a>
-            </div>
-
-            @include('components.footer')
         </div>
     </div>
 </body>

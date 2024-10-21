@@ -7,6 +7,7 @@ use App\Http\Controllers\RWController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PemerintahController;
+use Illuminate\Support\Facades\Password;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
@@ -78,3 +79,21 @@ Route::get('/Pemerintah/tambahedukasi', [PemerintahController::class, 'tambahEdu
 Route::get('/Pemerintah/tpatps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
 Route::get('/Pemerintah/pelaporan', [PemerintahController::class, 'pelaporan'])->name('pemerintah.pelaporan');
 Route::get('/Pemerintah/logout', [PemerintahController::class, 'logout'])->name('pemerintah.logout');
+
+// Rute untuk menampilkan form lupa password
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
+})->name('password.request');
+
+// Rute untuk mengirim link reset password ke email
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+})->name('password.email');
