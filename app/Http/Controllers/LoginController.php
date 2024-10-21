@@ -28,7 +28,7 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($infologin)) {
-            if (Auth::user()->role == 'admin') {
+            if (Auth::user()->role == 'Pemerintah') {
                 return redirect()->route('Pemerintah.dashboard');
                 
             } elseif (Auth::user()->role == 'Petugas') {
