@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AccountController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RWController;
@@ -8,6 +7,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PemerintahController;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Request;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
@@ -50,9 +50,7 @@ Route::get('/rw/jadwal', [RWController::class, 'jadwal'])->name('jadwal.store');
 
 //shamil
 //routes fitur tambah akun
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::resource('users', UserController::class);
 
 // --------------------------------------------
 // Rute Kritik & Saran
