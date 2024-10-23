@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Password;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // --------------------------------------------
