@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PemerintahController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\FeedbackController;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
@@ -95,3 +96,17 @@ Route::post('/forgot-password', function (Request $request) {
                 ? back()->with(['status' => __($status)])
                 : back()->withErrors(['email' => __($status)]);
 })->name('password.email');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+Route::get('/feedback', [FeedbackController::class, 'create'])->name('feedback.create');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
+Route::get('/about-us', function () {
+    return view('about-us'); // Menampilkan halaman 'about-us.blade.php'
+});
+
+Route::get('/partner', function () {
+    return view('partner'); // Menampilkan halaman 'partner.blade.php'
+});
