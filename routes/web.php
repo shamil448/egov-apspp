@@ -14,7 +14,6 @@ use App\Http\Controllers\FeedbackController;
 Route::get('/', function () {
     return view('home');
 });
-
 // --------------------------------------------
 // Rute Login dan Logout
 // --------------------------------------------

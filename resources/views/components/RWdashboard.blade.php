@@ -19,33 +19,39 @@
                     <span class="self-center text-xl font-semibold sm:text-2xl">Greenify</span>
                 </a>
             </div>
-            <div class="flex items-center">
-                <div class="flex items-center ms-3 relative">
-                    <!-- User Image as Dropdown Button -->
-                    <img id="dropdownDefaultButton" src="/images/woman.png" class="w-8 h-8 rounded-full cursor-pointer" alt="User photo">
-
-                    <!-- Dropdown menu -->
-                    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute right-0 mt-2">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                            <li>
-                                <a href="{{ route('rw.dashboard') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                  <span class="sr-only">Open user menu</span>
+                  <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+                </button>
+                <!-- Dropdown menu -->
+                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                  <div class="px-4 py-3">
+                    <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+                    <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                  </div>
+                  <ul class="py-2" aria-labelledby="user-menu-button"> 
+                    <li>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                    </li>
+                  </ul>
                 </div>
+                <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" 
+                    class="inline-flex items-center p-2 mt-2 ms-3 text-white bg-black rounded-lg sm:hidden hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    <span class="sr-only">Open sidebar</span>
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
 </nav>
 
+
 <!-- Sidebar -->
-<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 bg-green-300 border-r border-gray-200 transition-transform -translate-x-full sm:translate-x-0 dark:bg-green-700 dark:border-gray-700">
+
+<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 bg-green-300 border-r border-gray-200 transition-transform -translate-x-full sm:translate-x-0 dark:bg-green-700 dark:border-gray-700">
     <div class="h-full px-3 pb-4 overflow-y-auto">
         <ul class="space-y-2">
             <li>
@@ -84,25 +90,9 @@
 </aside>
 
 <main class="p-4 sm:ml-64 mt-20">
+
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-<script>
-    // Menangani logika untuk membuka/menutup dropdown
-    document.getElementById('dropdownDefaultButton').onclick = function () {
-        var dropdown = document.getElementById('dropdown');
-        dropdown.classList.toggle('hidden'); // Toggle class hidden
-    };
-
-    // Menutup dropdown jika pengguna mengklik di luar dropdown
-    window.onclick = function(event) {
-        if (!event.target.matches('#dropdownDefaultButton') && !event.target.closest('#dropdown')) {
-            var dropdown = document.getElementById('dropdown');
-            if (!dropdown.classList.contains('hidden')) {
-                dropdown.classList.add('hidden'); // Sembunyikan dropdown
-            }
-        }
-    };
-</script>
 </body>
 </html>
