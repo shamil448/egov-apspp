@@ -1,7 +1,7 @@
 @include('components.home')
 
 <div class="container mx-auto my-12 px-4 md:px-12">
-    <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-10">Our Partners</h2>
+    <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-10">Mitra Kami</h2>
     
     <div class="flex flex-col md:flex-row items-center justify-around">
         <!-- Partner 1 -->

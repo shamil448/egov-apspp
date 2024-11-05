@@ -12,7 +12,7 @@
             <!-- Bagian latar belakang hijau -->
             <div class="bg-green-500 p-6 rounded-lg shadow-lg w-full flex items-center">
                 <div>
-                    <h2 class="text-3xl font-bold text-white mb-4">WHAT IS Greenify?</h2>
+                    <h2 class="text-3xl font-bold text-white mb-4">Apa Itu Greenify?</h2>
                     <p class="text-2xl text-white leading-relaxed">
                         Greenify adalah aplikasi situs web yang terlibat dalam menjadikan planet kita tempat yang lebih baik untuk ditinggali, dengan membuat pengguna membantu dalam proses pengangkutan sampah dan lain-lain. Sebagai imbalannya, pengguna merasa berpengaruh, mereka berpartisipasi dalam melestarikan planet kita.
                     </p>
