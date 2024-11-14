@@ -18,7 +18,7 @@ class PemerintahController extends Controller
 
     // Menampilkan halaman tambah akun
     public function tambahAkun() {
-        return view('pemerintah.tambahakun');
+        return view('pemerintah.tambah-akun');
     }
 
     // Menampilkan halaman tambah edukasi

@@ -46,7 +46,7 @@ class RWController extends Controller
     // Fungsi untuk menampilkan form Kritik & Saran
     public function kritikSaranForm()
     {
-        return view('RW.kritiksaran'); // Mengembalikan view kritik & saran RW
+        return view('RW.kritik-saran'); // Mengembalikan view kritik & saran RW
     }
 
     // Fungsi untuk menangani form Kritik & Saran
@@ -64,7 +64,7 @@ class RWController extends Controller
         // Contoh: Feedback::create($request->all());
 
         // Redirect atau tampilkan pesan sukses
-        return redirect()->route('rw.kritiksaran')->with('success', 'Kritik dan saran telah dikirim!');
+        return redirect()->route('rw.kritik-saran')->with('success', 'Kritik dan saran telah dikirim!');
     }
 
 }

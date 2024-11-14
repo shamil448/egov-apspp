@@ -55,8 +55,8 @@ Route::resource('users', UserController::class);
 // --------------------------------------------
 // Rute Kritik & Saran
 // --------------------------------------------
-Route::get('/rw/kritiksaran', [RWController::class, 'kritikSaranForm'])->name('rw.kritik-saran'); // Tampilkan form kritik & saran
-Route::post('/rw/kritiksaran', [RWController::class, 'submitKritikSaran'])->name('rw.kritik-saran.submit'); // Proses kritik & saran
+Route::get('/rw/kritik-saran', [RWController::class, 'kritikSaranForm'])->name('rw.kritik-saran'); // Tampilkan form kritik & saran
+Route::post('/rw/kritik-saran', [RWController::class, 'submitKritikSaran'])->name('rw.kritik-saran.submit'); // Proses kritik & saran
 
 // Rute untuk menampilkan inbox RW
 Route::get('/rw/inbox', [RWController::class, 'inbox'])->name('rw.inbox');
@@ -71,10 +71,10 @@ Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
 
 
 Route::get('/Pemerintah/dashboard', [PemerintahController::class, 'dashboard'])->name('pemerintah.dashboard');
-Route::get('/Pemerintah/laporanharian', [PemerintahController::class, 'laporanharian'])->name('pemerintah.laporanharian');
-Route::get('/Pemerintah/tambahakun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambahakun');
-Route::get('/Pemerintah/tambahedukasi', [PemerintahController::class, 'tambahEdukasi'])->name('pemerintah.tambahedukasi');
-Route::get('/Pemerintah/tpatps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
+Route::get('/Pemerintah/laporan-harian', [PemerintahController::class, 'laporanharian'])->name('pemerintah.laporanharian');
+Route::get('/Pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambahakun');
+Route::get('/Pemerintah/tambah-edukasi', [PemerintahController::class, 'tambahEdukasi'])->name('pemerintah.tambahedukasi');
+Route::get('/Pemerintah/tpa-tps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
 Route::get('/Pemerintah/pelaporan', [PemerintahController::class, 'pelaporan'])->name('pemerintah.pelaporan');
 Route::get('/Pemerintah/logout', [PemerintahController::class, 'logout'])->name('pemerintah.logout');
 
