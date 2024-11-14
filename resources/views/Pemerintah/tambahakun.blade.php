@@ -1,30 +1,44 @@
 @include('components.PemerintahDashboard')
-<main class="p-4 md:ml-64 mt-20">
-<form>
-    <div class="grid gap-6 mb-6 md:grid-cols-1">
-        <div>
-            <label for="nama_lengkap" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
-            <input type="text" id="nama_lengkap" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cristov Relevando Manurung" required />
-        </div>
-        <div>
-            <label for="alamat_lengkap" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat Lengkap</label>
-            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Batu Aji Putra Moro Indah" required />
-        </div>
-        <div>
-            <label for="nomor_kontak" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Kontak</label>
-            <input type="tel" id="nomor_kontak" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
-        </div>
+
+<main class="p-4 sm:ml-64 mt-10">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <h2 class="text-2xl font-bold text-center mb-4">TAMBAH AKUN</h2>
+        <form action="{{ route('pemerintah.tambahakun') }}" method="POST" class="space-y-4">
+            @csrf
+            <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-1">
+                <div>
+                    <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                    <input type="text" id="nama_lengkap" name="nama_lengkap" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Cristov Relevando Manurung" required>
+                </div>
+                <div>
+                    <label for="alamat_lengkap" class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
+                    <input type="text" id="alamat_lengkap" name="alamat_lengkap" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Batu Aji Putra Moro Indah" required>
+                </div>
+                <div>
+                    <label for="nomor_kontak" class="block text-sm font-medium text-gray-700">Nomor Kontak</label>
+                    <input type="tel" id="nomor_kontak" name="nomor_kontak" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" id="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="cristov@gmail.com" required>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="•••••••••" required>
+                </div>
+            </div>
+
+            <div class="flex space-x-4 mt-6">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Tambah Akun
+                </button>
+                <button type="reset" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Batal
+                </button>
+            </div>
+        </form>
     </div>
-    <div class="mb-6">
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
-        <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="cristov@gmail.com" required />
-    </div> 
-    <div class="mb-6">
-        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
-    </div>
-    <div class="flex items-start mb-6">
-    </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-</form>
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+@include('components.footer')
