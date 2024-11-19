@@ -1,17 +1,27 @@
 @include('components.home')
 
-<div class="container mx-auto my-12 px-4 md:px-12">
-    <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-10">Government Educations</h2>
-
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        @foreach($educations as $education)
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $education->title }}</h3>
-                <p class="text-gray-700 dark:text-gray-300 mt-4">{{ Str::limit($education->description, 100) }}</p>
-                <a href="{{ route('education.show', $education->id) }}" class="text-blue-600 dark:text-blue-400 mt-4 block">Read More</a>
-            </div>
-        @endforeach
+<main class="p-4 mt-10">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-6">Daftar Edukasi</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach ($educations as $education)
+                <div class="border border-gray-300 rounded-lg shadow-md p-4">
+                    <h2 class="text-xl font-semibold mb-2">{{ $education->title }}</h2>
+                    <p class="text-sm text-gray-600 mb-2">Kategori: {{ ucfirst($education->category) }}</p>
+                    <p class="text-sm text-gray-600 mb-2">Subjek: {{ $education->subject }}</p>
+                    <p class="text-sm text-gray-600 mb-2">Penulis: {{ $education->author }}</p>
+                    <p class="text-sm text-gray-600 mb-2">Jenis: {{ ucfirst($education->type) }}</p>
+                    <p class="text-sm text-gray-600 mb-2">
+                        Publikasi: {{ $education->published_at ? $education->published_at->format('d M Y H:i') : 'Belum Dipublikasikan' }}
+                    </p>
+                    <p class="text-gray-800 mb-4 truncate">{{ Str::limit($education->content, 100, '...') }}</p>
+                    <a href="{{ route('education.show', $education->id) }}" class="text-blue-500 hover:underline">
+                        Baca Selengkapnya
+                    </a>
+                </div>
+            @endforeach
+        </div>
     </div>
-</div>
+</main>
 
-@include('components.footer') <!-- Jika ada footer -->
+@include('components.footer')

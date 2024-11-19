@@ -9,6 +9,7 @@ use App\Http\Controllers\PemerintahController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\EdukasiController;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
@@ -109,3 +110,15 @@ Route::get('/about-us', function () {
 Route::get('/partner', function () {
     return view('partner'); // Menampilkan halaman 'partner.blade.php'
 });
+
+Route::prefix('pemerintah')->group(function () {
+    Route::get('/tambah-edukasi', [EdukasiController::class, 'create'])->name('pemerintah.tambahedukasi');
+    Route::post('/tambah-edukasi', [EdukasiController::class, 'store']);
+    Route::get('/list-edukasi', [EdukasiController::class, 'index'])->name('pemerintah.listedukasi');
+});
+
+// Rute untuk menampilkan halaman home dengan daftar edukasi
+Route::get('/educations', [EdukasiController::class, 'index'])->name('home');
+
+// Rute untuk menampilkan detail edukasi
+Route::get('/education/{id}', [EdukasiController::class, 'show'])->name('education.show');
