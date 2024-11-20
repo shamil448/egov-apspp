@@ -122,3 +122,9 @@ Route::get('/educations', [EdukasiController::class, 'index'])->name('home');
 
 // Rute untuk menampilkan detail edukasi
 Route::get('/education/{id}', [EdukasiController::class, 'show'])->name('education.show');
+
+// Route untuk halaman tambah akun
+Route::get('/pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambah-akun');
+
+// Route untuk menyimpan data akun baru
+Route::post('/pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkunSubmit'])->name('pemerintah.tambah-akun.submit');
