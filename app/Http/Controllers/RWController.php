@@ -10,13 +10,13 @@ class RWController extends Controller
     // Fungsi untuk menampilkan halaman dashboard RW
     public function dashboard()
     {
-        return view('RW.dashboard'); // Mengembalikan view dashboard RW
+        return view('rw.dashboard'); // Mengembalikan view dashboard RW
     }
 
     // Fungsi untuk menampilkan form kirim lokasi
     public function kirimLokasiForm()
     {
-        return view('RW.lokasi'); // Menampilkan form input lokasi
+        return view('rw.lokasi'); // Menampilkan form input lokasi
     }
 
     // Fungsi untuk menangani form kirim lokasi
@@ -34,19 +34,19 @@ class RWController extends Controller
         // Contoh proses penyimpanan atau logika bisnis lainnya
 
         // Redirect ke halaman sukses atau dashboard RW
-        return redirect()->route('RW.dashboard')->with('success', 'Lokasi berhasil dikirim!');
+        return redirect()->route('rw.dashboard')->with('success', 'Lokasi berhasil dikirim!');
     }
 
     // Fungsi untuk menampilkan jadwal RW
     public function jadwal()
     {
-        return view('RW.jadwal'); // Mengembalikan view jadwal RW
+        return view('rw.jadwal'); // Mengembalikan view jadwal RW
     }
 
     // Fungsi untuk menampilkan form Kritik & Saran
     public function kritikSaranForm()
     {
-        return view('RW.kritik-saran'); // Mengembalikan view kritik & saran RW
+        return view('rw.kritik-saran'); // Mengembalikan view kritik & saran RW
     }
 
     // Fungsi untuk menangani form Kritik & Saran
