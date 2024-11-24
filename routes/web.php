@@ -9,6 +9,7 @@ use App\Http\Controllers\PemerintahController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\EdukasiController;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
@@ -55,8 +56,8 @@ Route::resource('users', UserController::class);
 // --------------------------------------------
 // Rute Kritik & Saran
 // --------------------------------------------
-Route::get('/rw/kritiksaran', [RWController::class, 'kritikSaranForm'])->name('rw.kritik-saran'); // Tampilkan form kritik & saran
-Route::post('/rw/kritiksaran', [RWController::class, 'submitKritikSaran'])->name('rw.kritik-saran.submit'); // Proses kritik & saran
+Route::get('/rw/kritik-saran', [RWController::class, 'kritikSaranForm'])->name('rw.kritik-saran'); // Tampilkan form kritik & saran
+Route::post('/rw/kritik-saran', [RWController::class, 'submitKritikSaran'])->name('rw.kritik-saran.submit'); // Proses kritik & saran
 
 // Rute untuk menampilkan inbox RW
 Route::get('/rw/inbox', [RWController::class, 'inbox'])->name('rw.inbox');
@@ -71,10 +72,10 @@ Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
 
 
 Route::get('/Pemerintah/dashboard', [PemerintahController::class, 'dashboard'])->name('pemerintah.dashboard');
-Route::get('/Pemerintah/laporanharian', [PemerintahController::class, 'laporanharian'])->name('pemerintah.laporanharian');
-Route::get('/Pemerintah/tambahakun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambahakun');
-Route::get('/Pemerintah/tambahedukasi', [PemerintahController::class, 'tambahEdukasi'])->name('pemerintah.tambahedukasi');
-Route::get('/Pemerintah/tpatps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
+Route::get('/Pemerintah/laporan-harian', [PemerintahController::class, 'laporanharian'])->name('pemerintah.laporanharian');
+Route::get('/Pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambahakun');
+Route::get('/Pemerintah/tambah-edukasi', [PemerintahController::class, 'tambahEdukasi'])->name('pemerintah.tambahedukasi');
+Route::get('/Pemerintah/tpa-tps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
 Route::get('/Pemerintah/pelaporan', [PemerintahController::class, 'pelaporan'])->name('pemerintah.pelaporan');
 Route::get('/Pemerintah/logout', [PemerintahController::class, 'logout'])->name('pemerintah.logout');
 
@@ -109,3 +110,21 @@ Route::get('/about-us', function () {
 Route::get('/partner', function () {
     return view('partner'); // Menampilkan halaman 'partner.blade.php'
 });
+
+Route::prefix('pemerintah')->group(function () {
+    Route::get('/tambah-edukasi', [EdukasiController::class, 'create'])->name('pemerintah.tambahedukasi');
+    Route::post('/tambah-edukasi', [EdukasiController::class, 'store']);
+    Route::get('/list-edukasi', [EdukasiController::class, 'index'])->name('pemerintah.listedukasi');
+});
+
+// Rute untuk menampilkan halaman home dengan daftar edukasi
+Route::get('/educations', [EdukasiController::class, 'index'])->name('home');
+
+// Rute untuk menampilkan detail edukasi
+Route::get('/education/{id}', [EdukasiController::class, 'show'])->name('education.show');
+
+// Route untuk halaman tambah akun
+Route::get('/pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambah-akun');
+
+// Route untuk menyimpan data akun baru
+Route::post('/pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkunSubmit'])->name('pemerintah.tambah-akun.submit');
