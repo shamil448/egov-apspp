@@ -93,7 +93,7 @@
             <li>
                 <a href="{{ route('rw.lokasi') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <img src="/images/2.jpeg" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
-                    <span class="ml-3 text-sm sm:text-base">Kirim Lokasi</span>
+                    <span class="ml-3 text-sm sm:text-base">Pengangkutan Darurat</span>
                 </a>
             </li>
             <li>
