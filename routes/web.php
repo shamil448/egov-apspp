@@ -42,7 +42,7 @@ Route::get('/rw/dashboard', [RWController::class, 'dashboard'])->name('rw.dashbo
 
 // Rute untuk fitur Kirim Lokasi di RW
 Route::get('/rw/lokasi', [RWController::class, 'kirimLokasiForm'])->name('rw.lokasi'); // Menampilkan form
-Route::post('/rw/lokasi', [RWController::class, 'kirimLokasi'])->name('rw.lokasi.submit'); // Proses pengiriman data lokasi
+Route::post('/rw/lokasi', [RWController::class, 'PengangkutanDarurat'])->name('rw.lokasi.submit'); // Proses pengiriman data lokasi
 
 // --------------------------------------------
 // Rute untuk Jadwal RW

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PengangkutanDarurat;
 use App\Models\Message; // Asumsi model pesan bernama Message
 
 class RWController extends Controller
@@ -20,27 +21,29 @@ class RWController extends Controller
     }
 
     // Fungsi untuk menangani form kirim lokasi
-    public function kirimLokasi(Request $request)
+    public function PengangkutanDarurat(Request $request)
     {
-        // Validasi data yang dikirim dari form
-        $validated = $request->validate([
-            'nama_perumahan' => 'required|string|max:255',
-            'kirim_lokasi' => 'required|string|max:255',
+        // Validasi input
+        $request->validate([
+            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048', // Validasi file gambar
             'nama_kecamatan' => 'required|string|max:255',
             'nama_kelurahan' => 'required|string|max:255',
+            'kirim_lokasi' => 'required|string',
         ]);
 
-        // Proses data yang telah divalidasi (contoh: simpan ke database)
-        // Contoh proses penyimpanan atau logika bisnis lainnya
+        // Proses upload foto
+        $fotoPath = $request->file('foto')->store('pengangkutan_darurat', 'public'); // Simpan di storage/public/uploads
 
-        // Redirect ke halaman sukses atau dashboard RW
-        return redirect()->route('rw.dashboard')->with('success', 'Lokasi berhasil dikirim!');
-    }
+        // Simpan data ke database
+        PengangkutanDarurat::create([
+            'foto' => $fotoPath,
+            'nama_kecamatan' => $request->input('nama_kecamatan'),
+            'nama_kelurahan' => $request->input('nama_kelurahan'),
+            'kirim_lokasi' => $request->input('kirim_lokasi'),
+        ]);
 
-    // Fungsi untuk menampilkan jadwal RW
-    public function jadwal()
-    {
-        return view('rw.jadwal'); // Mengembalikan view jadwal RW
+        // Redirect dengan pesan sukses
+        return redirect()->route('rw.lokasi')->with('success', 'Data pengangkutan darurat berhasil disimpan!');
     }
 
     // Fungsi untuk menampilkan form Kritik & Saran
