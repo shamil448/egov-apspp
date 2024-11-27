@@ -21,6 +21,6 @@ class PetugasController extends Controller
     public function laporanTugas()
     {
         // Logika untuk menampilkan halaman Laporan Tugas
-        return view('petugas.laporantugas');
+        return view('petugas.LaporanTugas');
     }
 }
