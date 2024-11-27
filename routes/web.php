@@ -74,6 +74,7 @@ Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
 Route::get('/Pemerintah/dashboard', [PemerintahController::class, 'dashboard'])->name('pemerintah.dashboard');
 Route::get('/Pemerintah/laporan-harian', [PemerintahController::class, 'laporanharian'])->name('pemerintah.laporanharian');
 Route::get('/Pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambahakun');
+Route::get('/Pemerintah/jadwal', [PemerintahController::class, 'jadwal'])->name('pemerintah.jadwal');
 Route::get('/Pemerintah/tambah-edukasi', [PemerintahController::class, 'tambahEdukasi'])->name('pemerintah.tambahedukasi');
 Route::get('/Pemerintah/tpa-tps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
 Route::get('/Pemerintah/pelaporan', [PemerintahController::class, 'pelaporan'])->name('pemerintah.pelaporan');

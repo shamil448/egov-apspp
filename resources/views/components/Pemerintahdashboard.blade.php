@@ -93,13 +93,19 @@
             <li>
                 <a href="{{ route('pemerintah.tambahakun') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <img src="/images/admin6.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
-                    <span class="ml-3 text-sm sm:text-base">Tambah Akun</span>
+                    <span class="ml-3 text-sm sm:text-base">Akun</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('pemerintah.jadwal') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <img src="/images/admin6.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
+                    <span class="ml-3 text-sm sm:text-base">Jadwal</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('pemerintah.tambahedukasi') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <img src="/images/admin3.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
-                    <span class="ml-3 text-sm sm:text-base">Tambah Edukasi</span>
+                    <span class="ml-3 text-sm sm:text-base">Edukasi</span>
                 </a>
             </li>
             <li>
@@ -111,7 +117,7 @@
             <li>
                 <a href="{{ route('pemerintah.pelaporan') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <img src="/images/admin5.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kritik & Saran Icon">
-                    <span class="ml-3 text-sm sm:text-base">Pelaporan Masyarakat</span>
+                    <span class="ml-3 text-sm sm:text-base">Laporan Kritis&Saran</span>
                 </a>
             </li>
             <li>
