@@ -52,6 +52,12 @@ class PemerintahController extends Controller
         return redirect()->back()->with('success', 'Akun berhasil ditambahkan.');
     }
 
+    public function jadwal()
+    {
+        return view('pemerintah.jadwal');
+    }
+
+
     // Menampilkan halaman tambah edukasi
     public function tambahEdukasi()
     {
