@@ -35,6 +35,7 @@ Route::get('/petugas/dashboard', function () {
     return view('petugas.dashboard');
 })->name('Petugas.dashboard');
 
+
 // --------------------------------------------
 // Rute untuk RW (Rukun Warga)
 // --------------------------------------------
@@ -136,3 +137,4 @@ Route::prefix('petugas')->group(function () {
     Route::get('/jadwalrute', [PetugasController::class, 'jadwalRute'])->name('petugas.jadwalrute');
     Route::get('/laporantugas', [PetugasController::class, 'laporanTugas'])->name('petugas.laporantugas');
 });
+Route::post('/petugas/laporan-tugas', [PetugasController::class, 'submitLaporan'])->name('petugas.submitLaporan');
