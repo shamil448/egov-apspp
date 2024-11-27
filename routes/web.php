@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\EdukasiController;
+use App\Http\Controllers\PetugasController;
 
 // Rute untuk halaman utama (Welcome Page)
 Route::get('/', function () {
@@ -129,3 +130,9 @@ Route::get('/pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkun'
 
 // Route untuk menyimpan data akun baru
 Route::post('/pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkunSubmit'])->name('pemerintah.tambah-akun.submit');
+
+Route::prefix('petugas')->group(function () {
+    Route::get('/dashboard', [PetugasController::class, 'dashboard'])->name('petugas.dashboard');
+    Route::get('/jadwalrute', [PetugasController::class, 'jadwalRute'])->name('petugas.jadwalrute');
+    Route::get('/laporantugas', [PetugasController::class, 'laporanTugas'])->name('petugas.laporantugas');
+});
