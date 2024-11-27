@@ -15,7 +15,7 @@
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start">
                 <a href="{{ route('rw.dashboard') }}" class="flex ms-2">
-                    <img src="/images/gaia.png" class="h-8 me-3" alt="Logo">
+                    <img src="/images/icon1.jpg" class="h-8 me-3" alt="Logo">
                     <span class="self-center text-xl font-semibold sm:text-2xl">Greenify</span>
                 </a>
             </div>
