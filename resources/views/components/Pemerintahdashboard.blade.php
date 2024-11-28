@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Greenify Dashboard</title>
+    <link rel="icon" type="image/png" href="/images/icon5.png" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     @vite('resources/css/app.css')
 </head>
@@ -15,7 +16,7 @@
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start">
                 <a href="{{ route('rw.dashboard') }}" class="flex ms-2">
-                    <img src="/images/gaia.png" class="h-8 me-3" alt="Logo">
+                    <img src="/images/icon5.png" class="h-8 me-3" alt="Logo">
                     <span class="self-center text-xl font-semibold sm:text-2xl">Greenify</span>
                 </a>
             </div>
