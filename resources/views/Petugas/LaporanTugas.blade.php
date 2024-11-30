@@ -1,8 +1,8 @@
 @include('components.PetugasDashboard')
 
 <main class="p-4 sm:ml-64 mt-10">
-    <div class="p-6 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 bg-white shadow-lg">
-        <h2 class="text-2xl font-bold text-center mb-6 text-blue-700">LAPORAN TUGAS</h2>
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <h2 class="text-2xl font-bold text-center mb-4">LAPORAN TUGAS</h2>
         <form action="{{ route('petugas.submitLaporan') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             <!-- Lokasi Pengangkutan -->
