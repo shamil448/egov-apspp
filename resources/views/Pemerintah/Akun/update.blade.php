@@ -2,7 +2,7 @@
 
 <main class="p-4 sm:ml-64 mt-10">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <h2 class="text-2xl font-bold text-center mb-4">EDIT AKUN</h2>
+        <h2 class="text-2xl font-bold text-center mb-4">UPDATE AKUN</h2>
 
         <form action="{{ route('pemerintah.update-akun', $user->id) }}" method="POST" class="space-y-4">
             @csrf
@@ -38,7 +38,7 @@
             </div>
             <div class="flex space-x-4 mt-6">
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
-                <a href="{{ route('pemerintah.list-akun') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Batal</a>
+                <a href="{{ route('pemerintah.index-akun') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Batal</a>
             </div>
         </form>
     </div>

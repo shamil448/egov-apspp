@@ -46,7 +46,7 @@ class PemerintahController extends Controller
             'role' => $validatedData['role'],
         ]);
 
-        return redirect()->route('pemerintah.list-akun')->with('success', 'Akun berhasil ditambahkan.');
+        return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil ditambahkan.');
     }
 
     // Menampilkan halaman edit akun
@@ -78,7 +78,7 @@ class PemerintahController extends Controller
             'role' => $validatedData['role'],
         ]);
 
-        return redirect()->route('pemerintah.list-akun')->with('success', 'Akun berhasil diperbarui.');
+        return redirect()->route('pemerintah.update-akun')->with('success', 'Akun berhasil diperbarui.');
     }
 
     // Menghapus akun
@@ -87,6 +87,6 @@ class PemerintahController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('pemerintah.list-akun')->with('success', 'Akun berhasil dihapus.');
+        return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil dihapus.');
     }
 }
