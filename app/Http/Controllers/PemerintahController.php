@@ -3,32 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // Pastikan model User digunakan
+use App\Models\User;
 
 class PemerintahController extends Controller
 {
-    // Menampilkan halaman dashboard
-    public function dashboard()
+    // Menampilkan daftar akun
+    public function listAkun()
     {
-        return view('pemerintah.dashboard');
+        $users = User::all();
+        return view('Pemerintah.akun.index', compact('users'));
     }
 
-    // Menampilkan halaman laporan harian
-    public function laporanharian()
+    public function dashboard()
     {
-        return view('pemerintah.laporanharian');
+        return view('Pemerintah.dashboard');
     }
 
     // Menampilkan halaman tambah akun
     public function tambahAkun()
     {
-        return view('pemerintah.tambah-akun');
+        return view('Pemerintah.akun.tambah');
     }
 
-    // Fungsi untuk menangani penambahan akun
+    // Menyimpan akun baru
     public function tambahAkunSubmit(Request $request)
     {
-        // Validasi data
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'alamat_lengkap' => 'required|string|max:255',
@@ -38,48 +37,56 @@ class PemerintahController extends Controller
             'role' => 'required|in:Pemerintah,Petugas,RW',
         ]);
 
-        // Simpan data ke database
         User::create([
             'name' => $validatedData['nama_lengkap'],
             'alamat' => $validatedData['alamat_lengkap'],
             'kontak' => $validatedData['nomor_kontak'],
             'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']), // Hash password
-            'role' => $validatedData['role'], // Simpan role
+            'password' => bcrypt($validatedData['password']),
+            'role' => $validatedData['role'],
         ]);
 
-        // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', 'Akun berhasil ditambahkan.');
+        return redirect()->route('pemerintah.list-akun')->with('success', 'Akun berhasil ditambahkan.');
     }
 
-    public function jadwal()
+    // Menampilkan halaman edit akun
+    public function editAkun($id)
     {
-        return view('pemerintah.jadwal');
+        $user = User::findOrFail($id);
+        return view('Pemerintah.akun.update', compact('user'));
     }
 
-
-    // Menampilkan halaman tambah edukasi
-    public function tambahEdukasi()
+    // Memperbarui akun
+    public function updateAkun(Request $request, $id)
     {
-        return view('pemerintah.tambahedukasi');
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'alamat_lengkap' => 'required|string|max:255',
+            'nomor_kontak' => 'required|string|max:20',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:6',
+            'role' => 'required|in:Pemerintah,Petugas,RW',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $validatedData['nama_lengkap'],
+            'alamat' => $validatedData['alamat_lengkap'],
+            'kontak' => $validatedData['nomor_kontak'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'] ? bcrypt($validatedData['password']) : $user->password,
+            'role' => $validatedData['role'],
+        ]);
+
+        return redirect()->route('pemerintah.list-akun')->with('success', 'Akun berhasil diperbarui.');
     }
 
-    // Menampilkan halaman pengawasan TPA/TPS
-    public function pengawasanTpaTps()
+    // Menghapus akun
+    public function deleteAkun($id)
     {
-        return view('pemerintah.tpatps');
-    }
+        $user = User::findOrFail($id);
+        $user->delete();
 
-    // Menampilkan halaman pelaporan masyarakat
-    public function pelaporan()
-    {
-        return view('pemerintah.pelaporan');
-    }
-
-    // Fungsi untuk logout
-    public function logout()
-    {
-        // Tambahkan logika untuk logout di sini
-        return redirect()->route('pemerintah.dashboard');
+        return redirect()->route('pemerintah.list-akun')->with('success', 'Akun berhasil dihapus.');
     }
 }

@@ -138,3 +138,13 @@ Route::prefix('petugas')->group(function () {
     Route::get('/laporantugas', [PetugasController::class, 'laporanTugas'])->name('petugas.laporantugas');
 });
 Route::post('/petugas/laporan-tugas', [PetugasController::class, 'submitLaporan'])->name('petugas.submitLaporan');
+
+
+Route::prefix('Pemerintah/Akun')->group(function () {
+    Route::get('/Index', [PemerintahController::class, 'listAkun'])->name('pemerintah.index-akun');
+    Route::get('/Tambah', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambah-akun');
+    Route::post('/Tambah', [PemerintahController::class, 'tambahAkunSubmit'])->name('pemerintah.tambah-akun.submit');
+    Route::get('/Update/{id}', [PemerintahController::class, 'editAkun'])->name('pemerintah.update-akun');
+    Route::post('/Update/{id}', [PemerintahController::class, 'updateAkun'])->name('pemerintah.update-akun');
+    Route::delete('/Delete/{id}', [PemerintahController::class, 'deleteAkun'])->name('pemerintah.delete-akun');
+});
