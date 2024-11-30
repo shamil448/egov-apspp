@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('jadwal_pengangkutan', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->time('waktu');
-            $table->string('tempat');
+            $table->string('hari');
+            $table->string('rw_id');
+            $table->string('petugas_id');
             $table->timestamps();
+
+            $table->foreign('rw_id')->references('id')->on('rw')->onDelete('cascade');
+            $table->foreign('petugas_id')->references('id')->on('petugas')->onDelete('cascade');
         });
     }
 
