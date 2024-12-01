@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('jadwal_pengangkutan', function (Blueprint $table) {
             $table->id();
             $table->string('hari');
-            $table->string('rw_id');
-            $table->string('petugas_id');
+            $table->unsignedBigInteger('rw_id');
+            $table->unsignedBigInteger('petugas_id');
             $table->timestamps();
 
             $table->foreign('rw_id')->references('id')->on('rw')->onDelete('cascade');
-            $table->foreign('petugas_id')->references('id')->on('petugas')->onDelete('cascade');
+            $table->foreign('petugas_id')->references('id')->on('petugas_pengangkutan')->onDelete('cascade');
         });
     }
 

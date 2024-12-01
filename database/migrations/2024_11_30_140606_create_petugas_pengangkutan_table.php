@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('petugas_pengangkutan', function (Blueprint $table) {
             $table->id();
             $table->string('nama_petugas');
-            $table->string('kecamatan_id');
+            $table->unsignedBigInteger('kecamatan_id');
             $table->timestamps();
 
             $table->foreign('kecamatan_id')->references('id')->on('kecamatan')->onDelete('cascade');
