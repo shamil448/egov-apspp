@@ -85,47 +85,72 @@
 <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 bg-green-300 border-r border-gray-200 transition-transform -translate-x-full sm:translate-x-0 dark:bg-green-700 dark:border-gray-700">
     <div class="h-full px-3 pb-4 overflow-y-auto">
         <ul class="space-y-2">
+            <!-- Dashboard -->
             <li>
                 <a href="{{ route('pemerintah.dashboard') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <img src="/images/admin1.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Dashboard Icon">
                     <span class="ml-3 text-sm sm:text-base">Dashboard</span>
                 </a>
             </li>
+            <!-- Akun -->
             <li>
                 <a href="{{ route('pemerintah.index-akun') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/admin6.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
+                    <img src="/images/admin6.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Akun Icon">
                     <span class="ml-3 text-sm sm:text-base">Akun</span>
                 </a>
             </li>
+            <!-- Master Data -->
+            <li>
+                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" data-dropdown-toggle="dropdownMasterData">
+                    <img src="/images/admin2.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Master Data Icon">
+                    <span class="ml-3 text-sm sm:text-base">Master Data</span>
+                    <svg class="w-5 h-5 ml-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </a>
+                <!-- Dropdown Menu -->
+                <ul id="dropdownMasterData" class="hidden space-y-1 pl-12">
+                    <li><a href="#" class="block text-sm text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">Kecamatan</a></li>
+                    <li><a href="#" class="block text-sm text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">Kelurahan</a></li>
+                    <li><a href="#" class="block text-sm text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">RW</a></li>
+                    <li><a href="#" class="block text-sm text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">Petugas</a></li>
+                </ul>
+            </li>
+            <!-- Jadwal -->
             <li>
                 <a href="{{ route('pemerintah.jadwal') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/admin6.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
+                    <img src="/images/admin6.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Jadwal Icon">
                     <span class="ml-3 text-sm sm:text-base">Jadwal</span>
                 </a>
             </li>
+            <!-- Edukasi -->
             <li>
                 <a href="{{ route('pemerintah.tambahedukasi') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/admin3.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
+                    <img src="/images/admin3.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Edukasi Icon">
                     <span class="ml-3 text-sm sm:text-base">Edukasi</span>
                 </a>
             </li>
+            <!-- Pengawasan TPA/TPS -->
             <li>
                 <a href="{{ route('pemerintah.tpatps') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/admin4.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
+                    <img src="/images/admin4.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Pengawasan TPA/TPS Icon">
                     <span class="ml-3 text-sm sm:text-base">Pengawasan TPA/TPS</span>
                 </a>
             </li>
+            <!-- Laporan -->
             <li>
-                <a href="{{ route('pemerintah.pelaporan') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/admin5.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kritik & Saran Icon">
-                    <span class="ml-3 text-sm sm:text-base">Laporan Kritis&Saran</span>
+                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" data-dropdown-toggle="dropdownLaporan">
+                    <img src="/images/admin5.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Laporan Icon">
+                    <span class="ml-3 text-sm sm:text-base">Laporan</span>
+                    <svg class="w-5 h-5 ml-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
                 </a>
-            </li>
-            <li>
-                <a href="{{ route('pemerintah.laporanharian') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <img src="/images/admin2.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
-                    <span class="ml-3 text-sm sm:text-base">Laporan Harian</span>
-                </a>
+                <!-- Dropdown Menu -->
+                <ul id="dropdownLaporan" class="hidden space-y-1 pl-12">
+                    <li><a href="#" class="block text-sm text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">Laporan Kritik & Saran</a></li>
+                    <li><a href="#" class="block text-sm text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white">Laporan Petugas</a></li>
+                </ul>
             </li>
         </ul>
     </div>
