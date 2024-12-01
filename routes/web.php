@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\EdukasiController;
+use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\PetugasController;
 
 // Rute untuk halaman utama (Welcome Page)
@@ -148,3 +150,8 @@ Route::prefix('Pemerintah/Akun')->group(function () {
     Route::post('/Update/{id}', [PemerintahController::class, 'updateAkun'])->name('pemerintah.update-akun');
     Route::delete('/Delete/{id}', [PemerintahController::class, 'deleteAkun'])->name('pemerintah.delete-akun');
 });
+
+///
+Route::resource('kecamatan', KecamatanController::class);
+Route::resource('kelurahan', KelurahanController::class);
+
