@@ -12,8 +12,8 @@ class KecamatanController extends Controller
      */
     public function index()
     {
-        $kecamatans = Kecamatan::all();
-        return view('kecamatan.index', compact('kecamatans'));
+        $kecamatan = Kecamatan::all();
+        return view('kecamatan.index', compact('kecamatan'));
     }
 
     /**
@@ -29,23 +29,13 @@ class KecamatanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama_kecamatan' => 'required|string|max:255',
         ]);
 
-        Kecamatan::create([
-            'nama_kecamatan' => $request->nama_kecamatan,
-        ]);
+        Kecamatan::create($validated);
 
-        return redirect()->route('kecamatan.index')->with('success', 'Kecamatan berhasil ditambahkan.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Kecamatan $kecamatan)
-    {
-        return view('kecamatan.show', compact('kecamatan'));
+        return redirect()->route('kecamatan.index')->with('success', 'Kecamatan berhasil ditambahkan!');
     }
 
     /**
@@ -61,15 +51,13 @@ class KecamatanController extends Controller
      */
     public function update(Request $request, Kecamatan $kecamatan)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama_kecamatan' => 'required|string|max:255',
         ]);
 
-        $kecamatan->update([
-            'nama_kecamatan' => $request->nama_kecamatan,
-        ]);
+        $kecamatan->update($validated);
 
-        return redirect()->route('kecamatan.index')->with('success', 'Kecamatan berhasil diperbarui.');
+        return redirect()->route('kecamatan.index')->with('success', 'Kecamatan berhasil diperbarui!');
     }
 
     /**
@@ -79,6 +67,6 @@ class KecamatanController extends Controller
     {
         $kecamatan->delete();
 
-        return redirect()->route('kecamatan.index')->with('success', 'Kecamatan berhasil dihapus.');
+        return redirect()->route('kecamatan.index')->with('success', 'Kecamatan berhasil dihapus!');
     }
 }
