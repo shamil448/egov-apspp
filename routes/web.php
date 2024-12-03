@@ -155,3 +155,14 @@ Route::prefix('Pemerintah/Akun')->group(function () {
 Route::resource('kecamatan', KecamatanController::class);
 Route::resource('kelurahan', KelurahanController::class);
 
+// Route untuk Kecamatan
+Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('pemerintah.kecamatan');
+
+// Route untuk Kelurahan
+Route::get('/kelurahan', [KelurahanController::class, 'index'])->name('pemerintah.kelurahan');
+
+// Route untuk RW
+Route::get('/rw', [RwController::class, 'index'])->name('pemerintah.rw');
+
+// Route untuk Petugas
+Route::get('/petugas', [PetugasController::class, 'index'])->name('pemerintah.petugas');
