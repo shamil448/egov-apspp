@@ -78,7 +78,7 @@ class PemerintahController extends Controller
             'role' => $validatedData['role'],
         ]);
 
-        return redirect()->route('pemerintah.update-akun')->with('success', 'Akun berhasil diperbarui.');
+        return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil diperbarui.');
     }
 
     // Menghapus akun
