@@ -89,4 +89,9 @@ class PemerintahController extends Controller
 
         return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil dihapus.');
     }
+    // Menampilkan laporan kritik & saran
+    public function laporanKritikSaran()
+    {
+    return view('pemerintah.laporan-kritik-saran');
+    }
 }

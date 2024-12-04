@@ -166,3 +166,7 @@ Route::get('/rw', [RwController::class, 'index'])->name('pemerintah.rw');
 
 // Route untuk Petugas
 Route::get('/petugas', [PetugasController::class, 'index'])->name('pemerintah.petugas');
+
+// Rute untuk Laporan Kritik & Saran
+Route::get('/laporan-kritik-saran', [PemerintahController::class, 'laporanKritikSaran'])
+    ->name('pemerintah.laporan.kritik-saran');
