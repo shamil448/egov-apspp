@@ -78,7 +78,7 @@ Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
 Route::get('/Pemerintah/dashboard', [PemerintahController::class, 'dashboard'])->name('pemerintah.dashboard');
 Route::get('/Pemerintah/laporan-harian', [PemerintahController::class, 'laporanharian'])->name('pemerintah.laporanharian');
 Route::get('/Pemerintah/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambahakun');
-Route::get('/Pemerintah/jadwal', [PemerintahController::class, 'jadwal'])->name('pemerintah.jadwal');
+Route::get('/Pemerintah/jadwal', [PemerintahController::class, 'jadwal'])->name('pemerintah.Jadwal.jadwal');
 Route::get('/Pemerintah/tambah-edukasi', [PemerintahController::class, 'tambahEdukasi'])->name('pemerintah.tambahedukasi');
 Route::get('/Pemerintah/tpa-tps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
 Route::get('/Pemerintah/pelaporan', [PemerintahController::class, 'pelaporan'])->name('pemerintah.pelaporan');
@@ -149,6 +149,11 @@ Route::prefix('Pemerintah/Akun')->group(function () {
     Route::get('/Update/{id}', [PemerintahController::class, 'editAkun'])->name('pemerintah.update-akun');
     Route::post('/Update/{id}', [PemerintahController::class, 'updateAkun'])->name('pemerintah.update-akun');
     Route::delete('/Delete/{id}', [PemerintahController::class, 'deleteAkun'])->name('pemerintah.delete-akun');
+});
+
+Route::prefix('Pemerintah/Jadwal')->group(function () {
+    Route::get('/Index', [PemerintahController::class, 'listjadwal'])->name('pemerintah.index-jadwal');
+    
 });
 
 ///
