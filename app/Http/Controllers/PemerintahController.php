@@ -79,7 +79,7 @@ class PemerintahController extends Controller
             'role' => $validatedData['role'],
         ]);
 
-        return redirect()->route('pemerintah.update-akun')->with('success', 'Akun berhasil diperbarui.');
+        return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil diperbarui.');
     }
 
     // Menghapus akun
@@ -90,10 +90,8 @@ class PemerintahController extends Controller
 
         return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil dihapus.');
     }
-
     public function listjadwal()
     {
-        $users = User::all();
-        return view('Pemerintah.jadwal.index', compact('users'));
+        return view('Pemerintah.jadwal.index');
     }
 }

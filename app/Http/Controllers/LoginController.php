@@ -15,37 +15,36 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
-        ], [
-            'email.required' => 'Email Wajib Diisi',
-            'password.required' => 'Password Wajib Diisi',
         ]);
 
-        $infologin = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
 
-        if (Auth::attempt($infologin)) {
-            if (Auth::user()->role == 'Pemerintah') {
-                return redirect()->route('pemerintah.dashboard');
-                
-            } elseif (Auth::user()->role == 'Petugas') {
-                return redirect()->route('Petugas.dashboard');
-            
-            } elseif (Auth::user()->role == 'RW') {
-                return redirect()->route('rw.dashboard');
+            $role = Auth::user()->role;
+            switch ($role) {
+                case 'Pemerintah':
+                    return redirect()->route('pemerintah.dashboard');
+                case 'RW':
+                    return redirect()->route('rw.dashboard');
+                case 'Petugas':
+                    return redirect()->route('petugas.dashboard');
+                default:
+                    Auth::logout();
+                    return redirect()->route('login')->withErrors('Role tidak dikenali.');
             }
-
-        } else {
-            return redirect('login')->withErrors('Username dan Password yang dimasukkan tidak sesuai')->withinput();
         }
+
+        return back()->withErrors('Login gagal! Periksa email atau password Anda.');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('login');
     }
 }

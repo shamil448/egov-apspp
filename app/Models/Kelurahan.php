@@ -7,24 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kelurahan extends Model
 {
-    use HasFactory;
+    protected $table = 'kelurahan'; // Nama tabel yang sesuai
+    protected $fillable = ['kelurahan', 'kecamatan_id'];
 
-    /**
-     * The table associated with the model.
-     */
-    protected $table = 'kelurahan';
-
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [
-        'kecamatan_id',
-        'kelurahan',
-    ];
-
-    /**
-     * Define the relationship with the Kecamatan model.
-     */
+    // Relasi ke model Kecamatan
     public function kecamatan()
     {
         return $this->belongsTo(Kecamatan::class);
