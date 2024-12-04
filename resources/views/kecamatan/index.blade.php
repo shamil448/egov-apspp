@@ -1,31 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Daftar Kecamatan</h1>
-    <a href="{{ route('kecamatan.create') }}">Tambah Kecamatan</a>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Kecamatan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($kecamatans as $kecamatan)
+    <div class="container">
+        <h1>Daftar Kecamatan</h1>
+        <a href="{{ route('kecamatan.create') }}" class="btn btn-primary mb-3">Tambah Kecamatan</a>
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>{{ $kecamatan->id }}</td>
-                    <td>{{ $kecamatan->nama_kecamatan }}</td>
-                    <td>
-                        <a href="{{ route('kecamatan.edit', $kecamatan->id) }}">Edit</a>
-                        <form action="{{ route('kecamatan.destroy', $kecamatan->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Hapus</button>
-                        </form>
-                    </td>
+                    <th>#</th>
+                    <th>Nama Kecamatan</th>
+                    <th>Aksi</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($kecamatan as $kecamatan)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $kecamatan->nama_kecamatan }}</td>
+                        <td>
+                            <a href="{{ route('kecamatan.edit', $kecamatan->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('kecamatan.destroy', $kecamatan->id) }}" method="POST" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

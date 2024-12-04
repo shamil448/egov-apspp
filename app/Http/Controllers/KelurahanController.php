@@ -13,8 +13,10 @@ class KelurahanController extends Controller
      */
     public function index()
     {
-        $kelurahan = Kelurahan::with('kecamatan')->get();
-        return view('kelurahan.index', compact('kelurahan'));
+        $kelurahans = Kelurahan::with('kecamatan')->get();
+        $kecamatan = Kecamatan::all(); // Ambil semua data kecamatan
+
+    return view('kelurahan.index', compact('kelurahans', 'kecamatan'));
     }
 
     /**
@@ -22,22 +24,25 @@ class KelurahanController extends Controller
      */
     public function create()
     {
-        $kecamatan = Kecamatan::all();
+        $kecamatan = Kecamatan::all(); // Ambil semua data kecamatan
         return view('kelurahan.create', compact('kecamatan'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate([
-            'kecamatan_id' => 'required|exists:kecamatan,id',
             'kelurahan' => 'required|string|max:255',
+            'kecamatan_id' => 'required|exists:kecamatan,id',
         ]);
 
-        Kelurahan::create($request->all());
-        return redirect()->route('kelurahan.index')->with('success', 'Kelurahan created successfully.');
+        Kelurahan::create([
+            'kelurahan' => $request->kelurahan,
+            'kecamatan_id' => $request->kecamatan_id,
+        ]);
+
+
+        return redirect()->route('kecamatan.index')->with('success', 'Kecamatan berhasil ditambahkan.');
     }
 
     /**
