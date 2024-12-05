@@ -25,6 +25,7 @@ class PemerintahController extends Controller
         return view('Pemerintah.akun.tambah');
     }
 
+
     // Menyimpan akun baru
     public function tambahAkunSubmit(Request $request)
     {
@@ -89,9 +90,8 @@ class PemerintahController extends Controller
 
         return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil dihapus.');
     }
-    // Menampilkan laporan kritik & saran
-    public function laporanKritikSaran()
+    public function listjadwal()
     {
-    return view('pemerintah.laporan-kritik-saran');
+        return view('Pemerintah.jadwal.index');
     }
 }

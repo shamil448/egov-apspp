@@ -130,7 +130,7 @@
     </ul>
 </li>
             <li>
-                <a href="{{ route('pemerintah.jadwal') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a href="{{ route('pemerintah.index-jadwal') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <img src="/images/admin6.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
                     <span class="ml-3 text-sm sm:text-base">Jadwal</span>
                 </a>
