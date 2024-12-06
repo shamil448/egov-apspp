@@ -15,6 +15,10 @@ class Kelurahan extends Model
     {
         return $this->belongsTo(Kecamatan::class);
     }
+    public function rw()
+    {
+        return $this->hasMany(RW::class);
+    }
     public function jadwalpengangkutan()
     {
         return $this->hasMany(JadwalPengangkutan::class);

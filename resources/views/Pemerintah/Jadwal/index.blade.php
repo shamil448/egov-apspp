@@ -10,7 +10,7 @@
        @endif
 
        <div class="mb-4">
-           <a href="{{ route('pemerintah.tambah-akun') }}" class="bg-green-600 text-white px-4 py-2 rounded">Tambah Jadwal</a>
+           <a href="{{ route('pemerintah.index-jadwal') }}" class="bg-green-600 text-white px-4 py-2 rounded">Tambah Jadwal</a>
        </div>
 
        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

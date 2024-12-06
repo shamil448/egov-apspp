@@ -12,6 +12,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\EdukasiController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KelurahanController;
+use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\PetugasController;
 
 Route::get('/', function () {
@@ -139,6 +140,12 @@ Route::prefix('pemerintah/Akun')->middleware(['auth', 'role:Pemerintah'])->group
     Route::get('/Update/{id}', [PemerintahController::class, 'editAkun'])->name('pemerintah.update-akun');
     Route::post('/Update/{id}', [PemerintahController::class, 'updateAkun'])->name('pemerintah.update-akun');
     Route::delete('/Delete/{id}', [PemerintahController::class, 'deleteAkun'])->name('pemerintah.delete-akun');
+});
+
+Route::prefix('pemerintah/Master_Data/RW')->middleware(['auth', 'role:Pemerintah'])->group(function () {
+    Route::get('/Index', [MasterDataController::class, 'listrw'])->name('pemerintah.master_data.index-rw');
+    Route::get('/Tambah', [MasterDataController::class, 'tambahrw'])->name('pemerintah.master_data.tambah-rw');
+    Route::post('/Tambah', [MasterDataController::class, 'tambahrwSubmit'])->name('pemerintah.master_data.tambah-rw.submit');
 });
 
 Route::prefix('pemerintah/Jadwal')->middleware(['auth', 'role:Pemerintah'])->group(function () {
