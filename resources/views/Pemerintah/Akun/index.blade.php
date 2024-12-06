@@ -19,6 +19,7 @@
                 <tr>
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Alamat</th>
+                    <th scope="col" class="px-6 py-3">Nomor Telepon</th>
                     <th scope="col" class="px-6 py-3">Email</th>
                     <th scope="col" class="px-6 py-3">Role</th>
                     <th scope="col" class="px-6 py-3">Aksi</th>
@@ -29,6 +30,7 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4">{{ $user->name }}</td>
                         <td class="px-6 py-4">{{ $user->alamat }}</td>
+                        <td class="px-6 py-4">{{ $user->kontak }}</td>
                         <td class="px-6 py-4">{{ $user->email }}</td>
                         <td class="px-6 py-4">{{ $user->role }}</td>
                         <td class="px-6 py-4 space-x-2">
@@ -45,3 +47,6 @@
         </table>
     </div>
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+@include('components.footer')
