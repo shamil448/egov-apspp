@@ -1,6 +1,6 @@
 @include('components.PemerintahDashboard')
 
-<main class="p-4 sm:ml-64 mt-10" style="zoom: 90%;"> 
+<main class="p-4 sm:ml-64 mt-10"> 
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
         <div class="mt-16 flex justify-center">
             <div class="w-full lg:w-3/4 sm:w-full">
@@ -32,32 +32,37 @@
                             @foreach($rws as $rw)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     @if ($lastRw !== $rw->nama_rw)
-                                        <td class="py-4 px-6 text-gray-600">{{ $rw->nama_rw }}</td>
-                                        <td class="py-4 px-6 text-gray-600">{{ $rw->kelurahan->kecamatan->nama_kecamatan }}</td>
-                                        <td class="py-4 px-6 text-gray-600">{{ $rw->kelurahan->kelurahan }}</td>
+                                        <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $rw->nama_rw }}</td>
+                                        <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $rw->kelurahan->kecamatan->nama_kecamatan }}</td>
+                                        <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $rw->kelurahan->kelurahan }}</td>
                                         @php
                                             $lastRw = $rw->nama_rw; // Update RW terakhir
                                         @endphp
                                     @else
                                         <td></td> <!-- Kosongkan sel jika Nama RW sama -->
-                                        <td></td> <!-- Kosongkan sel jika Kecamatan sama -->
-                                        <td></td> <!-- Kosongkan sel jika Kelurahan sama -->
+                                        
+                                        <td colspan="2"></td> <!-- Menyatukan kolom Kecamatan dan Kelurahan -->
                                     @endif
                                     <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $rw->alamat_lengkap }}</td>
                                     <td class="py-4 px-6 text-gray-600">
                                         <a href="{{ $rw->lokasi }}" 
                                            target="_blank" 
                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">
-                                            Lihat Lokasi
+                                            Lokasi
                                         </a>
                                     </td>
                                     <td class="py-4 px-6 text-gray-600 space-x-2">
-                                        <a href="" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1.5 px-3 rounded">Edit</a>
-                                        <form action="" method="POST" class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-1.5 rounded">Hapus</button>
-                                        </form>
+                                        <ul>
+                                            <li><a href="" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded">Edit</a></li>
+                                            <br>
+                                            <li>   
+                                                <form action="" method="POST" class="inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-1.5 rounded">Hapus</button>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </td>
                                 </tr>
                             @endforeach
