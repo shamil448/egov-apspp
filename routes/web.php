@@ -150,13 +150,14 @@ Route::prefix('pemerintah/Master_Data/RW')->middleware(['auth', 'role:Pemerintah
 
 Route::prefix('pemerintah/Jadwal')->middleware(['auth', 'role:Pemerintah'])->group(function () {
     Route::get('/Index', [PemerintahController::class, 'listjadwal'])->name('pemerintah.index-jadwal');
-    
+
 });
 
 Route::prefix('pemerintah')->middleware(['auth', 'role:Pemerintah'])->group(function () {
     Route::get('/tambah-edukasi', [EdukasiController::class, 'create'])->name('pemerintah.tambahedukasi');
     Route::post('/tambah-edukasi', [EdukasiController::class, 'store']);
     Route::get('/list-edukasi', [EdukasiController::class, 'index'])->name('pemerintah.listedukasi');
+    Route::post('/upload-gambar', [EdukasiController::class, 'uploadGambar'])->name('pemerintah.uploadgambar');
 });
 
 

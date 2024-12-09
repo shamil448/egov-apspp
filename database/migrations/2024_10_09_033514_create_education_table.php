@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('subject'); // Subjek atau mata pelajaran, misalnya 'Matematika'
             $table->string('author'); // Penulis atau pembuat materi
             $table->enum('type', ['article', 'video', 'course']); // Jenis materi edukasi
+            $table->string('image')->nullable(); // Kolom untuk menyimpan path gambar
             $table->timestamp('published_at')->nullable(); // Tanggal dan waktu publikasi
             $table->timestamps();
         });

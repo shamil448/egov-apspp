@@ -79,7 +79,7 @@
                     <textarea type="text" id="alamat_lengkap" name="alamat_lengkap" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required></textarea>
                     <p class="text-sm text-gray-500 mt-1">Note: Mohon Diisi Alamat Selengkap-Lengkapnya</p>
                 </div>
-                
+
             </div>
 
             <!-- Google Maps -->

@@ -53,7 +53,19 @@
             </div>
         </form>
     </div>
-</main>
+
+    <div class="mt-10">
+    <h2 class="text-2xl font-bold text-center mb-4">UPLOAD GAMBAR EDUKASI</h2>
+    <form action="{{ route('pemerintah.uploadgambar') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        @csrf
+            <label for="image" class="block text-sm font-medium text-gray-700">Unggah Gambar</label>
+            <input type="file" id="image" name="image" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" required>
+        </div>
+        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            Upload Gambar
+        </button>
+    </form>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 @include('components.footer')
