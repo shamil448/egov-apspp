@@ -148,6 +148,15 @@ Route::prefix('pemerintah/Master_Data/RW')->middleware(['auth', 'role:Pemerintah
     Route::post('/Tambah', [MasterDataController::class, 'tambahrwSubmit'])->name('pemerintah.master_data.tambah-rw.submit');
 });
 
+Route::prefix('pemerintah/Master_Data/Petugas')->middleware(['auth', 'role:Pemerintah'])->group(function () {
+    Route::get('/Index', [MasterDataController::class, 'listpetugas'])->name('pemerintah.master_data.index-petugas');
+    Route::get('/Tambah', [MasterDataController::class, 'tambahpetugas'])->name('pemerintah.master_data.tambah-petugas');
+    Route::post('/Tambah', [MasterDataController::class, 'tambahpetugasSubmit'])->name('pemerintah.master_data.tambah-petugas.submit');
+    Route::get('/{id}/Edit', [MasterDataController::class, 'editPetugas'])->name('pemerintah.master_data.edit-petugas');
+    Route::put('/{id}/Update', [MasterDataController::class, 'updatePetugas'])->name('pemerintah.master_data.update-petugas');
+    Route::delete('/Delete/{id}', [MasterDataController::class, 'deletePetugas'])->name('pemerintah.master_data.delete-petugas');
+});
+
 Route::prefix('pemerintah/Jadwal')->middleware(['auth', 'role:Pemerintah'])->group(function () {
     Route::get('/Index', [PemerintahController::class, 'listjadwal'])->name('pemerintah.index-jadwal');
 
