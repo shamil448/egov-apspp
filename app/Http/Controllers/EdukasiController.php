@@ -29,24 +29,34 @@ class EdukasiController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required',
-            'category' => 'required|in:Berita,Edukasi',
-            'subject' => 'required|string|max:255',
             'author' => 'required|string|max:255',
             'type' => 'required|in:article,video,course',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Validasi gambar
             'published_at' => 'nullable|date',
-        ]);
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
+            'video' => 'nullable|mimetypes:video/mp4,video/mpeg,video/quicktime|max:10240', // Validasi untuk video
+    ]);
 
-        $data = $request->all();
+        $data = $request->only([
+            'title',
+            'content',
+            'author',
+            'type',
+            'published_at',
+    ]);
 
-    // Cek dan simpan file gambar
-    if ($request->hasFile('image')) {
-        $data['image'] = $request->file('image')->store('images/education', 'public');
+        // Cek dan simpan file gambar
+        if ($request->hasFile('image')) {
+            $data['image_path'] = $request->file('image')->store('images/education', 'public');
     }
 
-    Education::create($data);
+        // Cek dan simpan file video
+        if ($request->hasFile('video')) {
+            $data['video_path'] = $request->file('video')->store('videos/education', 'public');
+    }
 
-    return redirect()->route('pemerintah.listedukasi')->with('success', 'Edukasi berhasil ditambahkan.');
+        Education::create($data);
+
+        return redirect()->route('pemerintah.listedukasi')->with('success', 'Edukasi berhasil ditambahkan.');
     }
 
     public function show($id)
@@ -55,21 +65,26 @@ class EdukasiController extends Controller
         return view('education.show', compact('education'));
     }
 
-    public function uploadGambar(Request $request)
+    public function uploadMedia(Request $request)
     {
         $request->validate([
-            'education_id' => 'required|exists:education,id',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'video' => 'nullable|mimetypes:video/mp4,video/mpeg,video/quicktime|max:10240',
     ]);
 
-        $education = Education::findOrFail($request->education_id);
+        $mediaPaths = [];
 
-        // Simpan gambar
-        $path = $request->file('image')->store('images/education', 'public');
-
-        // Update kolom gambar
-        $education->update(['image' => $path]);
-
-        return redirect()->back()->with('success', 'Gambar berhasil diunggah.');
+        // Simpan gambar jika ada
+        if ($request->hasFile('image')) {
+            $mediaPaths['image_path'] = $request->file('image')->store('images/education', 'public');
     }
+
+        // Simpan video jika ada
+        if ($request->hasFile('video')) {
+            $mediaPaths['video_path'] = $request->file('video')->store('videos/education', 'public');
+    }
+
+        return back()->with('success', 'Media berhasil diunggah: ' . json_encode($mediaPaths));
+    }
+
 }

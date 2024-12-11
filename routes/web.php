@@ -106,7 +106,7 @@ Route::prefix('pemerintah')->middleware(['auth', 'role:Pemerintah'])->group(func
     Route::get('/tambah-edukasi', [EdukasiController::class, 'create'])->name('pemerintah.tambahedukasi');
     Route::post('/tambah-edukasi', [EdukasiController::class, 'store']);
     Route::get('/list-edukasi', [EdukasiController::class, 'index'])->name('pemerintah.listedukasi');
-    Route::post('/upload-gambar', [EdukasiController::class, 'uploadGambar'])->name('pemerintah.uploadgambar');
+    Route::post('/upload-media', [EdukasiController::class, 'uploadMedia'])->name('pemerintah.uploadmedia');
 });
 
 

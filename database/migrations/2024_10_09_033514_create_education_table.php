@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title'); // Judul materi edukasi
             $table->text('content'); // Isi materi edukasi
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // Foreign key ke tabel categories
-            $table->string('subject'); // Subjek atau mata pelajaran, misalnya 'Matematika'
             $table->string('author'); // Penulis atau pembuat materi
             $table->enum('type', ['article', 'video', 'course']); // Jenis materi edukasi
-            $table->string('image')->nullable(); // Kolom untuk menyimpan path gambar
+            $table->string('image_path')->nullable(); // Path untuk file gambar
+            $table->string('video_path')->nullable(); // Path untuk file video
             $table->timestamp('published_at')->nullable(); // Tanggal dan waktu publikasi
             $table->timestamps();
         });
