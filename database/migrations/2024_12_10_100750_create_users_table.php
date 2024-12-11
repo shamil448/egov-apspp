@@ -21,8 +21,14 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique(); // Email unik
             $table->string('password'); // Password
             $table->enum('role', ['Pemerintah', 'Petugas', 'RW'])->default('Petugas'); // Role
+            $table->unsignedBigInteger('rw_id')->nullable(); // Foreign key untuk RW
+            $table->unsignedBigInteger('petugas_pengangkutan_id')->nullable(); // Foreign key untuk Petugas
             $table->rememberToken(); // Token remember me
             $table->timestamps(); // Created at dan updated at
+
+            // Menambahkan foreign key constraint untuk RW dan Petugas
+            $table->foreign('rw_id')->references('id')->on('rw')->onDelete('set null');
+            $table->foreign('petugas_pengangkutan_id')->references('id')->on('petugas_pengangkutan')->onDelete('set null');
         });
     }
 

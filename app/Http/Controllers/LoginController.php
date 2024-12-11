@@ -23,6 +23,15 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             $role = Auth::user()->role;
+
+            // Menyimpan rw_id atau petugas_id ke session berdasarkan role
+            if ($role == 'Petugas') {
+                session(['petugas_id' => Auth::user()->petugas_pengangkutan_id]);
+            } elseif ($role == 'RW') {
+                session(['rw_id' => Auth::user()->rw_id]);
+            }
+
+            // Redirect berdasarkan role
             switch ($role) {
                 case 'Pemerintah':
                     return redirect()->route('pemerintah.dashboard');

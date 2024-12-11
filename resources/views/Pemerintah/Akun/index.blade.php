@@ -10,8 +10,21 @@
             </div>
         @endif
 
-        <div class="mb-4">
-            <a href="{{ route('pemerintah.tambah-akun') }}" class="bg-green-600 text-white px-4 py-2 rounded">Tambah Akun</a>
+        <div class="mb-4 flex space-x-4">
+            <a href="{{ route('pemerintah.tambah-akun-pemerintah') }}" class="bg-green-600 text-white px-4 py-2 rounded">Tambah Pemerintah</a>
+            <a href="{{ route('pemerintah.tambah-akun-petugas') }}" class="bg-blue-600 text-white px-4 py-2 rounded">Tambah Petugas</a>
+            <a href="{{ route('pemerintah.tambah-akun-rw') }}" class="bg-yellow-600 text-white px-4 py-2 rounded">Tambah RW</a>
+
+            <form action="{{ route('pemerintah.index-akun') }}" method="GET" class="flex items-center space-x-2 ml-auto">
+                <label for="role" class="text-sm">Filter berdasarkan Role:</label>
+                <select name="role" id="role" class="border p-2 rounded">
+                    <option value="">Semua</option>
+                    <option value="Pemerintah" {{ request('role') == 'Pemerintah' ? 'selected' : '' }}>Pemerintah</option>
+                    <option value="Petugas" {{ request('role') == 'Petugas' ? 'selected' : '' }}>Petugas</option>
+                    <option value="RW" {{ request('role') == 'RW' ? 'selected' : '' }}>RW</option>
+                </select>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
+            </form>
         </div>
 
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -35,7 +48,8 @@
                         <td class="px-6 py-4">{{ $user->role }}</td>
                         <td class="px-6 py-4 space-x-2">
                             <a href="{{ route('pemerintah.update-akun', $user->id) }}" class="text-blue-600 hover:underline">Edit</a>
-                            <form action="{{ route('pemerintah.delete-akun', $user->id) }}" method="POST" class="inline">
+                            <!-- Button Delete with confirmation -->
+                            <form action="{{ route('pemerintah.delete-akun', $user->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-600 hover:underline">Hapus</button>

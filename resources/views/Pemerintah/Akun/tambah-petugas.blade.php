@@ -2,7 +2,7 @@
 
 <main class="p-4 sm:ml-64 mt-10">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <h2 class="text-2xl font-bold text-center mb-4">TAMBAH AKUN</h2>
+        <h2 class="text-2xl font-bold text-center mb-4">TAMBAH AKUN PETUGAS</h2>
 
         @if($errors->any())
             <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('pemerintah.tambah-akun.submit') }}" method="POST" class="space-y-4">
+        <form action="{{ route('pemerintah.tambah-akun-petugas.submit') }}" method="POST" class="space-y-4">
             @csrf
             <div class="grid grid-cols-1 gap-6">
                 <div>
@@ -38,13 +38,15 @@
                     <input type="password" id="password" name="password" class="mt-1 block w-full" required>
                 </div>
                 <div>
-                    <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
-                    <select id="role" name="role" class="mt-1 block w-full" required>
-                        <option value="Pemerintah">Pemerintah</option>
-                        <option value="Petugas">Petugas</option>
-                        <option value="RW">RW</option>
+                    <label for="petugas_pengangkutan_id" class="block text-sm font-medium text-gray-700">Petugas Pengangkutan</label>
+                    <select id="petugas_pengangkutan_id" name="petugas_pengangkutan_id" class="mt-1 block w-full" required>
+                        @foreach($petugas as $petugasItem)
+                            <option value="{{ $petugasItem->id }}">{{ $petugasItem->nama_petugas }}</option>
+                        @endforeach
                     </select>
                 </div>
+                <!-- Role tidak bisa diubah, hanya dikirimkan sebagai nilai hidden -->
+                <input type="hidden" id="role" name="role" value="Petugas">
             </div>
             <div class="flex space-x-4 mt-6">
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Tambah</button>

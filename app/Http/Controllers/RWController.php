@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PengangkutanDarurat;
-use App\Models\Message; // Asumsi model pesan bernama Message
+use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 class RWController extends Controller
 {
@@ -70,4 +71,12 @@ class RWController extends Controller
         return redirect()->route('rw.kritik-saran')->with('success', 'Kritik dan saran telah dikirim!');
     }
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
 }
