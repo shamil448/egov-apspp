@@ -18,7 +18,8 @@ class Education extends Model
         'subject',
         'author',
         'type',
-        'image',
+        'image_path',
+        'video_path',
         'published_at',
     ];
 }
