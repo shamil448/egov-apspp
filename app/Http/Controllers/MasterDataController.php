@@ -72,14 +72,17 @@ class MasterDataController extends Controller
     // Menyimpan data petugas baru
     public function tambahPetugasSubmit(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
-            'kecamatan_id' => 'required|exists:kecamatan,id', // Pastikan menggunakan tabel "kecamatan"
+            'petugas' => 'required|integer|min:1',
+            'kecamatan_id' => 'required|exists:kecamatan,id',
         ]);
+        // Format Nama Petugas
+        $nama_petugas = $validatedData['nama_lengkap'] . '/Petugas' . str_pad($validatedData['petugas'], 2, '0', STR_PAD_LEFT);
 
         PetugasPengangkutan::create([
-            'nama_petugas' => $request->input('nama_lengkap'),
-            'kecamatan_id' => $request->input('kecamatan_id'),
+            'nama_petugas' => $nama_petugas,
+            'kecamatan_id' => $validatedData['kecamatan_id'],
         ]);
 
         return redirect()->route('pemerintah.master_data.tambah-petugas')->with('success', 'Petugas berhasil ditambahkan.');
@@ -96,24 +99,26 @@ class MasterDataController extends Controller
     // Update data petugas
     public function updatePetugas(Request $request, $id)
     {
-        $validated = $request->validate([
+        $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
-            'kecamatan_id' => 'required|exists:kecamatan,id', // Pastikan menggunakan tabel "kecamatan"
+            'kecamatan_id' => 'required|exists:kecamatan,id',
         ]);
 
         $petugas = PetugasPengangkutan::findOrFail($id);
         $petugas->update([
-            'nama_petugas' => $validated['nama_lengkap'],
-            'kecamatan_id' => $validated['kecamatan_id'],
+            'nama_petugas' => $validatedData['nama_lengkap'],
+            'kecamatan_id' => $validatedData['kecamatan_id'],
         ]);
 
         return redirect()->route('pemerintah.master_data.index-petugas')->with('success', 'Data petugas berhasil diperbarui.');
     }
-    public function deletePetugas($id)
-{
-    $petugas = PetugasPengangkutan::findOrFail($id);
-    $petugas->delete();
 
-    return redirect()->route('pemerintah.master_data.index-petugas')->with('success', 'Petugas berhasil dihapus.');
-}
+    // Menghapus data petugas
+    public function deletePetugas($id)
+    {
+        $petugas = PetugasPengangkutan::findOrFail($id);
+        $petugas->delete();
+
+        return redirect()->route('pemerintah.master_data.index-petugas')->with('success', 'Petugas berhasil dihapus.');
+    }
 }
