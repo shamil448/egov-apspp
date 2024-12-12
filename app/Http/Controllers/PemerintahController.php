@@ -174,7 +174,7 @@ class PemerintahController extends Controller
         return redirect()->route('login');
     }
 
-    // Menampilkan laporan kritik & saran
+    // Menampilkan laporan kritik&saran
     public function laporanKritikSaran()
     {
     return view('pemerintah.laporan-kritik-saran');
