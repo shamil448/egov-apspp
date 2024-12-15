@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\RW;
 use App\Models\Kelurahan;
 use App\Models\PetugasPengangkutan;
-use App\Models\Kecamatan;
+use App\Models\kecamatan;
 
 class MasterDataController extends Controller
 {
@@ -120,5 +120,72 @@ class MasterDataController extends Controller
         $petugas->delete();
 
         return redirect()->route('pemerintah.master_data.index-petugas')->with('success', 'Petugas berhasil dihapus.');
+    }
+
+    // Menampilkan daftar kecamatan
+    public function index()
+    {
+        $kecamatan = Kecamatan::all();
+        return view('Pemerintah.Master_Data.Kecamatan.index', compact('kecamatan'));
+    }
+
+    // Menampilkan halaman tambah kecamatan
+    public function create()
+    {
+        return view('Pemerintah.Master_Data.Kecamatan.create');
+    }
+
+    // Menyimpan kecamatan baru
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_kecamatan' => 'required|string|max:255',
+        ]);
+
+        Kecamatan::create($validated);
+
+        return redirect()->route('pemerintah.master_data.index-kecamatan')->with('success', 'Kecamatan berhasil ditambahkan.');
+    }
+
+    // Menampilkan detail kecamatan
+    public function show($id)
+    {
+        $kecamatan = Kecamatan::findOrFail($id);
+        return view('Pemerintah.Master_Data.Kecamatan.show', compact('kecamatan'));
+    }
+
+     // Menampilkan halaman edit kecamatan
+     public function edit($id)
+     {
+         $kecamatan = Kecamatan::findOrFail($id);
+         return view('Pemerintah.Master_Data.Kecamatan.edit', compact('kecamatan'));
+     }
+ 
+      // Memperbarui data kecamatan
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'nama_kecamatan' => 'required|string|max:255',
+            'kode_pos' => 'required|string|max:10',
+            'keterangan' => 'nullable|string|max:500',
+        ]);
+
+        $kecamatan = Kecamatan::findOrFail($id);
+        $kecamatan->update([
+            'nama_kecamatan' => $validatedData['nama_kecamatan'],
+            'kode_pos' => $validatedData['kode_pos'],
+            'keterangan' => $validatedData['keterangan'],
+        ]);
+
+        return redirect()->route('pemerintah.master_data.index-kecamatan')->with('success', 'Kecamatan berhasil diperbarui.');
+    }
+
+    // Menghapus data kecamatan
+    public function destroy($id)
+    {
+        $kecamatan = Kecamatan::findOrFail($id);
+        $kecamatan->delete();
+
+        return redirect()->route('pemerintah.master_data.index-kecamatan')->with('success', 'Kecamatan berhasil dihapus.');
     }
 }
