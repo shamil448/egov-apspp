@@ -14,8 +14,6 @@ class Education extends Model
     protected $fillable = [
         'title',
         'content',
-        'category',
-        'subject',
         'author',
         'type',
         'image_path',
