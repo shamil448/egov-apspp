@@ -1,16 +1,13 @@
 <?php
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RWController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PemerintahController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\EdukasiController;
-use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\PetugasController;
@@ -48,7 +45,7 @@ Route::get('/partner', function () {
 });
 Route::get('/educations', [EdukasiController::class, 'index'])->name('home');
 Route::get('/education/{id}', [EdukasiController::class, 'show'])->name('education.show');
-Route::resource('kecamatan', KecamatanController::class);
+//Route::resource('kecamatan', KecamatanController::class);
 Route::resource('kelurahan', KelurahanController::class);
 
 Route::prefix('pemerintah')->middleware(['auth', 'role:Pemerintah'])->group(function () {
@@ -63,7 +60,7 @@ Route::get('/laporan.kritik-saran', [PemerintahController::class, 'laporanKritik
 Route::get('/petugas', [PetugasController::class, 'index'])->name('pemerintah.petugas');
 Route::get('/rw', [RwController::class, 'index'])->name('pemerintah.rw');
 Route::get('/kelurahan', [KelurahanController::class, 'index'])->name('pemerintah.kelurahan');
-Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('pemerintah.kecamatan');
+//Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('pemerintah.kecamatan');
 Route::get('/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambah-akun');
 Route::post('/tambah-akun', [PemerintahController::class, 'tambahAkunSubmit'])->name('pemerintah.tambah-akun.submit');
 });
@@ -100,6 +97,30 @@ Route::prefix('pemerintah/Master_Data/Petugas')->middleware(['auth', 'role:Pemer
     Route::delete('/Delete/{id}', [MasterDataController::class, 'deletePetugas'])->name('pemerintah.master_data.delete-petugas');
 });
 
+Route::prefix('pemerintah/Master_Data/kecamatan')->middleware(['auth', 'role:Pemerintah'])->group(function () {
+    // Menampilkan daftar kecamatan
+    Route::get('/Index', [MasterDataController::class, 'index'])->name('pemerintah.master_data.index-kecamatan');
+
+    // Menampilkan halaman tambah kecamatan
+    Route::get('/Tambah', [MasterDataController::class, 'create'])->name('pemerintah.master_data.tambah-kecamatan');
+
+    // Menangani submit form tambah kecamatan
+    Route::post('/Tambah', [MasterDataController::class, 'store'])->name('pemerintah.master_data.tambah-kecamatan.submit');
+
+    // Menampilkan detail kecamatan berdasarkan ID
+    Route::get('/{id}/Detail', [MasterDataController::class, 'show'])->name('pemerintah.master_data.detail-kecamatan');
+
+    // Menampilkan halaman edit kecamatan berdasarkan ID
+    Route::get('/{id}/Edit', [MasterDataController::class, 'edit'])->name('pemerintah.master_data.edit-kecamatan');
+
+    // Memperbarui data kecamatan berdasarkan ID
+    Route::put('/{id}/Update', [MasterDataController::class, 'update'])->name('pemerintah.master_data.update-kecamatan');
+
+    // Menghapus kecamatan berdasarkan ID
+    Route::delete('/Delete/{id}', [MasterDataController::class, 'destroy'])->name('pemerintah.master_data.delete-kecamatan');
+});
+
+
 Route::prefix('pemerintah/Jadwal')->middleware(['auth', 'role:Pemerintah'])->group(function () {
     Route::get('/Index', [PemerintahController::class, 'listjadwal'])->name('pemerintah.index-jadwal');
 
@@ -109,7 +130,8 @@ Route::prefix('pemerintah')->middleware(['auth', 'role:Pemerintah'])->group(func
     Route::get('/tambah-edukasi', [EdukasiController::class, 'create'])->name('pemerintah.tambahedukasi');
     Route::post('/tambah-edukasi', [EdukasiController::class, 'store']);
     Route::get('/list-edukasi', [EdukasiController::class, 'index'])->name('pemerintah.listedukasi');
-    Route::post('/upload-media', [EdukasiController::class, 'uploadMedia'])->name('pemerintah.uploadmedia');
+    Route::post('/pemerintah/storeEdukasi', [EdukasiController::class, 'storeEdukasi'])->name('pemerintah.storeEdukasi');
+    Route::get('/pemerintah/create', [EdukasiController::class, 'create'])->name('pemerintah.create');
 });
 
 
@@ -138,4 +160,29 @@ Route::prefix('petugas')->middleware(['auth', 'role:Petugas'])->group(function (
     Route::get('/laporantugas', [PetugasController::class, 'laporanTugas'])->name('petugas.laporantugas');
     Route::post('laporan-tugas', [PetugasController::class, 'submitLaporan'])->name('petugas.submitLaporan');
     Route::get('/logout', [PetugasController::class, 'logout'])->name('petugas.logout');
+});
+
+//pengawasan tpa/tps
+
+Route::get('/tpa-tps', function () {
+    return view('Pengawasan_TPA_TPS.index');
+});
+
+Route::resource('kecamatan', PemerintahController::class);
+
+Route::prefix('educations')->group(function () {
+    // Menampilkan daftar edukasi
+    Route::get('/', [EdukasiController::class, 'index'])->name('educations.index');
+
+    // Menampilkan form tambah edukasi
+    Route::get('/create', [EdukasiController::class, 'create'])->name('educations.create');
+
+    // Menyimpan data edukasi ke database
+    Route::post('/store', [EdukasiController::class, 'storeEdukasi'])->name('educations.store');
+
+    // Menampilkan detail edukasi
+    Route::get('/{id}', [EdukasiController::class, 'show'])->name('educations.show');
+
+    // Mengunggah media (gambar/video)
+    Route::post('/upload-media', [EdukasiController::class, 'uploadMedia'])->name('educations.uploadMedia');
 });

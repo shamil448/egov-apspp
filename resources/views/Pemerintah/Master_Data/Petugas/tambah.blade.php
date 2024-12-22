@@ -48,7 +48,7 @@
                         <option value="" disabled selected>Pilih Kecamatan</option>
                         @foreach ($kecamatans as $kecamatan)
                             <option value="{{ $kecamatan->id }}">
-                                {{ $kecamatan->nama_kecamatan }} - {{ $kecamatan->kecamatan }}
+                                {{ $kecamatan->nama_kecamatan }}{{ $kecamatan->kecamatan }}
                             </option>
                         @endforeach
                     </select>

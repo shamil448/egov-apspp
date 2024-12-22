@@ -173,4 +173,16 @@ class PemerintahController extends Controller
 
         return redirect()->route('login');
     }
+
+    // Menampilkan laporan kritik&saran
+    public function laporanKritikSaran()
+    {
+    return view('pemerintah.laporan-kritik-saran');
+    }
+
+    //menampilkan pengawasan tpa/tps
+    public function pengawasanTpaTps()
+    {
+        return view('pemerintah.Pengawasan_TPA_TPS.index');
+    }
 }
