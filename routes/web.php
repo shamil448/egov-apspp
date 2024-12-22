@@ -86,6 +86,9 @@ Route::prefix('pemerintah/Master_Data/RW')->middleware(['auth', 'role:Pemerintah
     Route::get('/Index', [MasterDataController::class, 'listrw'])->name('pemerintah.master_data.index-rw');
     Route::get('/Tambah', [MasterDataController::class, 'tambahrw'])->name('pemerintah.master_data.tambah-rw');
     Route::post('/Tambah', [MasterDataController::class, 'tambahrwSubmit'])->name('pemerintah.master_data.tambah-rw.submit');
+    Route::get('/{id}/Edit', [MasterDataController::class, 'editrw'])->name('pemerintah.master_data.edit-rw');
+    Route::put('/{id}/Update', [MasterDataController::class, 'updaterw'])->name('pemerintah.master_data.update-rw');
+    Route::delete('/Delete/{id}', [MasterDataController::class, 'deleterw'])->name('pemerintah.master_data.delete-rw');
 });
 
 Route::prefix('pemerintah/Master_Data/Petugas')->middleware(['auth', 'role:Pemerintah'])->group(function () {
