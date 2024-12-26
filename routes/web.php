@@ -123,6 +123,8 @@ Route::prefix('pemerintah/Master_Data/kecamatan')->middleware(['auth', 'role:Pem
 
 Route::prefix('pemerintah/Jadwal')->middleware(['auth', 'role:Pemerintah'])->group(function () {
     Route::get('/Index', [PemerintahController::class, 'listjadwal'])->name('pemerintah.index-jadwal');
+    Route::get('/Tambah', [PemerintahController::class, 'tambahjadwal'])->name('pemerintah.tambah-jadwal');
+    Route::post('/Tambah', [PemerintahController::class, 'tambahjadwalSubmit'])->name('pemerintah.tambah-jadwal.submit');
 
 });
 
