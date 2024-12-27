@@ -48,12 +48,41 @@ class MasterDataController extends Controller
         return redirect()->route('pemerintah.master_data.index-rw')->with('success', 'Akun berhasil ditambahkan.');
     }
 
-    // Menampilkan halaman edit RW
-    public function editAkun($id)
-    {
-        $rw = RW::findOrFail($id);
-        return view('Pemerintah.Master_Data.RW.update', compact('rw'));
-    }
+        // Menampilkan halaman edit RW
+        public function editrw($id)
+        {
+            $rw = RW::findOrFail($id);
+            $kelurahans = Kelurahan::with('kecamatan')->get();
+            return view('Pemerintah.Master_Data.RW.update', compact('rw','kelurahans'));
+        }
+
+        // Update data rw
+        public function updaterw(Request $request, $id)
+        {
+            $validatedData = $request->validate([
+                'nama_rw' => 'required|string|max:255',
+                'kelurahan_id' => 'required|string|max:255',
+                'alamat_lengkap' => 'required|string|max:255',
+                'lokasi' => 'required|string|max:255',
+            ]);
+
+            $rw = RW::findOrFail($id);
+            $rw->update([
+                'nama_rw' => $validatedData['nama_rw'],
+                'kelurahan_id' => $validatedData['kelurahan_id'],
+                'alamat_lengkap' => $validatedData['alamat_lengkap'],
+                'lokasi' => $validatedData['lokasi'],
+            ]);
+
+            return redirect()->route('pemerintah.master_data.index-rw')->with('success', 'Data rw berhasil diperbarui.');
+        }
+        public function deleterw($id)
+        {
+            $rw = RW::findOrFail($id);
+            $rw->delete();
+
+            return redirect()->route('pemerintah.master_data.index-rw')->with('success', 'rw berhasil dihapus.');
+        }
 
     // Menampilkan daftar petugas
     public function listPetugas()

@@ -16,4 +16,15 @@ class JadwalPengangkutan extends Model
         'rw_id',
         'petugas_id',
     ];
+
+    public function rw()
+    {
+        return $this->belongsTo(RW::class);
+    }
+
+    public function petugas()
+    {
+        return $this->belongsTo(PetugasPengangkutan::class);
+    }
+
 }

@@ -20,4 +20,9 @@ class PetugasPengangkutan extends Model
     {
         return $this->belongsTo(Kecamatan::class, 'kecamatan_id');
     }
+
+    public function jadwalpengangkutan()
+    {
+        return $this->hasMany(JadwalPengangkutan::class);
+    }
 }

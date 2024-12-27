@@ -22,4 +22,9 @@ class RW extends Model
     {
         return $this->belongsTo(Kelurahan::class);
     }
+
+    public function jadwalpengangkutan()
+    {
+        return $this->hasMany(JadwalPengangkutan::class);
+    }
 }

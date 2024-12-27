@@ -7,6 +7,7 @@ use App\Models\Kelurahan;
 use App\Models\User;
 use App\Models\Rw;
 use App\Models\PetugasPengangkutan;
+use App\Models\JadwalPengangkutan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -175,6 +176,73 @@ class PemerintahController extends Controller
 
         return redirect()->route('login');
     }
+
+    public function listjadwal()
+    {
+        $jadwal = JadwalPengangkutan::with('rw.kelurahan.kecamatan','petugas.kecamatan')->orderBy('hari', 'asc')->get();
+        return view('Pemerintah.jadwal.index', compact('jadwal'));
+    }
+    public function tambahjadwal()
+    {
+        $jadwal = RW::with('kelurahan')->get();
+        $jadwals = PetugasPengangkutan::with('kecamatan')->get();
+        return view('Pemerintah.jadwal.tambah', compact('jadwal','jadwals'));
+    }
+
+    public function tambahjadwalSubmit(Request $request)
+    {
+        $validatedData = $request->validate([
+            'hari' => 'required|string|max:255',
+            'rw_id' => 'required|integer|min:1',
+            'petugas_id' => 'required|integer|min:1',
+        ]);
+
+        JadwalPengangkutan::create([
+            'hari' => $validatedData['hari'],
+            'rw_id' => $validatedData['rw_id'],
+            'petugas_id' => $validatedData['petugas_id'],
+        ]);
+
+        return redirect()->route('pemerintah.index-jadwal')->with('success', 'Jadwal berhasil ditambahkan.');
+    }
+
+    public function editjadwal($id)
+        {
+            $jadwal = JadwalPengangkutan::findOrFail($id);
+            $rw = Rw::with('kelurahan')->get();
+            $petugas = PetugasPengangkutan::with('kecamatan')->get();
+            return view('Pemerintah.jadwal.update', compact('jadwal','rw','petugas'));
+        }
+    
+    public function updatejadwal(Request $request, $id)
+        {
+            $validatedData = $request->validate([
+                'hari' => 'required|string|max:255',
+                'rw_id' => 'required|integer|min:1',
+                'petugas_id' => 'required|integer|min:1',
+            ]);
+
+            $jadwal = JadwalPengangkutan::findOrFail($id);
+            $jadwal->update([
+                'hari' => $validatedData['hari'],
+                'rw_id' => $validatedData['rw_id'],
+                'petugas_id' => $validatedData['petugas_id'],
+
+                
+            ]);
+
+            return redirect()->route('pemerintah.index-jadwal')->with('success', 'Data Jadwal berhasil diperbarui.');
+        }
+    
+        public function deletejadwal($id)
+        {
+            $jadwal = JadwalPengangkutan::findOrFail($id);
+            $jadwal->delete();
+
+            return redirect()->route('pemerintah.index-jadwal')->with('success', 'Jadwal berhasil dihapus.');
+        }
+
+
 
     // Menampilkan laporan kritik&saran
     public function laporanKritikSaran()
