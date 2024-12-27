@@ -32,11 +32,11 @@
                                 <td class="py-4 px-6 text-gray-600 space-x-2">
                                     <ul>
                                         <li>
-                                            <a href="" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded">Edit</a>
+                                            <a href="{{ route('pemerintah.edit-jadwal', $jadwalItem->id) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded">Edit</a>
                                         </li>
                                         <br>
                                         <li>
-                                            <form action="" method="POST" class="inline-block">
+                                            <form action="{{ route('pemerintah.delete-jadwal', $jadwalItem->id) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-1.5 rounded">Hapus</button>

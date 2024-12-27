@@ -204,6 +204,42 @@ class PemerintahController extends Controller
         return redirect()->route('pemerintah.index-jadwal')->with('success', 'Jadwal berhasil ditambahkan.');
     }
 
+    public function editjadwal($id)
+        {
+            $jadwal = JadwalPengangkutan::findOrFail($id);
+            $rw = Rw::with('kelurahan')->get();
+            $petugas = PetugasPengangkutan::with('kecamatan')->get();
+            return view('Pemerintah.jadwal.update', compact('jadwal','rw','petugas'));
+        }
+    
+    public function updatejadwal(Request $request, $id)
+        {
+            $validatedData = $request->validate([
+                'hari' => 'required|string|max:255',
+                'rw_id' => 'required|integer|min:1',
+                'petugas_id' => 'required|integer|min:1',
+            ]);
+
+            $jadwal = JadwalPengangkutan::findOrFail($id);
+            $jadwal->update([
+                'hari' => $validatedData['hari'],
+                'rw_id' => $validatedData['rw_id'],
+                'petugas_id' => $validatedData['petugas_id'],
+
+                
+            ]);
+
+            return redirect()->route('pemerintah.index-jadwal')->with('success', 'Data Jadwal berhasil diperbarui.');
+        }
+    
+        public function deletejadwal($id)
+        {
+            $jadwal = JadwalPengangkutan::findOrFail($id);
+            $jadwal->delete();
+
+            return redirect()->route('pemerintah.index-jadwal')->with('success', 'Jadwal berhasil dihapus.');
+        }
+
 
 
     // Menampilkan laporan kritik&saran

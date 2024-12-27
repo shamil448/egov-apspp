@@ -125,7 +125,9 @@ Route::prefix('pemerintah/Jadwal')->middleware(['auth', 'role:Pemerintah'])->gro
     Route::get('/Index', [PemerintahController::class, 'listjadwal'])->name('pemerintah.index-jadwal');
     Route::get('/Tambah', [PemerintahController::class, 'tambahjadwal'])->name('pemerintah.tambah-jadwal');
     Route::post('/Tambah', [PemerintahController::class, 'tambahjadwalSubmit'])->name('pemerintah.tambah-jadwal.submit');
-
+    Route::get('/{id}/Edit', [PemerintahController::class, 'editjadwal'])->name('pemerintah.edit-jadwal');
+    Route::put('/{id}/Update', [PemerintahController::class, 'updatejadwal'])->name('pemerintah.update-jadwal');
+    Route::delete('/Delete/{id}', [PemerintahController::class, 'deletejadwal'])->name('pemerintah.delete-jadwal');
 });
 
 Route::prefix('pemerintah')->middleware(['auth', 'role:Pemerintah'])->group(function () {

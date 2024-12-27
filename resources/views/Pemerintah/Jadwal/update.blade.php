@@ -1,7 +1,7 @@
 @include('components.PemerintahDashboard')
 <main class="p-4 sm:ml-64 mt-10">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <h2 class="text-2xl font-bold text-center mb-4">Tambah Jadwal Pengangkutan</h2>
+        <h2 class="text-2xl font-bold text-center mb-4">Update Jadwal Pengangkutan</h2>
 
         <!-- Menampilkan Pesan Sukses -->
         @if (session('success'))
@@ -29,38 +29,38 @@
             </div>
         @endif
 
-        <form action="{{ route('pemerintah.tambah-jadwal.submit') }}" method="POST" class="space-y-4" enctype="multipart/form-data">
+        <form action="{{ route('pemerintah.update-jadwal', $jadwal->id) }}" method="POST" class="space-y-4" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="grid grid-cols-1 gap-1">
                 
                 <div>
                     <label for="hari" class="block text-sm font-medium text-gray-700">Hari</label>
                     <select id="hari" name="hari" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
                         <option value="" disabled selected>Pilih Hari</option>
-                        <option value="Hari 1">Hari Ke 1</option>
-                        <option value="Hari 2">Hari Ke 2</option>
-                        <option value="Hari 3">Hari Ke 3</option>
+                        <option value="Hari 1" {{ $jadwal->hari == 'Hari 1' ? 'selected' : '' }}>Hari Ke 1</option>
+                        <option value="Hari 2" {{ $jadwal->hari == 'Hari 2' ? 'selected' : '' }}>Hari Ke 2</option>
+                        <option value="Hari 3" {{ $jadwal->hari == 'Hari 3' ? 'selected' : '' }}>Hari Ke 3</option>
                     </select>
                 </div>  
                 <div>
                     <label for="rw_id" class="block text-sm font-medium text-gray-700">RW</label>
                     <select id="rw_id" name="rw_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
                         <option value="" disabled selected>Pilih RW</option>
-                        @foreach ($jadwal as $rw)
-                            <option value="{{ $rw->id }}">
-                                {{ $rw->nama_rw }}/{{ $rw->kelurahan->kecamatan->nama_kecamatan }}/{{ $rw->kelurahan->kelurahan }}
+                        @foreach ($rw as $rws)
+                            <option value="{{ $rws->id }}" @if($rws->id == $jadwal->rw_id) selected @endif>
+                                {{ $rws->nama_rw }}/{{ $rws->kelurahan->kecamatan->nama_kecamatan }}/{{ $rws->kelurahan->kelurahan }}
                             </option>
                         @endforeach
                     </select>
-                    
                 </div>               
                 <div class="mb-4">
                     <label for="petugas_id" class="block text-sm font-medium text-gray-700">Petugas Pengangkutan</label>
                     <select id="petugas_id" name="petugas_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
                         <option value="" disabled selected>Pilih Petugas</option>
-                        @foreach ($jadwals as $petugas)
-                            <option value="{{ $petugas->id }}">
-                                {{ $petugas->nama_petugas }}/{{ $petugas->kecamatan->nama_kecamatan }}
+                        @foreach ($petugas as $petugass)
+                            <option value="{{ $petugass->id }}"  @if($petugass->id == $jadwal->petugas_id) selected @endif>
+                                {{ $petugass->nama_petugas }}/{{ $petugass->kecamatan->nama_kecamatan }}
                             </option>
                         @endforeach
                     </select>
