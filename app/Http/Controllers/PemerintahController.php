@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use App\Models\User;
 use App\Models\Rw;
 use App\Models\PetugasPengangkutan;
@@ -184,5 +186,71 @@ class PemerintahController extends Controller
     public function pengawasanTpaTps()
     {
         return view('pemerintah.Pengawasan_TPA_TPS.index');
+    }
+
+    public function kelurahan()
+    {
+        $kelurahans = Kelurahan::with('kecamatan')->get();
+        $kecamatan = Kecamatan::all(); // Ambil semua data kecamatan
+
+        return view('Pemerintah.Master_Data.Kelurahan.index', compact('kelurahans', 'kecamatan'));
+    }
+
+    // Menampilkan halaman tambah kelurahan
+    public function tambahKelurahan()
+    {
+        $kecamatan = Kecamatan::all();
+        return view('Pemerintah.Master_Data.Kelurahan.create', compact('kecamatan'));
+    }
+
+    // Menangani submit form tambah kelurahan
+    public function tambahKelurahanSubmit(Request $request)
+    {
+        $validatedData = $request->validate([
+            'kelurahan' => 'required|string|max:255',
+            'kecamatan_id' => 'required|exists:kecamatan,id',
+        ]);
+
+        Kelurahan::create([
+            'kelurahan' => $validatedData['kelurahan'],
+            'kecamatan_id' => $validatedData['kecamatan_id'],
+        ]);
+
+        return redirect()->route('pemerintah.master_data.kelurahan.index')->with('success', 'Kelurahan berhasil ditambahkan.');
+    }
+
+    // Menampilkan halaman edit kelurahan
+    public function editKelurahan($id)
+    {
+        $kelurahan = Kelurahan::findOrFail($id);
+        $kecamatan = Kecamatan::all();
+        return redirect()->route('kelurahan.edit', $id)->with('success', 'Kelurahan berhasil diperbarui.');
+    }
+
+    // Menangani update kelurahan
+    public function updateKelurahan(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'kelurahan' => 'required|string|max:255',
+            'kecamatan_id' => 'required|exists:kecamatan,id',
+        ]);
+
+        $kelurahan = Kelurahan::findOrFail($id);
+        $kelurahan->update([
+            'kelurahan' => $validatedData['kelurahan'],
+            'kecamatan_id' => $validatedData['kecamatan_id'],
+        ]);
+
+        return redirect()->route('pemerintah.master_data.index-kelurahan')->with('success', 'Kelurahan berhasil diperbarui.');
+    }
+
+    // Menghapus kelurahan
+    public function deleteKelurahan($id)
+    {
+        $kelurahan = Kelurahan::findOrFail($id);
+        $kelurahan->delete();
+
+        return redirect()->route('kelurahan.index')->with('success', 'Kelurahan berhasil dihapus.');
+
     }
 }

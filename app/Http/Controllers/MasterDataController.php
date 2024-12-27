@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\RW;
 use App\Models\Kelurahan;
 use App\Models\PetugasPengangkutan;
-use App\Models\kecamatan;
+use App\Models\Kecamatan;
 
 class MasterDataController extends Controller
 {
@@ -77,6 +77,7 @@ class MasterDataController extends Controller
             'petugas' => 'required|integer|min:1',
             'kecamatan_id' => 'required|exists:kecamatan,id',
         ]);
+
         // Format Nama Petugas
         $nama_petugas = $validatedData['nama_lengkap'] . '/Petugas' . str_pad($validatedData['petugas'], 2, '0', STR_PAD_LEFT);
 
@@ -154,14 +155,14 @@ class MasterDataController extends Controller
         return view('Pemerintah.Master_Data.Kecamatan.show', compact('kecamatan'));
     }
 
-     // Menampilkan halaman edit kecamatan
-     public function edit($id)
-     {
-         $kecamatan = Kecamatan::findOrFail($id);
-         return view('Pemerintah.Master_Data.Kecamatan.edit', compact('kecamatan'));
-     }
- 
-      // Memperbarui data kecamatan
+    // Menampilkan halaman edit kecamatan
+    public function edit($id)
+    {
+        $kecamatan = Kecamatan::findOrFail($id);
+        return view('Pemerintah.Master_Data.Kecamatan.edit', compact('kecamatan'));
+    }
+
+    // Memperbarui data kecamatan
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
