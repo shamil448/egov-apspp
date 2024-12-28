@@ -7,7 +7,7 @@
                 <h3 class="text-2xl font-bold text-gray-800 text-center mt-10">Daftar Petugas</h3>
                 @if(session('success'))
                     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
-                        {{ session('success') }}
+                        {{ session(key: 'success') }}
                     </div>
                 @endif
                 <div class="overflow-x-auto mt-6 bg-white shadow-lg rounded-lg border border-gray-200 p-4">

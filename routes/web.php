@@ -46,7 +46,6 @@ Route::get('/partner', function () {
 Route::get('/educations', [EdukasiController::class, 'index'])->name('home');
 Route::get('/education/{id}', [EdukasiController::class, 'show'])->name('education.show');
 //Route::resource('kecamatan', KecamatanController::class);
-Route::resource('kelurahan', KelurahanController::class);
 
 Route::prefix('pemerintah')->middleware(['auth', 'role:Pemerintah'])->group(function () {
 Route::get('/dashboard', [PemerintahController::class, 'dashboard'])->name('pemerintah.dashboard');
@@ -59,7 +58,6 @@ Route::get('/laporan.kritik-saran', [PemerintahController::class, 'laporanKritik
     ->name('pemerintah.laporan.kritik-saran');
 Route::get('/petugas', [PetugasController::class, 'index'])->name('pemerintah.petugas');
 Route::get('/rw', [RwController::class, 'index'])->name('pemerintah.rw');
-Route::get('/kelurahan', [KelurahanController::class, 'index'])->name('pemerintah.kelurahan');
 //Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('pemerintah.kecamatan');
 Route::get('/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambah-akun');
 Route::post('/tambah-akun', [PemerintahController::class, 'tambahAkunSubmit'])->name('pemerintah.tambah-akun.submit');
@@ -173,6 +171,7 @@ Route::get('/tpa-tps', function () {
 });
 
 Route::resource('kecamatan', PemerintahController::class);
+Route::get('/kelurahan', [PemerintahController::class, 'kelurahan'])->name('pemerintah.kelurahan');
 
 Route::prefix('educations')->group(function () {
     // Menampilkan daftar edukasi
@@ -189,4 +188,24 @@ Route::prefix('educations')->group(function () {
 
     // Mengunggah media (gambar/video)
     Route::post('/upload-media', [EdukasiController::class, 'uploadMedia'])->name('educations.uploadMedia');
+});
+
+Route::prefix('pemerintah/master-data')->group(function () {
+    // Route untuk halaman daftar kelurahan
+    Route::get('/kelurahan', [PemerintahController::class, 'kelurahan'])->name('pemerintah.master_data.kelurahan.index');
+
+    // Route untuk halaman tambah kelurahan
+    Route::get('/kelurahan/create', [PemerintahController::class, 'tambahKelurahan'])->name('pemerintah.master_data.kelurahan.create');
+
+    // Route untuk submit form tambah kelurahan
+    Route::post('/kelurahan', [PemerintahController::class, 'tambahKelurahanSubmit'])->name('pemerintah.master_data.kelurahan.store');
+
+    // Route untuk halaman edit kelurahan
+    Route::get('/kelurahan/{id}/edit', [PemerintahController::class, 'editKelurahan'])->name('kelurahan.edit');
+
+    // Route untuk submit update kelurahan
+    Route::put('/kelurahan/{id}', [PemerintahController::class, 'updateKelurahan'])->name('pemerintah.master_data.kelurahan.update');
+
+    // Route untuk menghapus kelurahan
+    Route::delete('/kelurahan/{id}', [PemerintahController::class, 'deleteKelurahan'])->name('kelurahan.destroy');
 });
