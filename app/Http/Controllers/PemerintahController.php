@@ -114,7 +114,7 @@ class PemerintahController extends Controller
             'alamat_lengkap' => 'required|string|max:255',
             'nomor_kontak' => 'required|string|max:15',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:6',
             'role' => 'required|in:Pemerintah,Petugas,RW',
             'rw_id' => 'required|exists:rws,id',
         ]);
@@ -148,7 +148,7 @@ class PemerintahController extends Controller
             'alamat_lengkap' => 'required|string|max:255',
             'nomor_kontak' => 'required|string|max:15',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:6',
             'role' => 'required|in:Pemerintah,Petugas,RW',
             'petugas_pengangkutan_id' => 'required|exists:petugas_pengangkutan,id',
         ]);
