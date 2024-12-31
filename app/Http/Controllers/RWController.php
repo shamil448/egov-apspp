@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class RWController extends Controller
 {
-    // Fungsi untuk menampilkan halaman dashboard RW
     public function dashboard()
     {
-        return view('rw.dashboard'); // Mengembalikan view dashboard RW
+        $user = Auth::user();
+        return view('rw.dashboard', compact('user'));
     }
 
     // Fungsi untuk menampilkan form kirim lokasi
     public function kirimLokasiForm()
     {
-        return view('rw.lokasi'); // Menampilkan form input lokasi
+        $user = Auth::user();
+        return view('rw.lokasi', compact('user'));
     }
 
     // Fungsi untuk menangani form kirim lokasi
@@ -50,7 +51,8 @@ class RWController extends Controller
     // Fungsi untuk menampilkan form Kritik & Saran
     public function kritikSaranForm()
     {
-        return view('rw.kritik-saran'); // Mengembalikan view kritik & saran RW
+        $user = Auth::user();
+        return view('rw.kritik-saran', compact('user'));
     }
 
     // Fungsi untuk menangani form Kritik & Saran

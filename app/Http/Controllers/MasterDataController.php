@@ -7,26 +7,30 @@ use App\Models\RW;
 use App\Models\Kelurahan;
 use App\Models\PetugasPengangkutan;
 use App\Models\Kecamatan;
+use Illuminate\Support\Facades\Auth;
 
 class MasterDataController extends Controller
 {
     // Menampilkan daftar RW
     public function listrw()
     {
+        $user = Auth::user();
         $rws = RW::with('kelurahan.kecamatan')->orderBy('nama_rw', 'asc')->get();
-        return view('Pemerintah.Master_Data.RW.index', compact('rws'));
+        return view('Pemerintah.Master_Data.RW.index', compact('rws', 'user'));
     }
 
     // Menampilkan halaman tambah RW
     public function tambahrw()
     {
+        $user = Auth::user();
         $kelurahans = Kelurahan::with('kecamatan')->get();
-        return view('Pemerintah.Master_Data.RW.tambah', compact('kelurahans'));
+        return view('Pemerintah.Master_Data.RW.tambah', compact('kelurahans', 'user'));
     }
 
     // Menyimpan rw baru
     public function tambahrwSubmit(Request $request)
     {
+        $user = Auth::user();
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'rw' => 'required|integer|min:1',
@@ -48,59 +52,67 @@ class MasterDataController extends Controller
         return redirect()->route('pemerintah.master_data.index-rw')->with('success', 'Akun berhasil ditambahkan.');
     }
 
-        // Menampilkan halaman edit RW
-        public function editrw($id)
-        {
-            $rw = RW::findOrFail($id);
-            $kelurahans = Kelurahan::with('kecamatan')->get();
-            return view('Pemerintah.Master_Data.RW.update', compact('rw','kelurahans'));
-        }
+    // Menampilkan halaman edit RW
+    public function editrw($id)
+    {
+        $user = Auth::user();
+        $rw = RW::findOrFail($id);
+        $kelurahans = Kelurahan::with('kecamatan')->get();
+        return view('Pemerintah.Master_Data.RW.update', compact('rw', 'kelurahans', 'user'));
+    }
 
-        // Update data rw
-        public function updaterw(Request $request, $id)
-        {
-            $validatedData = $request->validate([
-                'nama_rw' => 'required|string|max:255',
-                'kelurahan_id' => 'required|string|max:255',
-                'alamat_lengkap' => 'required|string|max:255',
-                'lokasi' => 'required|string|max:255',
-            ]);
+    // Update data RW
+    public function updaterw(Request $request, $id)
+    {
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'nama_rw' => 'required|string|max:255',
+            'kelurahan_id' => 'required|string|max:255',
+            'alamat_lengkap' => 'required|string|max:255',
+            'lokasi' => 'required|string|max:255',
+        ]);
 
-            $rw = RW::findOrFail($id);
-            $rw->update([
-                'nama_rw' => $validatedData['nama_rw'],
-                'kelurahan_id' => $validatedData['kelurahan_id'],
-                'alamat_lengkap' => $validatedData['alamat_lengkap'],
-                'lokasi' => $validatedData['lokasi'],
-            ]);
+        $rw = RW::findOrFail($id);
+        $rw->update([
+            'nama_rw' => $validatedData['nama_rw'],
+            'kelurahan_id' => $validatedData['kelurahan_id'],
+            'alamat_lengkap' => $validatedData['alamat_lengkap'],
+            'lokasi' => $validatedData['lokasi'],
+        ]);
 
-            return redirect()->route('pemerintah.master_data.index-rw')->with('success', 'Data rw berhasil diperbarui.');
-        }
-        public function deleterw($id)
-        {
-            $rw = RW::findOrFail($id);
-            $rw->delete();
+        return redirect()->route('pemerintah.master_data.index-rw')->with('success', 'Data RW berhasil diperbarui.');
+    }
 
-            return redirect()->route('pemerintah.master_data.index-rw')->with('success', 'rw berhasil dihapus.');
-        }
+    // Menghapus data RW
+    public function deleterw($id)
+    {
+        $user = Auth::user();
+        $rw = RW::findOrFail($id);
+        $rw->delete();
+
+        return redirect()->route('pemerintah.master_data.index-rw')->with('success', 'RW berhasil dihapus.');
+    }
 
     // Menampilkan daftar petugas
     public function listPetugas()
     {
+        $user = Auth::user();
         $petugas = PetugasPengangkutan::with('kecamatan')->orderBy('nama_petugas', 'asc')->get();
-        return view('Pemerintah.Master_Data.Petugas.index', compact('petugas'));
+        return view('Pemerintah.Master_Data.Petugas.index', compact('petugas', 'user'));
     }
 
     // Menampilkan form tambah petugas
     public function tambahPetugas()
     {
+        $user = Auth::user();
         $kecamatans = Kecamatan::all();
-        return view('Pemerintah.Master_Data.Petugas.tambah', compact('kecamatans'));
+        return view('Pemerintah.Master_Data.Petugas.tambah', compact('kecamatans', 'user'));
     }
 
     // Menyimpan data petugas baru
     public function tambahPetugasSubmit(Request $request)
     {
+        $user = Auth::user();
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'petugas' => 'required|integer|min:1',
@@ -121,14 +133,16 @@ class MasterDataController extends Controller
     // Menampilkan halaman edit petugas
     public function editPetugas($id)
     {
+        $user = Auth::user();
         $petugas = PetugasPengangkutan::findOrFail($id);
         $kecamatans = Kecamatan::all();
-        return view('Pemerintah.Master_Data.Petugas.update', compact('petugas', 'kecamatans'));
+        return view('Pemerintah.Master_Data.Petugas.update', compact('petugas', 'kecamatans', 'user'));
     }
 
     // Update data petugas
     public function updatePetugas(Request $request, $id)
     {
+        $user = Auth::user();
         $validatedData = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'kecamatan_id' => 'required|exists:kecamatan,id',
@@ -146,6 +160,7 @@ class MasterDataController extends Controller
     // Menghapus data petugas
     public function deletePetugas($id)
     {
+        $user = Auth::user();
         $petugas = PetugasPengangkutan::findOrFail($id);
         $petugas->delete();
 
@@ -155,19 +170,22 @@ class MasterDataController extends Controller
     // Menampilkan daftar kecamatan
     public function index()
     {
+        $user = Auth::user();
         $kecamatan = Kecamatan::all();
-        return view('Pemerintah.Master_Data.Kecamatan.index', compact('kecamatan'));
+        return view('Pemerintah.Master_Data.Kecamatan.index', compact('kecamatan', 'user'));
     }
 
     // Menampilkan halaman tambah kecamatan
     public function create()
     {
-        return view('Pemerintah.Master_Data.Kecamatan.create');
+        $user = Auth::user();
+        return view('Pemerintah.Master_Data.Kecamatan.create', compact('user'));
     }
 
     // Menyimpan kecamatan baru
     public function store(Request $request)
     {
+        $user = Auth::user();
         $validated = $request->validate([
             'nama_kecamatan' => 'required|string|max:255',
         ]);
@@ -180,20 +198,23 @@ class MasterDataController extends Controller
     // Menampilkan detail kecamatan
     public function show($id)
     {
+        $user = Auth::user();
         $kecamatan = Kecamatan::findOrFail($id);
-        return view('Pemerintah.Master_Data.Kecamatan.show', compact('kecamatan'));
+        return view('Pemerintah.Master_Data.Kecamatan.show', compact('kecamatan', 'user'));
     }
 
     // Menampilkan halaman edit kecamatan
     public function edit($id)
     {
+        $user = Auth::user();
         $kecamatan = Kecamatan::findOrFail($id);
-        return view('Pemerintah.Master_Data.Kecamatan.edit', compact('kecamatan'));
+        return view('Pemerintah.Master_Data.Kecamatan.edit', compact('kecamatan', 'user'));
     }
 
     // Memperbarui data kecamatan
     public function update(Request $request, $id)
     {
+        $user = Auth::user();
         $validatedData = $request->validate([
             'nama_kecamatan' => 'required|string|max:255',
             'kode_pos' => 'required|string|max:10',
@@ -213,6 +234,7 @@ class MasterDataController extends Controller
     // Menghapus data kecamatan
     public function destroy($id)
     {
+        $user = Auth::user();
         $kecamatan = Kecamatan::findOrFail($id);
         $kecamatan->delete();
 

@@ -16,26 +16,27 @@ class PemerintahController extends Controller
     // Menampilkan daftar akun
     public function listAkun(Request $request)
     {
+        $user = Auth::user();
         $role = $request->input('role');
         $users = User::when($role, function($query, $role) {
             return $query->where('role', $role);
         })->get();
 
-        return view('Pemerintah.akun.index', compact('users'));
+        return view('Pemerintah.akun.index', compact('users', 'user'));
     }
 
     public function dashboard()
     {
-        return view('Pemerintah.dashboard');
+        $user = Auth::user();
+        return view('Pemerintah.dashboard', compact('user'));
     }
 
-    // Menampilkan halaman tambah akun
     public function tambahAkun()
     {
-        return view('Pemerintah.akun.tambah-pemerintah');
+        $user = Auth::user();
+        return view('Pemerintah.akun.tambah-pemerintah', compact('user'));
     }
 
-    // Menyimpan akun baru
     public function tambahAkunSubmit(Request $request)
     {
         $validatedData = $request->validate([
@@ -63,8 +64,9 @@ class PemerintahController extends Controller
     // Menampilkan halaman edit akun
     public function editAkun($id)
     {
+        $user = Auth::user();
         $user = User::findOrFail($id);
-        return view('Pemerintah.akun.update', compact('user'));
+        return view('Pemerintah.akun.update', compact('user', 'user'));
     }
 
     // Memperbarui akun
@@ -104,8 +106,9 @@ class PemerintahController extends Controller
     // Menampilkan form tambah akun RW
     public function tambahAkunRW()
     {
+        $user = Auth::user();
         $rws = Rw::all();
-        return view('Pemerintah.akun.tambah-rw', compact('rws'));
+        return view('Pemerintah.akun.tambah-rw', compact('rws', 'user'));
     }
 
     // Proses submit form tambah akun RW
@@ -138,8 +141,9 @@ class PemerintahController extends Controller
     // Menampilkan form tambah akun Petugas
     public function tambahAkunPetugas()
     {
+        $user = Auth::user();
         $petugas = PetugasPengangkutan::all();
-        return view('Pemerintah.akun.tambah-petugas', compact('petugas'));
+        return view('Pemerintah.akun.tambah-petugas', compact('petugas', 'user'));
     }
 
     // Proses submit form tambah akun Petugas
@@ -179,14 +183,16 @@ class PemerintahController extends Controller
 
     public function listjadwal()
     {
+        $user = Auth::user();
         $jadwal = JadwalPengangkutan::with('rw.kelurahan.kecamatan','petugas.kecamatan')->orderBy('hari', 'asc')->get();
-        return view('Pemerintah.jadwal.index', compact('jadwal'));
+        return view('Pemerintah.jadwal.index', compact('jadwal', 'user'));
     }
     public function tambahjadwal()
     {
+        $user = Auth::user();
         $jadwal = RW::with('kelurahan')->get();
         $jadwals = PetugasPengangkutan::with('kecamatan')->get();
-        return view('Pemerintah.jadwal.tambah', compact('jadwal','jadwals'));
+        return view('Pemerintah.jadwal.tambah', compact('jadwal','jadwals', 'user'));
     }
 
     public function tambahjadwalSubmit(Request $request)
@@ -208,10 +214,11 @@ class PemerintahController extends Controller
 
     public function editjadwal($id)
         {
+            $user = Auth::user();
             $jadwal = JadwalPengangkutan::findOrFail($id);
             $rw = Rw::with('kelurahan')->get();
             $petugas = PetugasPengangkutan::with('kecamatan')->get();
-            return view('Pemerintah.jadwal.update', compact('jadwal','rw','petugas'));
+            return view('Pemerintah.jadwal.update', compact('jadwal','rw','petugas', 'user'));
         }
     
     public function updatejadwal(Request $request, $id)
@@ -247,28 +254,32 @@ class PemerintahController extends Controller
     // Menampilkan laporan kritik&saran
     public function laporanKritikSaran()
     {
-    return view('pemerintah.laporan-kritik-saran');
+        $user = Auth::user();
+        return view('pemerintah.laporan-kritik-saran', compact('user'));
     }
 
     //menampilkan pengawasan tpa/tps
     public function pengawasanTpaTps()
     {
-        return view('pemerintah.Pengawasan_TPA_TPS.index');
+        $user = Auth::user();
+        return view('pemerintah.Pengawasan_TPA_TPS.index', compact('user'));
     }
 
     public function kelurahan()
     {
+        $user = Auth::user();
         $kelurahans = Kelurahan::with('kecamatan')->get();
         $kecamatan = Kecamatan::all(); // Ambil semua data kecamatan
 
-        return view('Pemerintah.Master_Data.Kelurahan.index', compact('kelurahans', 'kecamatan'));
+        return view('Pemerintah.Master_Data.Kelurahan.index', compact('kelurahans', 'kecamatan', 'user'));
     }
 
     // Menampilkan halaman tambah kelurahan
     public function tambahKelurahan()
     {
+        $user = Auth::user();
         $kecamatan = Kecamatan::all();
-        return view('Pemerintah.Master_Data.Kelurahan.create', compact('kecamatan'));
+        return view('Pemerintah.Master_Data.Kelurahan.create', compact('kecamatan', 'user'));
     }
 
     // Menangani submit form tambah kelurahan
@@ -287,15 +298,15 @@ class PemerintahController extends Controller
         return redirect()->route('pemerintah.master_data.kelurahan.index')->with('success', 'Kelurahan berhasil ditambahkan.');
     }
 
-    // Menampilkan halaman edit kelurahan
+
     public function editKelurahan($id)
     {
+        $user = Auth::user();
         $kelurahan = Kelurahan::findOrFail($id);
         $kecamatan = Kecamatan::all();
-        return redirect()->route('kelurahan.edit', $id)->with('success', 'Kelurahan berhasil diperbarui.');
+        return view('Pemerintah.Master_Data.Kelurahan.edit', compact('kelurahan', 'kecamatan', 'user'));
     }
 
-    // Menangani update kelurahan
     public function updateKelurahan(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -312,7 +323,6 @@ class PemerintahController extends Controller
         return redirect()->route('pemerintah.master_data.index-kelurahan')->with('success', 'Kelurahan berhasil diperbarui.');
     }
 
-    // Menghapus kelurahan
     public function deleteKelurahan($id)
     {
         $kelurahan = Kelurahan::findOrFail($id);
