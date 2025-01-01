@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('tpa_tps', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('lokasi');
             $table->enum('kategori', ['TPA', 'TPS']);
+            $table->string('alamat_lengkap');
+            $table->string('lokasi');
             $table->timestamps();
         });
     }
@@ -26,5 +26,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('tpa_tps');
-    }
+}
 };

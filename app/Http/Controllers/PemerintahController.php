@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kecamatan;
+use App\Models\TpaTps;
 use App\Models\Kelurahan;
 use App\Models\User;
 use App\Models\Rw;
@@ -257,14 +258,6 @@ class PemerintahController extends Controller
         $user = Auth::user();
         return view('pemerintah.laporan-kritik-saran', compact('user'));
     }
-
-    //menampilkan pengawasan tpa/tps
-    public function pengawasanTpaTps()
-    {
-        $user = Auth::user();
-        return view('pemerintah.Pengawasan_TPA_TPS.index', compact('user'));
-    }
-
     public function kelurahan()
     {
         $user = Auth::user();
@@ -331,4 +324,60 @@ class PemerintahController extends Controller
         return redirect()->route('kelurahan.index')->with('success', 'Kelurahan berhasil dihapus.');
 
     }
+public function TpaTpsindex()
+{
+    $user = Auth::user();
+    $TpaTps = TpaTps::all();
+    return view('pemerintah.Lokasi_TpaTps.index', compact('user', 'TpaTps'));
+}
+
+public function TpaTpscreate()
+{
+    $user = Auth::user();
+    $TpaTps = TpaTps::all();
+    return view('pemerintah.Lokasi_TpaTps.tambah', compact('user','TpaTps'));
+}
+
+public function TpaTpsstore(Request $request)
+{
+    $validatedData = $request->validate([
+        'kategori' => 'required|in:TPA,TPS',
+        'alamat_lengkap' => 'required|string|max:255',
+        'lokasi' => 'required|string|max:255',
+    ]);
+
+    TpaTps::create($validatedData);
+
+    return redirect()->route('pemerintah.tpa_tps')->with('success', 'Data TPA/TPS berhasil ditambahkan.');
+}
+
+public function TpaTpsedit($id)
+{
+    $user = Auth::user();
+    $TpaTps = TpaTps::findOrFail($id);
+    return view('pemerintah.Lokasi_TpaTps.edit', compact('user', 'TpaTps'));
+}
+
+public function TpaTpsupdate(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'kategori' => 'required|in:TPA,TPS',
+        'alamat_lengkap' => 'required|string|max:255',
+        'lokasi' => 'required|string|max:255',
+    ]);
+
+    $TpaTps = TpaTps::findOrFail($id);
+    $TpaTps->update($validatedData);
+
+    return redirect()->route('pemerintah.tpa_tps')->with('success', 'Data TPA/TPS berhasil diperbarui.');
+}
+
+public function TpaTpsdestroy($id)
+{
+    $TpaTps = TpaTps::findOrFail($id);
+    $TpaTps->delete();
+
+    return redirect()->route('pemerintah.tpa_tps')->with('success', 'Data TPA/TPS berhasil dihapus.');
+}
+
 }
