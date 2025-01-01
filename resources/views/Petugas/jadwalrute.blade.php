@@ -8,29 +8,35 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">No</th>
-                        <th scope="col" class="px-6 py-3">Hari | Jam | Tanggal</th>
-                        <th scope="col" class="px-6 py-3">Tujuan Lokasi</th>
-                        <th scope="col" class="px-6 py-3">Nama Petugas</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
+                        <th scope="col" class="px-6 py-3">Hari</th>
+                        <th scope="col" class="px-6 py-3">Rw</th>
+                        <th scope="col" class="px-6 py-3">Alamat Lengkap</th>
+                        <th scope="col" class="px-6 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data jadwal akan di-loop di sini -->
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-6 py-4">1</td>
-                        <td class="px-6 py-4">Sen | 14.00 | 13/10/24</td>
-                        <td class="px-6 py-4">Perum. Cendana</td>
-                        <td class="px-6 py-4">Parto</td>
-                        <td class="px-6 py-4 text-orange-600 font-bold">Sedang Berlangsung</td>
-                    </tr>
-                    <tr class="bg-gray-50 border-b dark:bg-gray-700 dark:border-gray-600">
-                        <td class="px-6 py-4">2</td>
-                        <td class="px-6 py-4">Sel | 10.00 | 15/10/24</td>
-                        <td class="px-6 py-4">Perum. Mawar</td>
-                        <td class="px-6 py-4">Tono</td>
-                        <td class="px-6 py-4 text-green-600 font-bold">Selesai</td>
-                    </tr>
+                    @foreach($jadwal as $jadwalItem)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->hari }}</td>
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->rw->nama_rw }}/{{ $jadwalItem->rw->kelurahan->kelurahan }}/{{ $jadwalItem->rw->kelurahan->kecamatan->nama_kecamatan }}</td>
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->rw->alamat_lengkap }}</td>
+                                <td class="py-4 px-6 text-gray-600 space-x-2">
+                                    <ul>
+                                        <li>
+                                            <a href="{{ $jadwalItem->rw->lokasi }}" 
+                                                target="_blank" 
+                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded">
+                                                 Lokasi 
+                                            </a>
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <a href="{{ route('petugas.tambahlaporan', ['jadwal_id' => $jadwalItem->id]) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded">Laporan</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        @endforeach
                 </tbody>
             </table>
         </div>

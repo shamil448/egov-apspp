@@ -159,8 +159,9 @@ Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
 Route::prefix('petugas')->middleware(['auth', 'role:Petugas'])->group(function () {
     Route::get('/dashboard', [PetugasController::class, 'dashboard'])->name('petugas.dashboard');
     Route::get('/jadwalrute', [PetugasController::class, 'jadwalRute'])->name('petugas.jadwalrute');
-    Route::get('/laporantugas', [PetugasController::class, 'laporanTugas'])->name('petugas.laporantugas');
-    Route::post('laporan-tugas', [PetugasController::class, 'submitLaporan'])->name('petugas.submitLaporan');
+    Route::get('/tambahlaporan/{jadwal_id}', [PetugasController::class, 'tambahlaporan'])->name('petugas.tambahlaporan');
+    Route::post('/tambahlaporan', [PetugasController::class, 'tambahlaporansubmit'])->name('petugas.tambahlaporan.submit');
+    Route::get('/laporantugas', [PetugasController::class, 'laporantugas'])->name('petugas.laporantugas');
     Route::get('/logout', [PetugasController::class, 'logout'])->name('petugas.logout');
 });
 

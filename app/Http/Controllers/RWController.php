@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PengangkutanDarurat;
+use App\Models\JadwalPengangkutan;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,25 @@ class RWController extends Controller
     // Fungsi untuk menampilkan halaman dashboard RW
     public function dashboard()
     {
-        return view('rw.dashboard'); // Mengembalikan view dashboard RW
+        // Ambil user yang sedang login
+        $user = Auth::user();
+
+        // Pastikan user memiliki relasi ke model PetugasPengangkutan
+        $rw = $user->rw;
+
+        // Jika user bukan rw, beri respon error atau redirect
+        if (!$rw) {
+            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke jadwal pengangkutan.');
+        }
+
+        // Ambil jadwal pengangkutan berdasarkan rw yang login
+        $jadwal = JadwalPengangkutan::with('rw.kelurahan.kecamatan')
+            ->where('rw_id', $rw->id)
+            ->orderBy('hari', 'asc')
+            ->get();
+
+        // Kirim data ke view
+        return view('rw.dashboard', compact('jadwal'));
     }
 
     // Fungsi untuk menampilkan form kirim lokasi

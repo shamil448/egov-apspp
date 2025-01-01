@@ -27,4 +27,9 @@ class JadwalPengangkutan extends Model
         return $this->belongsTo(PetugasPengangkutan::class);
     }
 
+    public function laporantugas()
+    {
+        return $this->hasMany(LaporanTugas::class);
+    }
+
 }

@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\RW;
 use App\Models\PetugasPengangkutan;
+use App\Models\JadwalPengangkutan;
+
 
 class User extends Authenticatable
 {
@@ -38,4 +40,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(PetugasPengangkutan::class, 'petugas_pengangkutan_id');
     }
+
 }

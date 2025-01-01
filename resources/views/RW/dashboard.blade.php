@@ -16,13 +16,33 @@
             </div>
        </div>
        <br>
-       <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-          <p class="text-2xl text-gray-400 dark:text-gray-500">
-             <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-             </svg> 
-          </p>
-       </div>
+       <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <h2 class="text-2xl font-bold text-center mb-4">JADWAL & RUTE PENGANGKUTAN</h2>
+        
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Hari</th>
+                        <th scope="col" class="px-6 py-3">Rw</th>
+                        <th scope="col" class="px-6 py-3">Alamat Lengkap</th>
+                        <th scope="col" class="px-6 py-3">Petugas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($jadwal as $jadwalItem)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->hari }}</td>
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->rw->nama_rw }}/{{ $jadwalItem->rw->kelurahan->kelurahan }}/{{ $jadwalItem->rw->kelurahan->kecamatan->nama_kecamatan }}</td>
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->rw->alamat_lengkap }}</td>
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->petugas->nama_petugas }}</td>
+                                
+                            </tr>
+                        @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
        
     </div>
 </main>
