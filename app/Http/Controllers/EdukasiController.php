@@ -8,11 +8,16 @@ use App\Models\Education;
 class EdukasiController extends Controller
 {
     // Menampilkan daftar edukasi di halaman home
-    public function index()
+    public function index(Request $request)
     {
-        // Ambil semua data edukasi dari database
-        $educations = Education::all();
-        // Kirim data edukasi ke view 'educations'
+        $query = Education::query();
+
+        if ($request->has('type') && $request->type != '') {
+            $query->where('type', $request->type);
+        }
+
+        $educations = $query->get();
+
         return view('educations.index', compact('educations'));
     }
 
@@ -25,40 +30,41 @@ class EdukasiController extends Controller
 
     // Menyimpan data edukasi ke database
     public function storeEdukasi(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'content' => 'required',
-        'author' => 'required|string|max:255',
-        'type' => 'required|in:article,video,course',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
-        'video' => 'nullable|mimetypes:video/mp4,video/mpeg,video/quicktime|max:10240', // Validasi untuk video
-    ]);
+    {
 
-    $data = $request->only([
-        'title',
-        'content',
-        'author',
-        'type',
-    ]);
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+            'author' => 'required|string|max:255',
+            'type' => 'required|in:article,video,course',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
+            'video' => 'nullable|mimetypes:video/mp4,video/mpeg,video/quicktime|max:10240', // Validasi untuk video
+        ]);
 
-    // Tetapkan published_at dengan waktu saat ini
-    $data['published_at'] = now();
+        $data = $request->only([
+            'title',
+            'content',
+            'author',
+            'type',
+        ]);
 
-    // Cek dan simpan file gambar
-    if ($request->hasFile('image')) {
-        $data['image_path'] = $request->file('image')->store('images/education', 'public');
+        // Tetapkan published_at dengan waktu saat ini
+        $data['published_at'] = now();
+
+        // Cek dan simpan file gambar
+        if ($request->hasFile('image')) {
+            $data['image_path'] = $request->file('image')->store('images/education', 'public');
+        }
+
+        // Cek dan simpan file video
+        if ($request->hasFile('video')) {
+            $data['video_path'] = $request->file('video')->store('videos/education', 'public');
+        }
+
+        Education::create($data);
+
+        return redirect()->route('pemerintah.listedukasi')->with('success', 'Edukasi berhasil ditambahkan.');
     }
-
-    // Cek dan simpan file video
-    if ($request->hasFile('video')) {
-        $data['video_path'] = $request->file('video')->store('videos/education', 'public');
-    }
-
-    Education::create($data);
-
-    return redirect()->route('pemerintah.listedukasi')->with('success', 'Edukasi berhasil ditambahkan.');
-}
 
     public function show($id)
     {

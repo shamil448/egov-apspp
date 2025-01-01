@@ -61,6 +61,12 @@ Route::get('/rw', [RwController::class, 'index'])->name('pemerintah.rw');
 //Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('pemerintah.kecamatan');
 Route::get('/tambah-akun', [PemerintahController::class, 'tambahAkun'])->name('pemerintah.tambah-akun');
 Route::post('/tambah-akun', [PemerintahController::class, 'tambahAkunSubmit'])->name('pemerintah.tambah-akun.submit');
+Route::get('/tpa-tps', [PemerintahController::class, 'TpaTpsindex'])->name('pemerintah.tpa_tps');
+        Route::get('/tambah-tpa-tps', [PemerintahController::class, 'TpaTpscreate'])->name('pemerintah.tambah-tpa-tps');
+        Route::post('/tambah-tpa-tps', [PemerintahController::class, 'TpaTpsstore'])->name('pemerintah.tambah-tpa-tps.submit');
+        Route::get('/edit-tpa-tps/{id}', [PemerintahController::class, 'TpaTpsedit'])->name('pemerintah.edit-tpa-tps');
+        Route::put('/edit-tpa-tps/{id}', [PemerintahController::class, 'TpaTpsupdate'])->name('pemerintah.update-tpa-tps');
+        Route::delete('/delete-tpa-tps/{id}', [PemerintahController::class, 'TpaTpsdestroy'])->name('pemerintah.delete-tpa-tps');
 });
 
 

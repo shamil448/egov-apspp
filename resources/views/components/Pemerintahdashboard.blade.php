@@ -58,8 +58,8 @@
                 <!-- Dropdown menu -->
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
                   <div class="px-4 py-3">
-                    <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                    <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                  <span class="block text-sm text-gray-900 dark:text-white">{{ $user->name }}</span>
+                  <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ $user->email }}</span>
                   </div>
                   <ul class="py-2" aria-labelledby="user-menu-button">
                     <li>
@@ -142,7 +142,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('pemerintah.tpatps') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a href="{{ route('pemerintah.tpa_tps') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <img src="/images/admin4.png" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
                     <span class="ml-3 text-sm sm:text-base">Pengawasan TPA/TPS</span>
                 </a>

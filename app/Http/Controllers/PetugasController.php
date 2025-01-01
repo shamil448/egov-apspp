@@ -11,8 +11,8 @@ class PetugasController extends Controller
 {
     public function dashboard()
     {
-        // Logika untuk menampilkan halaman dashboard
-        return view('petugas.dashboard');
+        $user = Auth::user();
+        return view('petugas.dashboard', compact('user'));
     }
 
     public function jadwalRute()
@@ -35,13 +35,14 @@ class PetugasController extends Controller
             ->get();
 
         // Kirim data ke view
-        return view('petugas.jadwalrute', compact('jadwal'));
+        return view('petugas.jadwalrute', compact('jadwal', 'user'));
     }
 
     public function tambahlaporan($jadwal_id)
     {
+        $user = Auth::user();
         $jadwal = JadwalPengangkutan::with('rw.kelurahan.kecamatan')->findOrFail($jadwal_id);
-        return view('petugas.tambahlaporan', compact('jadwal'));
+        return view('petugas.tambahlaporan', compact('jadwal', 'user'));
     }
 
     public function tambahlaporansubmit(Request $request)
@@ -96,7 +97,7 @@ class PetugasController extends Controller
             ->get();
 
         // Kirim data ke view
-        return view('petugas.laporantugas', compact('laporan'));
+        return view('petugas.laporantugas', compact('laporan', 'user'));
     }
 
 
