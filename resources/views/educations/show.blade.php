@@ -5,6 +5,7 @@
 @section('content')
 <div class="container">
     <h1>{{ $educations->title }}</h1>
+    <link rel="stylesheet" href="{{ asset('css/education.css') }}">
 
     <p><strong>Penulis:</strong> {{ $educations->author }}</p>
     <p><strong>Tipe:</strong> {{ ucfirst($educations->type) }}</p>
