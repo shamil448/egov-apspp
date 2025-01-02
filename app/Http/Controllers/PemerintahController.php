@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kecamatan;
 use App\Models\TpaTps;
 use App\Models\Kelurahan;
+use App\Models\KritikSaranRw;
 use App\Models\User;
 use App\Models\Rw;
 use App\Models\PetugasPengangkutan;
@@ -269,7 +270,8 @@ class PemerintahController extends Controller
     public function laporanKritikSaran()
     {
         $user = Auth::user();
-        return view('pemerintah.laporan-kritik-saran', compact('user'));
+        $kritikSaran = KritikSaranRw::all();
+        return view('pemerintah.laporan.kritik-saran', compact('user', 'kritikSaran'));
     }
     public function kelurahan()
     {

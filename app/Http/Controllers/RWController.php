@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PengangkutanDarurat;
 use App\Models\JadwalPengangkutan;
+use App\Models\KritikSaranRw;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,30 +66,41 @@ class RWController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('rw.lokasi')->with('success', 'Data pengangkutan darurat berhasil disimpan!');
     }
-
-    // Fungsi untuk menampilkan form Kritik & Saran
     public function kritikSaranForm()
     {
-        $user = Auth::user();
-        return view('rw.kritik-saran', compact('user'));
+        return view('rw.kritik-saran');
     }
 
-    // Fungsi untuk menangani form Kritik & Saran
+    // Fungsi untuk menampilkan form Kritik & Saran
     public function submitKritikSaran(Request $request)
     {
-        // Validasi input
-        $request->validate([
-            'nama' => 'required|string|max:255',
+        // Validasi data input
+        $validated = $request->validate([
+            'lokasi' => 'required|string|max:255',
             'kritik' => 'required|string',
-            'saran' => 'nullable|string',
-            'kepuasan' => 'required|integer|min:0|max:100',
+            'saran' => 'required|string',
+            'foto.*' => 'nullable|image|mimes:jpg,png,jpeg|max:2048', // Memvalidasi banyak file
         ]);
 
-        // Proses data yang telah divalidasi (contoh: simpan ke database)
-        // Contoh: Feedback::create($request->all());
+        // Menangani upload foto jika ada
+        $fotoPaths = [];
+        if ($request->hasFile('foto')) {
+            foreach ($request->file('foto') as $foto) {
+                // Simpan setiap file dan tambahkan path ke array
+                $fotoPaths[] = $foto->store('kritiksaran', 'public');
+            }
+        }
 
-        // Redirect atau tampilkan pesan sukses
-        return redirect()->route('rw.kritik-saran')->with('success', 'Kritik dan saran telah dikirim!');
+        // Simpan data ke dalam database
+        KritikSaranRw::create([
+            'lokasi' => $validated['lokasi'],
+            'kritik' => $validated['kritik'],
+            'saran' => $validated['saran'],
+            'foto' => json_encode($fotoPaths), // Menyimpan array foto sebagai JSON
+        ]);
+
+        // Kembali dengan pesan sukses
+        return redirect()->back()->with('success', 'Kritik dan saran berhasil dikirim.');
     }
 
     public function logout(Request $request)
