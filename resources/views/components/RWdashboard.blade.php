@@ -97,6 +97,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('rw.konfirmasilaporan') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <img src="/images/2.jpeg" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kirim Lokasi Icon">
+                    <span class="ml-3 text-sm sm:text-base">Konfirmasi Laporan</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('rw.kritik-saran') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <img src="/images/4.jpeg" class="w-12 h-12 sm:w-20 sm:h-20" alt="Kritik & Saran Icon">
                     <span class="ml-3 text-sm sm:text-base">Kritik & Saran</span>

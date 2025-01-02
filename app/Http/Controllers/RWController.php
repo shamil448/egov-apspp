@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PengangkutanDarurat;
 use App\Models\JadwalPengangkutan;
 use App\Models\KritikSaranRw;
+use App\Models\LaporanTugas;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 
@@ -101,6 +102,47 @@ class RWController extends Controller
 
         // Kembali dengan pesan sukses
         return redirect()->back()->with('success', 'Kritik dan saran berhasil dikirim.');
+    }
+
+    public function konfirmasilaporan()
+    {
+         // Ambil user yang sedang login
+         $user = Auth::user();
+
+         // Pastikan user memiliki relasi ke model RW
+         $rw = $user->rw;
+ 
+         // Jika user bukan RW, beri respon error atau redirect
+         if (!$rw) {
+             return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke jadwal pengangkutan.');
+         }
+ 
+         // Ambil data laporan tugas berdasarkan jadwal pengangkutan
+         $jadwal = LaporanTugas::with(['jadwalpengangkutan.rw', 'jadwalpengangkutan.petugas'])
+             ->whereHas('jadwalpengangkutan', function ($query) use ($rw) {
+                 $query->where('rw_id', $rw->id);
+             })
+             ->where('status_pengangkutan', 'Pending')
+             ->get();
+
+          $Disetujui = LaporanTugas::with(['jadwalpengangkutan.rw', 'jadwalpengangkutan.petugas'])
+            ->whereHas('jadwalpengangkutan', function ($query) use ($rw) {
+                $query->where('rw_id', $rw->id);
+            })
+            ->where('status_pengangkutan', 'Disetujui')
+            ->get();    
+ 
+         // Kirim data ke view
+         return view('rw.konfirmasilaporan', compact('jadwal', 'Disetujui', 'user'));
+    }
+
+    public function konfirmasi($id)
+    {
+        $laporan = LaporanTugas::findOrFail($id);
+        $laporan->status_pengangkutan = 'Disetujui'; // Update status
+        $laporan->save();
+
+        return redirect()->back()->with('success', 'Laporan berhasil dikonfirmasi.');
     }
 
     public function logout(Request $request)
