@@ -1,153 +1,82 @@
-/* Global Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    font-size: 2.5rem;
-}
-
-/* Container */
-.container {
-    padding: 50px;
-    border-radius: 10px;
-}
-
-/* Button Styles */
-.btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-    transition: all 0.3s ease;
-}
-
-.btn-success:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
-}
-
-.btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    transition: all 0.3s ease;
-}
-
-.btn-info:hover {
-    background-color: #138496;
-    border-color: #117a8b;
-}
-
-/* Table Styles */
-.table {
-    background: #ffffff;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    overflow: hidden;
+/* Pastikan navbar tetap di atas */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    table-layout: fixed;
+    z-index: 1050; /* Tetapkan prioritas navbar tetap di atas */
 }
 
-.table th {
-    background-color: #a4a8ad;
-    color: #ffffff;
-    text-align: center;
-    font-weight: bold;
-    padding: 15px;
+/* Berikan margin atas pada container utama agar tidak tertutup navbar */
+.container {
+    margin-top: 80px; /* Sesuaikan dengan tinggi navbar */
 }
 
-.table td {
-    padding: 15px;
-    vertical-align: middle;
+/* Tabel dengan margin untuk jarak dari filter */
+table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 40px; /* Jarak tabel dari filter */
 }
 
-.table-hover tbody tr:hover {
-    background-color: #f1f3f5;
-}
-
-.table-bordered td,
-.table-bordered th {
-    border: 1px solid #dee2e6;
-}
-
-/* Badge Styles */
-.badge {
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-radius: 5px;
-}
-
-.badge.bg-primary {
-    background-color: #007bff;
-    color: #ffffff;
-}
-
-/* Alert Styles */
-.alert {
-    font-size: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.alert-dismissible .btn-close {
-    color: #000;
-}
-
-/* Empty State */
-.text-muted {
-    font-size: 1.2rem;
-    color: #6c757d !important;
-}
-
-/* Filter Dropdown Styles */
-form .form-select {
-    font-size: 1rem;
+table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #4CAF50; /* Warna latar header tabel */
+    color: white;
+    z-index: 1; /* Pastikan tetap di atas konten */
     padding: 10px;
+    text-align: left;
+}
+
+table tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Tombol filter berwarna hijau muda */
+form .btn {
+    background-color: #a8d5ba; /* Warna hijau muda */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
     border-radius: 5px;
-    border: 1px solid #ced4da;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    width: auto;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-form .form-select:focus {
-    border-color: #80bdff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+form .btn:hover {
+    background-color: #85c7a3; /* Warna hijau muda lebih gelap saat hover */
 }
 
-form .form-select.me-2 {
-    margin-right: 10px;
+/* Jarak antara tombol filter dan opsi */
+form .form-select {
+    margin-top: 10px; /* Jarak dari tombol filter */
 }
 
-.d-flex {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
+/* Tambahkan jarak vertikal antara filter dan tabel */
+form {
+    margin-bottom: 20px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.8rem;
-    }
+/* Tambahkan gaya untuk scrollbar pada tabel */
+table::-webkit-scrollbar {
+    height: 8px;
+}
 
-    .btn {
-        font-size: 0.9rem;
-        padding: 10px 15px;
-    }
+table::-webkit-scrollbar-thumb {
+    background-color: #4CAF50;
+    border-radius: 5px;
+}
 
-    .table td {
-        padding: 10px;
-    }
-
-    form .form-select {
-        font-size: 0.9rem;
-        padding: 8px;
-    }
+table::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
 }
