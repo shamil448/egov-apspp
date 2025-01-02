@@ -137,12 +137,12 @@ Route::prefix('rw')->middleware(['auth', 'role:RW'])->group(function () {
 Route::get('/dashboard', [RWController::class, 'dashboard'])->name('rw.dashboard');
 Route::get('/lokasi', [RWController::class, 'kirimLokasiForm'])->name('rw.lokasi'); // Menampilkan form
 Route::post('/lokasi', [RWController::class, 'PengangkutanDarurat'])->name('rw.lokasi.submit'); // Proses pengiriman data lokasi
-Route::get('/jadwal', [RWController::class, 'jadwal'])->name('jadwal.store');
 Route::get('/kritik-saran', [RWController::class, 'kritikSaranForm'])->name('rw.kritik-saran');
 Route::post('/kritik-saran', [RWController::class, 'submitKritikSaran'])->name('rw.kritik-saran.submit');
 Route::get('/rw/inbox', [RWController::class, 'inbox'])->name('rw.inbox');
+Route::get('/konfirmasilaporan', [RWController::class, 'konfirmasilaporan'])->name('rw.konfirmasilaporan');
+Route::post('/konfirmasi/{id}', [RWController::class, 'konfirmasi'])->name('rw.konfirmasi');
 Route::get('/logout', [PetugasController::class, 'logout'])->name('rw.logout');
-Route::get('/jadwal', [RWController::class, 'index'])->name('rw.jadwal');
 });
 
 
