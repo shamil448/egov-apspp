@@ -12,10 +12,10 @@ class RW extends Model
     protected $table = 'rw';
 
     protected $fillable = [
-        'nama_rw',              // Path foto yang diunggah
-        'kelurahan_id',    // Nama kecamatan
-        'alamat_lengkap',    // Nama kelurahan
-        'lokasi',      // Lokasi pengangkutan
+        'nama_rw',
+        'kelurahan_id',
+        'alamat_lengkap',
+        'lokasi',
     ];
 
     public function kelurahan()

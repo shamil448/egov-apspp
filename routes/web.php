@@ -80,6 +80,7 @@ Route::prefix('pemerintah/Akun')->middleware(['auth', 'role:Pemerintah'])->group
     Route::post('/Tambah/RW', [PemerintahController::class, 'tambahAkunRWSubmit'])->name('pemerintah.tambah-akun-rw.submit');
     Route::get('/Update/{id}', [PemerintahController::class, 'editAkun'])->name('pemerintah.update-akun');
     Route::post('/Update/{id}', [PemerintahController::class, 'updateAkun'])->name('pemerintah.update-akun');
+    Route::put('/Update/{id}', [PemerintahController::class, 'updateAkun'])->name('pemerintah.update-akun');
     Route::delete('/Delete/{id}', [PemerintahController::class, 'deleteAkun'])->name('pemerintah.delete-akun');
 });
 

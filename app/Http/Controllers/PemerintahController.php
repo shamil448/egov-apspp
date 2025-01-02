@@ -67,34 +67,47 @@ class PemerintahController extends Controller
     {
         $user = Auth::user();
         $user = User::findOrFail($id);
-        return view('Pemerintah.akun.update', compact('user', 'user'));
+        $petugas = PetugasPengangkutan::all();
+        $rws = RW::all();
+        return view('Pemerintah.akun.update', compact('user', 'user', 'petugas', 'rws'));
     }
 
     // Memperbarui akun
     public function updateAkun(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'alamat_lengkap' => 'required|string|max:255',
-            'nomor_kontak' => 'required|string|max:20',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:6',
-            'role' => 'required|in:Pemerintah,Petugas,RW',
-        ]);
+{
+    $user = User::findOrFail($id);
 
-        $user = User::findOrFail($id);
-        $user->update([
-            'name' => $validatedData['nama_lengkap'],
-            'alamat' => $validatedData['alamat_lengkap'],
-            'kontak' => $validatedData['nomor_kontak'],
-            'email' => $validatedData['email'],
-            'password' => $validatedData['password'] ? bcrypt($validatedData['password']) : $user->password,
-            'role' => $validatedData['role'],
-        ]);
+    $request->validate([
+        'nama_lengkap' => 'required|string|max:255',
+        'alamat_lengkap' => 'required|string|max:255',
+        'nomor_kontak' => 'required|string|max:20',
+        'email' => 'required|email|max:255|unique:users,email,' . $id,
+        'role' => 'required|in:Pemerintah,Petugas,RW',
+        'petugas_pengangkutan_id' => 'nullable|exists:petugas_pengangkutan,id',
+        'rw_id' => 'nullable|exists:rw,id',
+    ]);
 
-        return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil diperbarui.');
+    $user->name = $request->nama_lengkap;
+    $user->alamat = $request->alamat_lengkap;
+    $user->kontak = $request->nomor_kontak;
+    $user->email = $request->email;
+    $user->role = $request->role;
+
+    if ($request->role == 'Petugas') {
+        $user->petugas_pengangkutan_id = $request->petugas_pengangkutan_id;
+        $user->rw_id = null; // Reset RW jika berganti role
+    } elseif ($request->role == 'RW') {
+        $user->rw_id = $request->rw_id;
+        $user->petugas_pengangkutan_id = null; // Reset Petugas jika berganti role
+    } else {
+        $user->petugas_pengangkutan_id = null;
+        $user->rw_id = null;
     }
 
+    $user->save();
+
+    return redirect()->route('pemerintah.index-akun')->with('success', 'Akun berhasil diperbarui.');
+}
     // Menghapus akun
     public function deleteAkun($id)
     {
