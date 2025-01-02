@@ -31,8 +31,16 @@ class RWController extends Controller
             ->orderBy('hari', 'asc')
             ->get();
 
+        $pendingCount = LaporanTugas::whereHas('jadwalpengangkutan', function ($query) use ($rw) {
+                $query->where('rw_id', $rw->id);
+            })->where('status_pengangkutan', 'Pending')->count();
+
+        $approvedCount = LaporanTugas::whereHas('jadwalpengangkutan', function ($query) use ($rw) {
+                $query->where('rw_id', $rw->id);
+            })->where('status_pengangkutan', 'Disetujui')->count();
+
         // Kirim data ke view
-        return view('rw.dashboard', compact('jadwal', 'user'));
+        return view('rw.dashboard', compact('jadwal', 'pendingCount', 'approvedCount', 'user'));
     }
 
     // Fungsi untuk menampilkan form kirim lokasi

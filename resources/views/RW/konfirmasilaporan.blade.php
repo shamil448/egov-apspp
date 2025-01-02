@@ -11,6 +11,8 @@
                         <th scope="col" class="px-6 py-3">Status</th>
                         <th scope="col" class="px-6 py-3">Alamat Lengkap</th>
                         <th scope="col" class="px-6 py-3">Petugas</th>
+                        <th scope="col" class="px-6 py-3">Tanggal</th>
+                        <th scope="col" class="px-6 py-3"></th>
                         
                     </tr>
                 </thead>
@@ -21,6 +23,7 @@
                                 <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->status_pengangkutan }}</td>
                                 <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->jadwalpengangkutan->rw->alamat_lengkap }}</td>
                                 <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->jadwalpengangkutan->petugas->nama_petugas }}</td>
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $jadwalItem->created_at }}</td>
                                 <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">
                                     <form action="{{ route('rw.konfirmasi', $jadwalItem->id) }}" method="POST">
                                         @csrf
@@ -37,7 +40,10 @@
             </table>
         </div>
     </div>
-
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
         <h2 class="text-2xl font-bold text-center mb-4">Laporan Pengangkutan Yang Telah Disetujui</h2>
         
@@ -49,6 +55,7 @@
                         <th scope="col" class="px-6 py-3">Status</th>
                         <th scope="col" class="px-6 py-3">Alamat Lengkap</th>
                         <th scope="col" class="px-6 py-3">Petugas</th>
+                        <th scope="col" class="px-6 py-3">Tanggal</th>
                         
                     </tr>
                 </thead>
@@ -59,6 +66,7 @@
                                 <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $setuju->status_pengangkutan }}</td>
                                 <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $setuju->jadwalpengangkutan->rw->alamat_lengkap }}</td>
                                 <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $setuju->jadwalpengangkutan->petugas->nama_petugas }}</td>
+                                <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $setuju->created_at }}</td>
                             </tr>
                         @empty
                         <tr>

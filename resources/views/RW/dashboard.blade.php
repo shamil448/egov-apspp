@@ -2,18 +2,23 @@
 <main class="p-4 sm:ml-64 mt-10">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-screen-lg">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-500 mb-4">New products this week</p>
-                <p class="text-blue-600 mt-4">PRODUCTS REPORT</p>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Laporan Pending</h3>
+                <p class="text-2xl font-extrabold text-blue-600">{{ $pendingCount }}</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-500 mb-4">Visitors this week</p>
-                <p class="text-blue-600 mt-4">VISITS REPORT</p>
+        
+            <!-- Laporan Disetujui -->
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Laporan Disetujui</h3>
+                <p class="text-2xl font-extrabold text-green-600">{{ $approvedCount }}</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-500 mb-4">User signups this week</p>
-                <p class="text-blue-600 mt-4">USERS REPORT</p>
+        
+            <!-- Pengangkutan Darurat -->
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Pengangkutan Darurat</h3>
+                <p class="text-2xl font-extrabold text-red-600">0</p>
             </div>
+    
        </div>
        <br>
        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
