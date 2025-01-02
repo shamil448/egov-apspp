@@ -164,8 +164,6 @@ Route::get('/tpa-tps', function () {
 });
 
 Route::resource('kecamatan', PemerintahController::class);
-Route::get('/kelurahan', [PemerintahController::class, 'kelurahan'])->name('pemerintah.kelurahan');
-
 Route::prefix('educations')->group(function () {
     // Menampilkan daftar edukasi
     Route::get('/', [EdukasiController::class, 'index'])->name('educations.index');
@@ -184,21 +182,10 @@ Route::prefix('educations')->group(function () {
 });
 
 Route::prefix('pemerintah/master-data')->group(function () {
-    // Route untuk halaman daftar kelurahan
-    Route::get('/kelurahan', [PemerintahController::class, 'kelurahan'])->name('pemerintah.master_data.kelurahan.index');
-
-    // Route untuk halaman tambah kelurahan
-    Route::get('/kelurahan/create', [PemerintahController::class, 'tambahKelurahan'])->name('pemerintah.master_data.kelurahan.create');
-
-    // Route untuk submit form tambah kelurahan
-    Route::post('/kelurahan', [PemerintahController::class, 'tambahKelurahanSubmit'])->name('pemerintah.master_data.kelurahan.store');
-
-    // Route untuk halaman edit kelurahan
-    Route::get('/kelurahan/{id}/edit', [PemerintahController::class, 'editKelurahan'])->name('kelurahan.edit');
-
-    // Route untuk submit update kelurahan
-    Route::put('/kelurahan/{id}', [PemerintahController::class, 'updateKelurahan'])->name('pemerintah.master_data.kelurahan.update');
-
-    // Route untuk menghapus kelurahan
-    Route::delete('/kelurahan/{id}', [PemerintahController::class, 'deleteKelurahan'])->name('kelurahan.destroy');
+    Route::get('/kelurahan', [MasterDataController::class, 'kelurahanindex'])->name('pemerintah.master_data.kelurahan.index');
+    Route::get('/kelurahan/create', [MasterDataController::class, 'kelurahantambah'])->name('pemerintah.master_data.kelurahan.create');
+    Route::post('/kelurahan', [MasterDataController::class, 'kelurahantambahSubmit'])->name('pemerintah.master_data.kelurahan.store');
+    Route::get('/kelurahan/{id}/edit', [MasterDataController::class, 'kelurahanedit'])->name('pemerintah.master_data.kelurahan.edit');
+    Route::put('/kelurahan/{id}', [MasterDataController::class, 'kelurahanupdate'])->name('pemerintah.master_data.kelurahan.update');
+    Route::delete('/kelurahan/{id}', [MasterDataController::class, 'kelurahandelete'])->name('pemerintah.master_data.kelurahan.destroy');
 });

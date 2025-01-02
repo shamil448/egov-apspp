@@ -227,4 +227,58 @@ class MasterDataController extends Controller
 
         return redirect()->route('pemerintah.master_data.index-kecamatan')->with('success', 'Kecamatan berhasil dihapus.');
     }
+    public function kelurahanindex()
+    {
+        $user = Auth::user();
+        $kelurahan = Kelurahan::with('kecamatan')->get();
+        return view('Pemerintah.Master_Data.Kelurahan.index', compact('kelurahan', 'user'));
+    }
+
+    public function kelurahantambah()
+    {
+        $user = Auth::user();
+        $kecamatan = Kecamatan::all();
+        return view('Pemerintah.Master_Data.Kelurahan.tambah', compact('kecamatan', 'user'));
+    }
+
+    public function kelurahantambahSubmit(Request $request)
+    {
+        $validated = $request->validate([
+            'kelurahan' => 'required|string|max:255',
+            'kecamatan_id' => 'required|exists:kecamatan,id',
+        ]);
+
+        Kelurahan::create($validated);
+
+        return redirect()->route('pemerintah.master_data.kelurahan.index')->with('success', 'Kelurahan berhasil ditambahkan.');
+    }
+
+    public function kelurahanedit($id)
+    {
+        $user = Auth::user();
+        $kelurahan = Kelurahan::findOrFail($id);
+        $kecamatan = Kecamatan::all();
+        return view('Pemerintah.Master_Data.Kelurahan.edit', compact('kelurahan', 'kecamatan', 'user'));
+    }
+
+    public function kelurahanupdate(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'kelurahan' => 'required|string|max:255',
+            'kecamatan_id' => 'required|exists:kecamatan,id',
+        ]);
+
+        $kelurahan = Kelurahan::findOrFail($id);
+        $kelurahan->update($validated);
+
+        return redirect()->route('pemerintah.master_data.kelurahan.index')->with('success', 'Kelurahan berhasil diperbarui.');
+    }
+
+    public function kelurahandelete($id)
+    {
+        $kelurahan = Kelurahan::findOrFail($id);
+        $kelurahan->delete();
+
+        return redirect()->route('pemerintah.master_data.kelurahan.index')->with('success', 'Kelurahan berhasil dihapus.');
+    }
 }

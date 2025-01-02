@@ -113,7 +113,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('pemerintah.kelurahan') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a href="{{ route('pemerintah.master_data.kelurahan.index') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span class="ml-3 text-sm sm:text-base">Kelurahan</span>
             </a>
         </li>

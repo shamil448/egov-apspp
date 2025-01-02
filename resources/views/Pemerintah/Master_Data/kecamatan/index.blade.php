@@ -5,7 +5,7 @@
         <div class="mt-16 flex justify-center">
             <div class="w-full lg:w-3/4 sm:w-full">
                 <!-- Judul Halaman -->
-                <h2 class="text-2xl font-bold text-center mb-4">MANAJEMEN KECAMATAN</h2>
+                <h3 class="text-2xl font-bold text-gray-800 text-center mt-10">Daftar Kecamatan</h3>
 
                 <!-- Pesan Sukses -->
                 @if (session('success'))
@@ -14,24 +14,20 @@
                     </div>
                 @endif
 
-                <!-- Tombol Tambah Kecamatan -->
-                <div class="flex justify-end mb-4">
-                    <a href="{{ route('pemerintah.master_data.tambah-kecamatan') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition flex items-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                        </svg>
-                        <span>Tambah Kecamatan</span>
-                    </a>
-                </div>
-
-                <!-- Tabel Daftar Kecamatan -->
+                <!-- Card Tabel Daftar Kecamatan -->
                 <div class="overflow-x-auto mt-6 bg-white shadow-lg rounded-lg border border-gray-200 p-4">
+                    <!-- Tombol Tambah Kecamatan -->
+                    <div class="mb-4">
+                        <a href="{{ route('pemerintah.master_data.tambah-kecamatan') }}" class="bg-green-600 text-white px-4 py-2 rounded">Tambah Kecamatan</a>
+                    </div>
+
+                    <!-- Tabel -->
                     <table class="w-full table-auto border-collapse">
                         <thead class="bg-gray-300">
                             <tr>
                                 <th class="py-4 px-6 text-left text-gray-700 text-lg border-b border-gray-400">No</th>
                                 <th class="py-4 px-6 text-left text-gray-700 text-lg border-b border-gray-400">Nama Kecamatan</th>
-                                <th class="py-4 px-6 text-center text-gray-700 text-lg border-b border-gray-400">Aksi</th>
+                                <th class="py-4 px-6 text-left text-gray-700 text-lg border-b border-gray-400">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="table-body" style="border-collapse: collapse; empty-cells: hide;">
@@ -39,26 +35,20 @@
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="py-4 px-6 text-gray-600">{{ $loop->iteration }}</td>
                                     <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $item->nama_kecamatan }}</td>
-                                    <td class="py-4 px-6 text-gray-600 space-x-2 flex justify-center">
-                                        <ul>
-                                            <!-- Tombol Edit -->
-                                            <li>
-                                                <a href="{{ route('pemerintah.master_data.edit-kecamatan', $item->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">
-                                                    Edit
-                                                </a>
-                                            </li>
-                                            <br>
-                                            <!-- Tombol Hapus -->
-                                            <li>
-                                                <form action="{{ route('pemerintah.master_data.delete-kecamatan', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kecamatan ini?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-1.5 rounded">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        </ul>
+                                    <td class="py-4 px-6 text-gray-600 flex space-x-2">
+                                        <!-- Tombol Edit -->
+                                        <a href="{{ route('pemerintah.master_data.edit-kecamatan', $item->id) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-4 rounded">
+                                            Edit
+                                        </a>
+
+                                        <!-- Tombol Hapus -->
+                                        <form action="{{ route('pemerintah.master_data.delete-kecamatan', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kecamatan ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-1.5 rounded">
+                                                Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
