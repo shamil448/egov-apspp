@@ -102,26 +102,12 @@ Route::prefix('pemerintah/Master_Data/Petugas')->middleware(['auth', 'role:Pemer
 });
 
 Route::prefix('pemerintah/Master_Data/kecamatan')->middleware(['auth', 'role:Pemerintah'])->group(function () {
-    // Menampilkan daftar kecamatan
-    Route::get('/Index', [MasterDataController::class, 'index'])->name('pemerintah.master_data.index-kecamatan');
-
-    // Menampilkan halaman tambah kecamatan
-    Route::get('/Tambah', [MasterDataController::class, 'create'])->name('pemerintah.master_data.tambah-kecamatan');
-
-    // Menangani submit form tambah kecamatan
-    Route::post('/Tambah', [MasterDataController::class, 'store'])->name('pemerintah.master_data.tambah-kecamatan.submit');
-
-    // Menampilkan detail kecamatan berdasarkan ID
-    Route::get('/{id}/Detail', [MasterDataController::class, 'show'])->name('pemerintah.master_data.detail-kecamatan');
-
-    // Menampilkan halaman edit kecamatan berdasarkan ID
-    Route::get('/{id}/Edit', [MasterDataController::class, 'edit'])->name('pemerintah.master_data.edit-kecamatan');
-
-    // Memperbarui data kecamatan berdasarkan ID
-    Route::put('/{id}/Update', [MasterDataController::class, 'update'])->name('pemerintah.master_data.update-kecamatan');
-
-    // Menghapus kecamatan berdasarkan ID
-    Route::delete('/Delete/{id}', [MasterDataController::class, 'destroy'])->name('pemerintah.master_data.delete-kecamatan');
+    Route::get('/Index', [MasterDataController::class, 'kecamatanindex'])->name('pemerintah.master_data.index-kecamatan');
+    Route::get('/Tambah', [MasterDataController::class, 'kecamatancreate'])->name('pemerintah.master_data.tambah-kecamatan');
+    Route::post('/Tambah', [MasterDataController::class, 'kecamatanstore'])->name('pemerintah.master_data.tambah-kecamatan.submit');
+    Route::get('/{id}/Edit', [MasterDataController::class, 'kecamatanedit'])->name('pemerintah.master_data.edit-kecamatan');
+    Route::put('/{id}/Update', [MasterDataController::class, 'kecamatanupdate'])->name('pemerintah.master_data.update-kecamatan');
+    Route::delete('/Delete/{id}', [MasterDataController::class, 'kecamatandestroy'])->name('pemerintah.master_data.delete-kecamatan');
 });
 
 

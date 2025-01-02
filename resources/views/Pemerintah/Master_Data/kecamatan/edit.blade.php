@@ -8,7 +8,7 @@
                 <h2 class="text-2xl font-bold text-center mb-4">EDIT KECAMATAN</h2>
 
                 <!-- Form Edit Kecamatan -->
-                <form action="{{ route('kecamatan.update', $kecamatan->id) }}" method="POST" class="bg-white shadow-lg rounded-lg border border-gray-200 p-4">
+                <form action="{{ route('pemerintah.master_data.update-kecamatan', $kecamatan->id) }}" method="POST" class="bg-white shadow-lg rounded-lg border border-gray-200 p-4">
                     @csrf
                     @method('PUT')
 
@@ -23,7 +23,7 @@
 
                     <!-- Tombol Aksi -->
                     <div class="flex justify-end space-x-4">
-                        <a href="{{ route('kecamatan.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600 transition">Batal</a>
+                        <a href="{{ route('pemerintah.master_data.index-kecamatan') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600 transition">Batal</a>
                         <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">Simpan</button>
                     </div>
                 </form>

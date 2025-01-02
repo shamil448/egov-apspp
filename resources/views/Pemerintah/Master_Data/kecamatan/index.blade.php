@@ -43,14 +43,14 @@
                                         <ul>
                                             <!-- Tombol Edit -->
                                             <li>
-                                                <a href="{{ route('kecamatan.edit', $item->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">
+                                                <a href="{{ route('pemerintah.master_data.edit-kecamatan', $item->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">
                                                     Edit
                                                 </a>
                                             </li>
                                             <br>
                                             <!-- Tombol Hapus -->
                                             <li>
-                                                <form action="{{ route('kecamatan.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kecamatan ini?')">
+                                                <form action="{{ route('pemerintah.master_data.delete-kecamatan', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kecamatan ini?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-1.5 rounded">
