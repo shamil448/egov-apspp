@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Education;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 class EdukasiController extends Controller
 {
     // Menampilkan daftar edukasi di halaman home
@@ -32,7 +33,8 @@ class EdukasiController extends Controller
     public function create()
     {
         $educations = Education::all(); // Ambil semua data edukasi
-        return view('educations.create', compact('educations')); // Kirim data ke view
+        $user = Auth::user();
+        return view('educations.create', compact('educations', 'user')); // Kirim data ke view
     }
 
     // Menyimpan data edukasi ke database

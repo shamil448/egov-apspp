@@ -17,7 +17,11 @@ return new class extends Migration
             $table->string('nama_kecamatan');
             $table->string('nama_kelurahan');
             $table->string('kirim_lokasi');
+            $table->string('status');
+            $table->unsignedBigInteger('rw_id');
             $table->timestamps();
+
+            $table->foreign('rw_id')->references('id')->on('pengangkutan_darurat')->onDelete('cascade');
         });
     }
 
