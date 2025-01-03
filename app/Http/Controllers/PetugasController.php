@@ -25,7 +25,7 @@ class PetugasController extends Controller
 
         // Jika user bukan petugas, beri respon error atau redirect
         if (!$petugas) {
-            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke jadwal pengangkutan.');
+            return redirect()->route('petugas.dashboard')->with('error', 'Anda tidak memiliki akses ke jadwal pengangkutan.');
         }
 
         // Ambil jadwal pengangkutan berdasarkan petugas yang login
@@ -85,7 +85,7 @@ class PetugasController extends Controller
 
         // Jika user bukan petugas, beri respon error atau redirect
         if (!$petugas) {
-            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke laporan tugas.');
+            return redirect()->route('petugas.dashboard')->with('error', 'Anda tidak memiliki akses ke laporan tugas.');
         }
 
         // Ambil laporan tugas berdasarkan petugas yang login, menggunakan jadwal

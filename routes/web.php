@@ -142,7 +142,7 @@ Route::post('/kritik-saran', [RWController::class, 'submitKritikSaran'])->name('
 Route::get('/rw/inbox', [RWController::class, 'inbox'])->name('rw.inbox');
 Route::get('/konfirmasilaporan', [RWController::class, 'konfirmasilaporan'])->name('rw.konfirmasilaporan');
 Route::post('/konfirmasi/{id}', [RWController::class, 'konfirmasi'])->name('rw.konfirmasi');
-Route::get('/logout', [PetugasController::class, 'logout'])->name('rw.logout');
+Route::get('/logout', [RWController::class, 'logout'])->name('rw.logout');
 });
 
 
