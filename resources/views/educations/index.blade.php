@@ -77,7 +77,6 @@
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $education->title }}</td>
                         <td>{{ $education->author }}</td>
-                        <td>{{ ucfirst($education->type) }}</td>
                         <td>{{ $educations->appends(request()->query())->links() }}</td>
                         <td>
                             <a href="{{ route('educations.show', $education->id) }}" class="btn btn-info btn-sm">Lihat</a>
