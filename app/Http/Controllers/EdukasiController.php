@@ -12,11 +12,18 @@ class EdukasiController extends Controller
     {
         $query = Education::query();
 
-        if ($request->has('type') && $request->type != '') {
+        if ($request->has('search') && $request->search) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                  ->orWhere('author', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        if ($request->has('type') && $request->type) {
             $query->where('type', $request->type);
         }
 
-        $educations = $query->get();
+        $educations = $query->paginate(10);
 
         return view('educations.index', compact('educations'));
     }

@@ -1,82 +1,105 @@
-/* Pastikan navbar tetap di atas */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1050; /* Tetapkan prioritas navbar tetap di atas */
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
 }
 
-/* Berikan margin atas pada container utama agar tidak tertutup navbar */
-.container {
-    margin-top: 80px; /* Sesuaikan dengan tinggi navbar */
+/* Form Styles */
+form {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-/* Tabel dengan margin untuk jarak dari filter */
-table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 40px; /* Jarak tabel dari filter */
-}
-
-table thead th {
-    position: sticky;
-    top: 0;
-    background-color: #4CAF50; /* Warna latar header tabel */
-    color: white;
-    z-index: 1; /* Pastikan tetap di atas konten */
-    padding: 10px;
-    text-align: left;
-}
-
-table tbody td {
-    padding: 10px;
+form input[type="text"] {
+    flex-grow: 1;
     border: 1px solid #ddd;
-    text-align: left;
+    border-radius: 4px;
+    padding: 8px;
 }
 
-/* Tombol filter berwarna hijau muda */
-form .btn {
-    background-color: #a8d5ba; /* Warna hijau muda */
+form select {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    max-width: 200px;
+}
+
+form button {
+    background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-form .btn:hover {
-    background-color: #85c7a3; /* Warna hijau muda lebih gelap saat hover */
+form button:hover {
+    background-color: #0056b3;
 }
 
-/* Jarak antara tombol filter dan opsi */
-form .form-select {
-    margin-top: 10px; /* Jarak dari tombol filter */
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
 }
 
-/* Tambahkan jarak vertikal antara filter dan tabel */
-form {
-    margin-bottom: 20px;
+.table th, .table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
 }
 
-/* Tambahkan gaya untuk scrollbar pada tabel */
-table::-webkit-scrollbar {
-    height: 8px;
+.table thead th {
+    background-color: #007bff;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
-table::-webkit-scrollbar-thumb {
-    background-color: #4CAF50;
-    border-radius: 5px;
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
-table::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.table td a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #28a745;
+    transition: background-color 0.3s ease;
+}
+
+.table td a:hover {
+    background-color: #218838;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    form {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

@@ -36,6 +36,18 @@
         </div>
     </nav>
 
+<!-- Filter Berdasarkan Type -->
+<form method="GET" action="{{ route('educations.index') }}" class="mb-4">
+    <div class="d-flex align-items-center">
+        <!-- Input Pencarian -->
+        <input
+            type="text"
+            name="search"
+            class="form-control me-2"
+            placeholder="Cari judul atau penulis..."
+            value="{{ request('search') }}"
+        >
+
         <!-- Filter Berdasarkan Type -->
         <form method="GET" action="{{ route('educations.index') }}" class="mb-4">
     <div>
@@ -66,6 +78,7 @@
                         <td>{{ $education->title }}</td>
                         <td>{{ $education->author }}</td>
                         <td>{{ ucfirst($education->type) }}</td>
+                        <td>{{ $educations->appends(request()->query())->links() }}</td>
                         <td>
                             <a href="{{ route('educations.show', $education->id) }}" class="btn btn-info btn-sm">Lihat</a>
                         </td>
