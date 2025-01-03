@@ -136,7 +136,7 @@ class PemerintahController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
             'role' => 'required|in:Pemerintah,Petugas,RW',
-            'rw_id' => 'required|exists:rws,id',
+            'rw_id' => 'required|exists:rw,id',
         ]);
 
         // Membuat akun RW

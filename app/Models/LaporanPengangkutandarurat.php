@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PengangkutanDarurat extends Model
+class LaporanPengangkutanDarurat extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class PengangkutanDarurat extends Model
      *
      * @var string
      */
-    protected $table = 'pengangkutan_darurat';
+    protected $table = 'laporan_pengangkutandarurat';
 
     /**
      * The attributes that are mass assignable.
@@ -22,12 +22,10 @@ class PengangkutanDarurat extends Model
      * @var array
      */
     protected $fillable = [
+        'pengangkutandarurat_id',
+        'status_pengangkutan',
+        'catatan',
         'foto',
-        'nama_kecamatan',
-        'nama_kelurahan',
-        'kirim_lokasi',
-        'status',
-        'rw_id',
     ];
 
     /**
@@ -36,15 +34,16 @@ class PengangkutanDarurat extends Model
      * @var array
      */
     protected $casts = [
+        'foto' => 'array', // JSON field cast to array
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
     /**
-     * Get the RW (related model) that owns the PengangkutanDarurat.
+     * Get the PengangkutanDarurat that owns the LaporanPengangkutanDarurat.
      */
-    public function rw()
+    public function pengangkutanDarurat()
     {
-        return $this->belongsTo(Rw::class, 'rw_id');
+        return $this->belongsTo(PengangkutanDarurat::class, 'pengangkutandarurat_id');
     }
 }
