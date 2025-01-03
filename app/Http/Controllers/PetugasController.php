@@ -25,7 +25,7 @@ class PetugasController extends Controller
 
         // Jika user bukan petugas, beri respon error atau redirect
         if (!$petugas) {
-            return redirect()->route('petugas.dashboard')->with('error', 'Anda tidak memiliki akses ke jadwal pengangkutan.');
+            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke jadwal pengangkutan.');
         }
 
         // Ambil jadwal pengangkutan berdasarkan petugas yang login
@@ -65,11 +65,11 @@ class PetugasController extends Controller
         if ($request->hasFile('foto')) {
             foreach ($request->file('foto') as $file) {
                 $path = $file->store('laporanpengangkutan', 'public'); // Simpan di folder storage/public/laporan
-                $fotoPaths[] = $path;
+                $fotoPaths[] = basename($path);
             }
         }
 
-        $laporan->foto = json_encode($fotoPaths); // Simpan path sebagai JSON di kolom database
+        $laporan->foto = $fotoPaths; // Simpan path sebagai JSON di kolom database
         $laporan->save();
 
         return redirect()->route('petugas.jadwalrute')->with('success', 'Laporan berhasil disimpan.');
@@ -85,7 +85,7 @@ class PetugasController extends Controller
 
         // Jika user bukan petugas, beri respon error atau redirect
         if (!$petugas) {
-            return redirect()->route('petugas.dashboard')->with('error', 'Anda tidak memiliki akses ke laporan tugas.');
+            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke laporan tugas.');
         }
 
         // Ambil laporan tugas berdasarkan petugas yang login, menggunakan jadwal

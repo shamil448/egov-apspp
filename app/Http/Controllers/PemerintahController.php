@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Rw;
 use App\Models\PetugasPengangkutan;
 use App\Models\JadwalPengangkutan;
+use App\Models\LaporanTugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -393,6 +394,13 @@ public function TpaTpsdestroy($id)
     $TpaTps->delete();
 
     return redirect()->route('pemerintah.tpa_tps')->with('success', 'Data TPA/TPS berhasil dihapus.');
+}
+
+public function laporantugas()
+{
+    $user = Auth::user();
+    $laporan = LaporanTugas::all();
+    return view('pemerintah.laporan.laporantugas', compact('laporan', 'user'));
 }
 
 }

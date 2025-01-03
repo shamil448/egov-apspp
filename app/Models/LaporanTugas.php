@@ -12,7 +12,7 @@ class LaporanTugas extends Model
     protected $table = 'laporan_tugas';
 
     protected $fillable = [
-        'jadwal_id',   
+        'jadwalpengangkutan_id',   
         'status_pengangkutan', 
         'catatan', 
         'foto',
