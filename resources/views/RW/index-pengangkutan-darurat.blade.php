@@ -19,7 +19,7 @@
         @endif
         <div class="overflow-x-auto mt-6 bg-white shadow-lg rounded-lg border border-gray-200 p-4">
                     <div class="mb-4">
-                        <a href="{{ route('rw.tambah-pengangkutan-darurat') }}" class="bg-green-600 text-white px-4 py-2 rounded">Tambah TPA/TPS</a>
+                        <a href="{{ route('rw.tambah-pengangkutan-darurat') }}" class="bg-green-600 text-white px-4 py-2 rounded">Tambah Pengangkutan Darurat</a>
                     </div>
         <!-- Tabel Pengangkutan Darurat -->
         <div class="overflow-x-auto">
