@@ -14,6 +14,7 @@ use App\Models\JadwalPengangkutan;
 use App\Models\LaporanTugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class PemerintahController extends Controller
 {
@@ -201,9 +202,12 @@ class PemerintahController extends Controller
     public function listjadwal()
     {
         $user = Auth::user();
-        $jadwal = JadwalPengangkutan::with('rw.kelurahan.kecamatan','petugas.kecamatan')->orderBy('hari', 'asc')->get();
+        $jadwal = JadwalPengangkutan::with('rw.kelurahan.kecamatan','petugas.kecamatan')
+        ->orderByRaw("FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu')")
+        ->get();
         return view('Pemerintah.jadwal.index', compact('jadwal', 'user'));
     }
+
     public function tambahjadwal()
     {
         $user = Auth::user();
@@ -402,6 +406,31 @@ public function laporantugas()
     $user = Auth::user();
     $laporan = LaporanTugas::with('jadwalpengangkutan.petugas')->get();
     return view('pemerintah.laporan.laporantugas', compact('laporan', 'user'));
+}
+
+public function belumdikerjakan(Request $request)
+{
+    $user = Auth::user();
+    $tanggalHariIni = Carbon::today()->format('Y-m-d'); // Tanggal hari ini
+
+    $hariIni = strtolower(Carbon::now()->locale('id')->isoFormat('dddd')); // Hari ini (contoh: 'sabtu')
+    
+    // Ambil tanggal dari input, gunakan tanggal hari ini jika tidak ada
+    $tanggal = $request->input('tanggal', $tanggalHariIni);
+    
+
+    // Data laporan tugas berdasarkan tanggal
+    $laporanTugasHariIni = LaporanTugas::whereDate('created_at', $tanggal)
+        ->pluck('jadwalpengangkutan_id')
+        ->toArray();
+
+    // Cari jadwal yang sesuai hari dan belum dikerjakan
+    $jadwalBelumDikerjakan = JadwalPengangkutan::with('petugas')
+        ->where('hari', $hariIni) // Hanya jadwal hari ini
+        ->whereNotIn('id', $laporanTugasHariIni) // Belum ada laporan
+        ->get();
+
+    return view('pemerintah.laporan.laporanbelumdikerjakan', compact('jadwalBelumDikerjakan', 'tanggal', 'hariIni', 'user'));   
 }
 
 public function showPengangkutanRequest($id)

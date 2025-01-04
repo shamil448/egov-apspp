@@ -6,6 +6,7 @@ use App\Models\JadwalPengangkutan;
 use App\Models\LaporanTugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class PetugasController extends Controller
 {
@@ -31,7 +32,7 @@ class PetugasController extends Controller
         // Ambil jadwal pengangkutan berdasarkan petugas yang login
         $jadwal = JadwalPengangkutan::with('rw.kelurahan.kecamatan')
             ->where('petugas_id', $petugas->id)
-            ->orderBy('hari', 'asc')
+            ->orderByRaw("FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu')")
             ->get();
 
         // Kirim data ke view
