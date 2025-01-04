@@ -403,22 +403,67 @@ public function laporantugas()
     $laporan = LaporanTugas::all();
     return view('pemerintah.laporan.laporantugas', compact('laporan', 'user'));
 }
+public function showPengangkutanRequest($id)
+{
+    // Data pengangkutan darurat berdasarkan ID
+    $pengangkutanDarurat = PengangkutanDarurat::with('rw.kelurahan.kecamatan')->findOrFail($id);
+    $user = Auth::user();
+
+    // Ambil kecamatan terkait
+    $kecamatanId = $pengangkutanDarurat->rw->kelurahan->kecamatan->id;
+
+    // Ambil petugas terkait kecamatan
+    $petugas = User::where('role', 'petugas')
+        ->whereHas('petugasPengangkutan', function ($query) use ($kecamatanId) {
+            $query->where('kecamatan_id', $kecamatanId); // Filter petugas berdasarkan kecamatan_id
+        })
+        ->get();
+
+    return view('pemerintah.laporan.pengangkutan-darurat-request', compact('pengangkutanDarurat', 'petugas', 'user'));
+}
+
+public function assignPetugas(Request $request, $id)
+{
+    $request->validate([
+        'petugas_id' => 'required|exists:users,id',
+    ]);
+
+    // Ambil data pengangkutan darurat berdasarkan ID
+    $pengangkutanDarurat = PengangkutanDarurat::findOrFail($id);
+
+    // Assign petugas_id dan ubah status pengangkutan darurat
+    $pengangkutanDarurat->petugas_id = $request->petugas_id;
+    $pengangkutanDarurat->status = 'Progress'; // Mengubah status pengangkutan darurat
+    $pengangkutanDarurat->save();
+
+    return redirect()->route('pemerintah.pengangkutan-darurat')
+        ->with('success', 'Petugas berhasil ditugaskan untuk pengangkutan darurat.');
+}
 
 public function listPengangkutanDarurat()
 {
     $user = Auth::user();
+    // Mengambil semua data pengangkutan darurat dengan relasi rw, kelurahan, dan kecamatan
     $pengangkutanDarurat = PengangkutanDarurat::with('rw.kelurahan.kecamatan')->get();
     return view('pemerintah.laporan.pengangkutan-darurat', compact('pengangkutanDarurat', 'user'));
 }
 
-public function updateStatusPengangkutan(Request $request, $id)
+public function updateStatusRequest(Request $request, $id)
 {
+    $request->validate([
+        'petugas_pengangkutan_id' => 'required|exists:users,id',
+    ]);
+
+    // Ambil data pengangkutan darurat berdasarkan ID
     $pengangkutanDarurat = PengangkutanDarurat::findOrFail($id);
-    $pengangkutanDarurat->status = 'Progress'; // Status baru
+
+    // Mengubah status dan menugaskan petugas
+    $pengangkutanDarurat->status = 'Progress';
+    $pengangkutanDarurat->petugas_pengangkutan_id = $request->petugas_pengangkutan_id;
     $pengangkutanDarurat->save();
 
     return redirect()->route('pemerintah.pengangkutan-darurat')
-        ->with('success', 'Status pengangkutan darurat berhasil diperbarui.');
+        ->with('success', 'Tugas berhasil diberikan kepada petugas.');
 }
 
 }

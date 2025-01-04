@@ -68,7 +68,9 @@ Route::get('/tpa-tps', [PemerintahController::class, 'TpaTpsindex'])->name('peme
         Route::put('/edit-tpa-tps/{id}', [PemerintahController::class, 'TpaTpsupdate'])->name('pemerintah.update-tpa-tps');
         Route::delete('/delete-tpa-tps/{id}', [PemerintahController::class, 'TpaTpsdestroy'])->name('pemerintah.delete-tpa-tps');
 Route::get('/pengangkutan-darurat', [PemerintahController::class, 'listPengangkutanDarurat'])->name('pemerintah.pengangkutan-darurat');
-Route::patch('/pengangkutan-darurat/{id}/update-status', [PemerintahController::class, 'updateStatusPengangkutan'])->name('pemerintah.update-status');
+Route::get('/pengangkutan-darurat/{id}/request', [PemerintahController::class, 'showPengangkutanRequest'])->name('pemerintah.pengangkutan-darurat-request');
+Route::post('/pengangkutan-darurat/{id}/assign', [PemerintahController::class, 'assignPetugas'])->name('pemerintah.pengangkutan-darurat.assign');
+Route::patch('/pengangkutan-darurat/{id}/update-status', [PemerintahController::class, 'updateStatusRequest'])->name('pemerintah.update-status-request');
 });
 
 

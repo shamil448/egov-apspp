@@ -50,15 +50,12 @@
                                 <td class="py-4 px-6 text-gray-600">{{ $item->status }}</td>
                                 <td class="py-4 px-6 text-gray-600">
                                     @if ($item->status != 'Progress')
-                                        <form action="{{ route('pemerintah.update-status', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Setujui</button>
-                                        </form>
-                                    @else
-                                        <span class="text-green-500 font-semibold">Progress</span>
-                                    @endif
-                                </td>
+                                    <a href="{{ route('pemerintah.pengangkutan-darurat-request', $item->id) }}" 
+                                class="bg-blue-600 text-white px-4 py-2 rounded">Setujui</a>
+                                @else
+                                    <span class="text-green-500 font-semibold">Progress</span>
+                                @endif
+                            </td>
                             </tr>
                         @endforeach
                     </tbody>

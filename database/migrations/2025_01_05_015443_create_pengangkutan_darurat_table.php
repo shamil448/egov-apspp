@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('kirim_lokasi');
             $table->string('status');
             $table->unsignedBigInteger('rw_id');
+            $table->unsignedBigInteger('petugas_pengangkutan_id')->nullable(); // Menambahkan kolom petugas_pengangkutan_id
             $table->timestamps();
 
-            $table->foreign('rw_id')->references('id')->on('pengangkutan_darurat')->onDelete('cascade');
+            // Menambahkan relasi petugas_pengangkutan_id ke tabel users
+            $table->foreign('rw_id')->references('id')->on('rw')->onDelete('cascade');
+            $table->foreign('petugas_pengangkutan_id')->references('id')->on('users')->onDelete('set null'); // Menambahkan relasi ke tabel users
         });
     }
 
