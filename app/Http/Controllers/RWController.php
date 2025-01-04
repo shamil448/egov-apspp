@@ -146,14 +146,14 @@ public function PengangkutanDarurat(Request $request)
             ->where('status_pengangkutan', 'Pending')
             ->get();
 
-        $disetujui = LaporanTugas::with(['jadwalpengangkutan.rw', 'jadwalpengangkutan.petugas'])
+        $Disetujui = LaporanTugas::with(['jadwalpengangkutan.rw', 'jadwalpengangkutan.petugas'])
             ->whereHas('jadwalpengangkutan', function ($query) use ($rw) {
                 $query->where('rw_id', $rw->id);
             })
             ->where('status_pengangkutan', 'Disetujui')
             ->get();
 
-        return view('rw.konfirmasilaporan', compact('jadwal', 'disetujui', 'user'));
+        return view('rw.konfirmasilaporan', compact('jadwal', 'Disetujui', 'user'));
     }
 
     public function konfirmasi($id)
