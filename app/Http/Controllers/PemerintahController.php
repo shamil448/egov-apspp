@@ -8,6 +8,7 @@ use App\Models\Kelurahan;
 use App\Models\KritikSaranRw;
 use App\Models\User;
 use App\Models\Rw;
+use App\Models\PengangkutanDarurat;
 use App\Models\PetugasPengangkutan;
 use App\Models\JadwalPengangkutan;
 use App\Models\LaporanTugas;
@@ -401,6 +402,23 @@ public function laporantugas()
     $user = Auth::user();
     $laporan = LaporanTugas::all();
     return view('pemerintah.laporan.laporantugas', compact('laporan', 'user'));
+}
+
+public function listPengangkutanDarurat()
+{
+    $user = Auth::user();
+    $pengangkutanDarurat = PengangkutanDarurat::with('rw.kelurahan.kecamatan')->get();
+    return view('pemerintah.laporan.pengangkutan-darurat', compact('pengangkutanDarurat', 'user'));
+}
+
+public function updateStatusPengangkutan(Request $request, $id)
+{
+    $pengangkutanDarurat = PengangkutanDarurat::findOrFail($id);
+    $pengangkutanDarurat->status = 'Progress'; // Status baru
+    $pengangkutanDarurat->save();
+
+    return redirect()->route('pemerintah.pengangkutan-darurat')
+        ->with('success', 'Status pengangkutan darurat berhasil diperbarui.');
 }
 
 }

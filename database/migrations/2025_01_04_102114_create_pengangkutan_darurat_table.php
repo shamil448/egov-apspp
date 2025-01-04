@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengangkutan_darurat', function (Blueprint $table) {
             $table->id();
-            $table->string('foto')->nullable(); // Menyimpan path atau nama file foto
-            $table->string('nama_kecamatan');
-            $table->string('nama_kelurahan');
+            $table->string('foto')->nullable();
             $table->string('kirim_lokasi');
             $table->string('status');
             $table->unsignedBigInteger('rw_id');

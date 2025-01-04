@@ -67,6 +67,8 @@ Route::get('/tpa-tps', [PemerintahController::class, 'TpaTpsindex'])->name('peme
         Route::get('/edit-tpa-tps/{id}', [PemerintahController::class, 'TpaTpsedit'])->name('pemerintah.edit-tpa-tps');
         Route::put('/edit-tpa-tps/{id}', [PemerintahController::class, 'TpaTpsupdate'])->name('pemerintah.update-tpa-tps');
         Route::delete('/delete-tpa-tps/{id}', [PemerintahController::class, 'TpaTpsdestroy'])->name('pemerintah.delete-tpa-tps');
+Route::get('/pengangkutan-darurat', [PemerintahController::class, 'listPengangkutanDarurat'])->name('pemerintah.pengangkutan-darurat');
+Route::patch('/pengangkutan-darurat/{id}/update-status', [PemerintahController::class, 'updateStatusPengangkutan'])->name('pemerintah.update-status');
 });
 
 
@@ -135,8 +137,9 @@ Route::prefix('pemerintah')->middleware(['auth', 'role:Pemerintah'])->group(func
 
 Route::prefix('rw')->middleware(['auth', 'role:RW'])->group(function () {
 Route::get('/dashboard', [RWController::class, 'dashboard'])->name('rw.dashboard');
-Route::get('/lokasi', [RWController::class, 'kirimLokasiForm'])->name('rw.lokasi'); // Menampilkan form
-Route::post('/lokasi', [RWController::class, 'PengangkutanDarurat'])->name('rw.lokasi.submit'); // Proses pengiriman data lokasi
+Route::get('/index-pengangkutan-darurat', [RWController::class, 'indexPengangkutanDarurat'])->name('rw.index-pengangkutan-darurat');
+Route::get('/tambah-pengangkutan-darurat', [RWController::class, 'kirimLokasiForm'])->name('rw.tambah-pengangkutan-darurat'); // Menampilkan form
+Route::post('/tambah-pengangkutan-darurat', [RWController::class, 'PengangkutanDarurat'])->name('rw.tambah-pengangkutan-darurat.submit'); // Proses pengiriman data lokasi
 Route::get('/kritik-saran', [RWController::class, 'kritikSaranForm'])->name('rw.kritik-saran');
 Route::post('/kritik-saran', [RWController::class, 'submitKritikSaran'])->name('rw.kritik-saran.submit');
 Route::get('/rw/inbox', [RWController::class, 'inbox'])->name('rw.inbox');
