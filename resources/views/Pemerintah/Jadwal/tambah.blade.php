@@ -37,9 +37,12 @@
                     <label for="hari" class="block text-sm font-medium text-gray-700">Hari</label>
                     <select id="hari" name="hari" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
                         <option value="" disabled selected>Pilih Hari</option>
-                        <option value="Hari 1">Hari Ke 1</option>
-                        <option value="Hari 2">Hari Ke 2</option>
-                        <option value="Hari 3">Hari Ke 3</option>
+                        <option value="Senin">Senin</option>
+                        <option value="Selasa">Selasa</option>
+                        <option value="Rabu">Rabu</option>
+                        <option value="Kamis">Kamis</option>
+                        <option value="Jumat">Jumat</option>
+                        <option value="Sabtu">Sabtu</option>
                     </select>
                 </div>  
                 <div>

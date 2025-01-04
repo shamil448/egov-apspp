@@ -12,12 +12,13 @@
                 @endif
                 <div class="overflow-x-auto mt-6 bg-white shadow-lg rounded-lg border border-gray-200 p-4">
                     <div class="mb-4">
-                        <a href="" class="bg-green-600 text-white px-4 py-2 rounded">Lihat Status : Pending/Belum Dikerjakan</a>
+                        <a href="{{ route('pemerintah.laporanbelumdikerjakan') }}" class="bg-green-600 text-white px-4 py-2 rounded">Lihat Status : Pending/Belum Dikerjakan</a>
                     </div>
                     <table class="w-full table-auto border-collapse">
                         <thead class="bg-gray-300">
                             <tr>
                             <th class="py-4 px-6 text-left text-gray-700 text-lg border-b border-gray-400">Jadwal</th>
+                            <th class="py-4 px-6 text-left text-gray-700 text-lg border-b border-gray-400">Petugas</th>
                             <th class="py-4 px-6 text-left text-gray-700 text-lg border-b border-gray-400">Status</th>
                             <th class="py-4 px-6 text-left text-gray-700 text-lg border-b border-gray-400">Catatan</th>
                             <th class="py-4 px-6 text-left text-gray-700 text-lg border-b border-gray-400">Tanggal</th>
@@ -28,7 +29,11 @@
                         <tbody id="table-body" style="border-collapse: collapse; empty-cells: hide;">
                             @forelse($laporan as $laporanitem)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $laporanitem->jadwalpengangkutan_id }}</td>
+                                    <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">
+                                    <li>Hari :{{ $laporanitem->jadwalpengangkutan->hari }}</li>
+                                    <li>Alamat:{{ $laporanitem->jadwalpengangkutan->rw->alamat_lengkap }}</li>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $laporanitem->jadwalpengangkutan->petugas->nama_petugas }}</td>
                                     <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $laporanitem->status_pengangkutan }}</td>
                                     <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $laporanitem->catatan }}</td>
                                     <td class="py-4 px-6 text-gray-600 max-w-xs line-clamp-2">{{ $laporanitem->created_at }}</td>
