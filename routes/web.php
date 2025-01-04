@@ -50,6 +50,8 @@ Route::get('/education/{id}', [EdukasiController::class, 'show'])->name('educati
 Route::prefix('pemerintah')->middleware(['auth', 'role:Pemerintah'])->group(function () {
 Route::get('/dashboard', [PemerintahController::class, 'dashboard'])->name('pemerintah.dashboard');
 Route::get('/laporantugas', [PemerintahController::class, 'laporantugas'])->name('pemerintah.laporantugas');
+Route::get('/laporanbelumdikerjakan', [PemerintahController::class, 'belumdikerjakan'])->name('pemerintah.laporanbelumdikerjakan');
+
 Route::get('/jadwal', [PemerintahController::class, 'jadwal'])->name('pemerintah.jadwal');
 Route::get('/tpa-tps', [PemerintahController::class, 'pengawasanTpaTps'])->name('pemerintah.tpatps');
 Route::get('/pelaporan', [PemerintahController::class, 'pelaporan'])->name('pemerintah.pelaporan');

@@ -400,9 +400,10 @@ public function TpaTpsdestroy($id)
 public function laporantugas()
 {
     $user = Auth::user();
-    $laporan = LaporanTugas::all();
+    $laporan = LaporanTugas::with('jadwalpengangkutan.petugas')->get();
     return view('pemerintah.laporan.laporantugas', compact('laporan', 'user'));
 }
+
 public function showPengangkutanRequest($id)
 {
     // Data pengangkutan darurat berdasarkan ID
