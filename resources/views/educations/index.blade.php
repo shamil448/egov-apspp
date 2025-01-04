@@ -67,7 +67,7 @@
                     <th>#</th>
                     <th>Judul</th>
                     <th>Penulis</th>
-                    <th>Tipe</th>
+                    <th>Halaman</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
