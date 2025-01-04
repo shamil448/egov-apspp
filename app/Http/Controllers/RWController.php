@@ -99,6 +99,7 @@ public function PengangkutanDarurat(Request $request)
 
     return redirect()->route('rw.tambah-pengangkutan-darurat')->with('success', 'Data pengangkutan darurat berhasil disimpan.');
 }
+
     public function kritikSaranForm()
     {
         return view('rw.kritik-saran');

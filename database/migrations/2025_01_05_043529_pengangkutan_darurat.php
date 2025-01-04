@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('foto')->nullable();
             $table->string('kirim_lokasi');
-            $table->string('status');
+            $table->enum('status', ['Pending', 'Progress', 'Done'])->default('Pending'); // Menggunakan enum
             $table->unsignedBigInteger('rw_id');
             $table->unsignedBigInteger('petugas_pengangkutan_id')->nullable(); // Menambahkan kolom petugas_pengangkutan_id
             $table->timestamps();

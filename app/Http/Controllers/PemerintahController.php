@@ -459,7 +459,7 @@ public function updateStatusRequest(Request $request, $id)
     $pengangkutanDarurat = PengangkutanDarurat::findOrFail($id);
 
     // Mengubah status dan menugaskan petugas
-    $pengangkutanDarurat->status = 'Progress';
+    $pengangkutanDarurat->status = 'Progress'; // Ubah status menjadi "Progress"
     $pengangkutanDarurat->petugas_pengangkutan_id = $request->petugas_pengangkutan_id;
     $pengangkutanDarurat->save();
 

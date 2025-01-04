@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('laporan_pengangkutandarurat', function (Blueprint $table) {
+        Schema::create('laporan_pengangkutan_darurat', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pengangkutandarurat_id');
-            $table->string('status_pengangkutan');
+            $table->unsignedBigInteger('pengangkutan_darurat_id');
             $table->text('catatan');
             $table->json('foto'); // Simpan array foto dalam JSON
             $table->timestamps();
-    
-            $table->foreign('pengangkutandarurat_id')->references('id')->on('pengangkutan_darurat')->onDelete('cascade');
+
+            $table->foreign('pengangkutan_darurat_id')->references('id')->on('pengangkutan_darurat')->onDelete('cascade');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('laporan_tugas');
+        Schema::dropIfExists('laporan_pengangkutan_darurat');
     }
 };

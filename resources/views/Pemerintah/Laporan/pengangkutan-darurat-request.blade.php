@@ -36,6 +36,9 @@
 
                 <p class="text-gray-700 font-semibold">Lokasi Dikirim</p>
                 <p class="text-gray-700">: <a href="{{ $pengangkutanDarurat->kirim_lokasi }}" target="_blank" class="text-blue-500 underline">Lihat Lokasi</a></p>
+
+                <p class="text-gray-700 font-semibold">Status</p>
+                <p class="text-gray-700">: {{ $pengangkutanDarurat->status }}</p>
             </div>
         </div>
 
