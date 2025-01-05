@@ -1,39 +1,102 @@
-/* public/css/education.css */
+/* Desain umum */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+}
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+    margin-top: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 h1 {
+    color: #2c3e50;
     font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 20px;
 }
 
-img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-    margin-bottom: 1.5rem;
-}
-
-video {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-    margin-bottom: 1.5rem;
+h3 {
+    color: #34495e;
+    font-size: 1.8rem;
+    margin-top: 20px;
 }
 
 p {
     font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    line-height: 1.8;
+    margin: 10px 0;
 }
 
-h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+/* Section dengan border dan padding */
+.section {
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #ecf0f1;
+    margin-bottom: 20px;
+}
+
+strong {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+td {
+    background-color: #ecf0f1;
+    font-size: 1rem;
+}
+
+/* Hover effect untuk tabel */
+tr:hover {
+    background-color: #d6eaf8;
+}
+
+/* Gambar */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Video */
+video {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Styling untuk link CSS */
+a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #2980b9;
 }

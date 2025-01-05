@@ -1,21 +1,41 @@
-<!-- resources/views/education/show.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
     <h1>{{ $educations->title }}</h1>
+
+    <!-- Link ke file CSS -->
     <link rel="stylesheet" href="{{ asset('css/education.css') }}">
 
-    <p><strong>Penulis:</strong> {{ $educations->author }}</p>
-    <p><strong>Tipe:</strong> {{ ucfirst($educations->type) }}</p>
-    <p><strong>Dipublikasikan pada:</strong> {{ $educations->published_at }}</p>
+    <!-- Informasi Penulis dan Tipe -->
+    <div class="row section">
+        <div class="col-md-6">
+            <p><strong>Penulis:</strong> {{ $educations->author }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Tipe:</strong> {{ ucfirst($educations->type) }}</p>
+        </div>
+    </div>
 
-    <div class="mt-3">
+    <!-- Tanggal publikasi -->
+
+    <!-- Konten Artikel -->
+    <div class="mt-3 section">
         <h3>Konten:</h3>
         <p>{{ $educations->content }}</p>
     </div>
 
+    <!-- Tabel Artikel -->
+    <div class="section">
+        <table>
+            <tr>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Gambar Artikel (Jika ada) -->
     @if($educations->image_path)
     <div class="mt-3">
         <h3>Gambar:</h3>
@@ -23,6 +43,7 @@
     </div>
     @endif
 
+    <!-- Video Artikel (Jika ada) -->
     @if($educations->video_path)
     <div class="mt-3">
         <h3>Video:</h3>
@@ -33,5 +54,3 @@
     @endif
 </div>
 @endsection
-
-<!-- End of show.blade.php -->
