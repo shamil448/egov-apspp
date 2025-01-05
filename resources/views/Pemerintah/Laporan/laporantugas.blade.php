@@ -12,7 +12,7 @@
                 @endif
                 <div class="overflow-x-auto mt-6 bg-white shadow-lg rounded-lg border border-gray-200 p-4">
                     <div class="mb-4">
-                        <a href="{{ route('pemerintah.laporanbelumdikerjakan') }}" class="bg-green-600 text-white px-4 py-2 rounded">Lihat Status : Pending/Belum Dikerjakan</a>
+                        <a href="{{ route('pemerintah.laporanbelumdikerjakan') }}" class="bg-green-600 text-white px-4 py-2 rounded">Lihat Status : Belum Dikerjakan</a>
                     </div>
                     <table class="w-full table-auto border-collapse">
                         <thead class="bg-gray-300">
