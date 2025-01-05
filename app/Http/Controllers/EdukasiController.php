@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Education;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 class EdukasiController extends Controller
 {
-    // Menampilkan daftar edukasi di halaman home
     public function index(Request $request)
     {
+        // Hapus data yang berusia lebih dari 5 hari
+        Education::where('created_at', '<', Carbon::now()->subDays(5))->delete();
+
         $query = Education::query();
 
         if ($request->has('search') && $request->search) {
             $query->where(function ($q) use ($request) {
                 $q->where('title', 'like', '%' . $request->search . '%')
-                  ->orWhere('author', 'like', '%' . $request->search . '%');
+                ->orWhere('author', 'like', '%' . $request->search . '%');
             });
         }
 
