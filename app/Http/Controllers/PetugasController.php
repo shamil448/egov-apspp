@@ -16,32 +16,7 @@ class PetugasController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        $petugas = $user->petugasPengangkutan;
-
-    if (!$petugas) {
-        return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke jadwal pengangkutan.');
-    }
-
-    $hariIni = Carbon::now()->translatedFormat('l'); // Mengambil nama hari sekarang (Senin, Selasa, dll.)
-
-    // Mendapatkan jadwal berdasarkan hari ini
-    $jadwalHariIni = JadwalPengangkutan::with('rw.kelurahan.kecamatan')
-        ->where('petugas_id', $petugas->id) // Filter berdasarkan petugas
-        ->where('hari', $hariIni)           // Filter berdasarkan hari sekarang
-        ->orderBy('hari', 'asc')          // Mengurutkan berdasarkan waktu
-        ->get();
-
-    $laporanselesai = LaporanTugas::whereHas('jadwalpengangkutan', function ($query) use ($petugas) {
-            $query->where('petugas_id', $petugas->id);
-        })->where('status_pengangkutan', 'Disetujui')->count();
-
-    $laporanpending = LaporanTugas::whereHas('jadwalpengangkutan', function ($query) use ($petugas) {
-            $query->where('petugas_id', $petugas->id);
-        })->where('status_pengangkutan', 'Pending')->count();
-
-    
-
-    return view('petugas.dashboard', compact('jadwalHariIni', 'hariIni', 'petugas', 'laporanselesai', 'laporanpending', 'user'));
+        return view('petugas.dashboard', compact('user'));
     }
 
     public function jadwalRute()
