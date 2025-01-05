@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\JadwalPengangkutan;
+use App\Models\PengangkutanDarurat;
+use App\Models\LaporanPengangkutanDarurat;
+use App\Models\User;
 use App\Models\LaporanTugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,8 +103,84 @@ class PetugasController extends Controller
         // Kirim data ke view
         return view('petugas.laporantugas', compact('laporan', 'user'));
     }
+    public function index()
+    {
+        $pengangkutanDarurat = PengangkutanDarurat::with(['rw.kelurahan.kecamatan'])->get();
+        return view('petugas.laporan-pengangkutan-darurat', compact('pengangkutanDarurat'));
+    }
 
+    /**
+     * Menampilkan form tambah laporan.
+     */
+    public function create($id)
+    {
+        $pengangkutanDarurat = PengangkutanDarurat::findOrFail($id);
+        return view('petugas.laporan-pengangkutan-darurat-tambah', compact('pengangkutanDarurat'));
+    }
 
+    /**
+     * Menyimpan laporan pengangkutan darurat.
+     */
+    public function store(Request $request)
+{
+    $request->validate([
+        'pengangkutan_darurat_id' => 'required|exists:pengangkutan_darurat,id',
+        'catatan' => 'required|string',
+        'foto' => 'required|array|min:3',
+        'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    // Menemukan pengangkutan darurat berdasarkan ID
+    $pengangkutanDarurat = PengangkutanDarurat::findOrFail($request->pengangkutan_darurat_id);
+
+    // Membuat laporan pengangkutan darurat baru
+    $laporanPengangkutanDarurat = new LaporanPengangkutanDarurat();
+    $laporanPengangkutanDarurat->pengangkutan_darurat_id = $pengangkutanDarurat->id;
+    $laporanPengangkutanDarurat->catatan = $request->catatan;
+
+    // Proses upload foto
+    $fotoPaths = [];
+    if ($request->hasFile('foto')) {
+        foreach ($request->file('foto') as $foto) {
+            $path = $foto->store('pengangkutan_darurat', 'public');
+            $fotoPaths[] = $path;
+        }
+    }
+
+    // Menyimpan path foto sebagai JSON
+    $laporanPengangkutanDarurat->foto = json_encode($fotoPaths);
+
+    // Simpan laporan
+    $laporanPengangkutanDarurat->save();
+
+    // Perbarui status pengangkutan darurat menjadi "Done"
+    $pengangkutanDarurat->status = 'Done';
+    $pengangkutanDarurat->save();
+
+    // Redirect setelah berhasil
+    return redirect()->route('petugas.pengangkutan-darurat')
+                     ->with('success', 'Laporan berhasil dikirim dan status diperbarui menjadi "Done".');
+}
+
+    /**
+     * Memperbarui status pengangkutan menjadi "Done".
+     */
+    public function updateStatus($id)
+{
+    // Temukan data pengangkutan darurat
+    $pengangkutanDarurat = PengangkutanDarurat::findOrFail($id);
+
+    // Pastikan status sebelumnya adalah "Progress" sebelum diubah menjadi "Done"
+    if ($pengangkutanDarurat->status === 'Progress') {
+        // Update status menjadi "Done"
+        $pengangkutanDarurat->update(['status' => 'Done']);
+        return redirect()->route('petugas.pengangkutan-darurat')
+                         ->with('success', 'Status berhasil diperbarui menjadi "Done".');
+    }
+
+    return redirect()->route('petugas.pengangkutan-darurat')
+                     ->with('error', 'Hanya pengangkutan dengan status "Progress" yang dapat diperbarui.');
+}
     public function logout(Request $request)
     {
         Auth::logout();

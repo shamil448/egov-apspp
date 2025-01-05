@@ -14,7 +14,7 @@ class LaporanPengangkutanDarurat extends Model
      *
      * @var string
      */
-    protected $table = 'laporan_pengangkutandarurat';
+    protected $table = 'laporan_pengangkutan_darurat';
 
     /**
      * The attributes that are mass assignable.
