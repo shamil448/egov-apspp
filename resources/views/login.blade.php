@@ -86,12 +86,6 @@
                     <button name="submit" type="submit" class="btn btn-primary">Login</button>
                 </div>
             </form>
-
-            <!-- Link Forgot Password -->
-            <div class="forgot-password">
-                <a href="{{ route('password.request') }}">Lupa Password?</a>
-            </div>
-
             @include('components.footer')
         </div>
     </div>
