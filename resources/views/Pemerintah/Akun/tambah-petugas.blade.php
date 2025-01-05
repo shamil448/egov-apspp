@@ -41,7 +41,7 @@
                     <label for="petugas_pengangkutan_id" class="block text-sm font-medium text-gray-700">Petugas Pengangkutan</label>
                     <select id="petugas_pengangkutan_id" name="petugas_pengangkutan_id" class="mt-1 block w-full" required>
                         @foreach($petugas as $petugasItem)
-                            <option value="{{ $petugasItem->id }}">{{ $petugasItem->nama_petugas }}</option>
+                            <option value="{{ $petugasItem->id }}">{{ $petugasItem->nama_petugas }}/{{ $petugasItem->kecamatan->nama_kecamatan }}</option>
                         @endforeach
                     </select>
                 </div>

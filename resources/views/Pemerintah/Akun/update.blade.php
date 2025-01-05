@@ -47,7 +47,7 @@
             <select id="petugas_pengangkutan_id" name="petugas_pengangkutan_id" class="mt-1 block w-full">
                 @foreach($petugas as $petugasItem)
                     <option value="{{ $petugasItem->id }}" {{ $user->petugas_pengangkutan_id == $petugasItem->id ? 'selected' : '' }}>
-                        {{ $petugasItem->nama_petugas }}
+                    {{ $petugasItem->nama_petugas }}/{{ $petugasItem->kecamatan->nama_kecamatan }}
                     </option>
                 @endforeach
             </select>
@@ -57,7 +57,7 @@
             <select id="rw_id" name="rw_id" class="mt-1 block w-full">
                 @foreach($rws as $rw)
                     <option value="{{ $rw->id }}" {{ $user->rw_id == $rw->id ? 'selected' : '' }}>
-                        {{ $rw->nama_rw }}
+                    {{ $rw->nama_rw }}/{{ $rw->kelurahan->kelurahan }}/{{ $rw->kelurahan->kecamatan->nama_kecamatan }}
                     </option>
                 @endforeach
             </select>

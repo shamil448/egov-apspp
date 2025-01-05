@@ -39,9 +39,12 @@ class PetugasController extends Controller
             $query->where('petugas_id', $petugas->id);
         })->where('status_pengangkutan', 'Pending')->count();
 
+        $laporandarurat = PengangkutanDarurat::where('petugas_pengangkutan_id', $petugas->id)
+        ->where('status', 'Done')
+        ->count();
     
 
-    return view('petugas.dashboard', compact('jadwalHariIni', 'hariIni', 'petugas', 'laporanselesai', 'laporanpending', 'user'));
+    return view('petugas.dashboard', compact('jadwalHariIni', 'hariIni', 'petugas', 'laporanselesai', 'laporanpending', 'laporandarurat', 'user'));
     }
 
     public function jadwalRute()
@@ -130,8 +133,9 @@ class PetugasController extends Controller
     }
     public function index()
     {
+        $user = Auth::user();
         $pengangkutanDarurat = PengangkutanDarurat::with(['rw.kelurahan.kecamatan'])->get();
-        return view('petugas.laporan-pengangkutan-darurat', compact('pengangkutanDarurat'));
+        return view('petugas.laporan-pengangkutan-darurat', compact('pengangkutanDarurat', 'user'));
     }
 
     /**
@@ -139,8 +143,9 @@ class PetugasController extends Controller
      */
     public function create($id)
     {
+        $user = Auth::user();
         $pengangkutanDarurat = PengangkutanDarurat::findOrFail($id);
-        return view('petugas.laporan-pengangkutan-darurat-tambah', compact('pengangkutanDarurat'));
+        return view('petugas.laporan-pengangkutan-darurat-tambah', compact('pengangkutanDarurat','user'));
     }
 
     /**

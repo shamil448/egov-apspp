@@ -163,7 +163,7 @@ Route::prefix('petugas')->middleware(['auth', 'role:Petugas'])->group(function (
     Route::post('/tambahlaporan', [PetugasController::class, 'tambahlaporansubmit'])->name('petugas.tambahlaporan.submit');
     Route::get('/laporantugas', [PetugasController::class, 'laporantugas'])->name('petugas.laporantugas');
     Route::get('/pengangkutan-darurat', [PetugasController::class, 'index'])->name('petugas.pengangkutan-darurat');
-    Route::get('/pengangkutan-darurat/tambah/{id}', [PetugasController::class, 'create'])->name('rw.pengangkutan-darurat-tambah');
+    Route::get('/pengangkutan-darurat/tambah/{id}', [PetugasController::class, 'create'])->name('petugas.pengangkutan-darurat-tambah');
     Route::post('/pengangkutan-darurat/store', [PetugasController::class, 'store'])->name('petugas.laporan-darurat.submit');
     Route::post('/pengangkutan-darurat/update-status/{id}', [PetugasController::class, 'updateStatus'])->name('petugas.laporan-darurat.update-status');
     Route::get('/logout', [PetugasController::class, 'logout'])->name('petugas.logout');

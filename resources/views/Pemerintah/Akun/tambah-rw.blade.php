@@ -41,7 +41,7 @@
                     <label for="rw_id" class="block text-sm font-medium text-gray-700">RW</label>
                     <select id="rw_id" name="rw_id" class="mt-1 block w-full" required>
                         @foreach($rws as $rw)
-                            <option value="{{ $rw->id }}">{{ $rw->nama_rw }}</option>
+                            <option value="{{ $rw->id }}">{{ $rw->nama_rw }}/{{ $rw->kelurahan->kelurahan }}/{{ $rw->kelurahan->kecamatan->nama_kecamatan }}</option>
                         @endforeach
                     </select>
                 </div>
