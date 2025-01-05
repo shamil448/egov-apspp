@@ -102,7 +102,8 @@ public function PengangkutanDarurat(Request $request)
 
     public function kritikSaranForm()
     {
-        return view('rw.kritik-saran');
+        $user = Auth::user();
+        return view('rw.kritik-saran', compact('user'));
     }
 
     public function submitKritikSaran(Request $request)

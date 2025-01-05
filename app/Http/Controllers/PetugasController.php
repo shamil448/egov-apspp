@@ -130,8 +130,9 @@ class PetugasController extends Controller
     }
     public function index()
     {
+        $user = Auth::user();
         $pengangkutanDarurat = PengangkutanDarurat::with(['rw.kelurahan.kecamatan'])->get();
-        return view('petugas.laporan-pengangkutan-darurat', compact('pengangkutanDarurat'));
+        return view('petugas.laporan-pengangkutan-darurat', compact('pengangkutanDarurat', 'user'));
     }
 
     /**
@@ -139,8 +140,9 @@ class PetugasController extends Controller
      */
     public function create($id)
     {
+        $user = Auth::user();
         $pengangkutanDarurat = PengangkutanDarurat::findOrFail($id);
-        return view('petugas.laporan-pengangkutan-darurat-tambah', compact('pengangkutanDarurat'));
+        return view('petugas.laporan-pengangkutan-darurat-tambah', compact('pengangkutanDarurat','user'));
     }
 
     /**

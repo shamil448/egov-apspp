@@ -50,7 +50,7 @@
                                 <td class="py-4 px-6 text-gray-600">{{ $item->status }}</td>
                                 <td class="py-4 px-6 text-gray-600">
                                     @if ($item->status != 'Done')
-                                    <a href="{{ route('rw.pengangkutan-darurat-tambah', $item->id) }}" 
+                                    <a href="{{ route('petugas.pengangkutan-darurat-tambah', $item->id) }}" 
                                 class="bg-blue-600 text-white px-4 py-2 rounded">Lapor</a>
                                 @else
                                     <span class="text-green-500 font-semibold">Done</span>

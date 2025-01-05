@@ -101,5 +101,5 @@
         doc.save(`laporan_kritik_saran_${lokasi}_${tanggal}.pdf`);
     }
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 @include('components.footer')
