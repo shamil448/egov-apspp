@@ -33,7 +33,12 @@ class PemerintahController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        return view('Pemerintah.dashboard', compact('user'));
+        $laporanall = LaporanTugas::all()->count();
+        $laporanselesai = LaporanTugas::where('status_pengangkutan', 'Disetujui')->count();
+        $laporanpending = LaporanTugas::where('status_pengangkutan', 'Pending')->count();
+        $laporansaran = KritikSaranRw::all()->count();
+
+        return view('Pemerintah.dashboard', compact('laporanall', 'laporanselesai', 'laporanpending', 'laporansaran', 'user'));
     }
 
     public function tambahAkun()
