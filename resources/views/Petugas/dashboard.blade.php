@@ -8,7 +8,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             <div class="bg-blue-600 text-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold">Jumlah Pengangkutan Darurat</h3>
-                <p class="text-3xl mt-4">0</p>
+                <p class="text-3xl mt-4">{{ $laporanselesai }}</p>
                 <p class="mt-2">Pengangkutan Darurat Yang ada</p>
             </div>
             <div class="bg-green-600 text-white p-6 rounded-lg shadow-md">

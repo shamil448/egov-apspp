@@ -39,9 +39,12 @@ class PetugasController extends Controller
             $query->where('petugas_id', $petugas->id);
         })->where('status_pengangkutan', 'Pending')->count();
 
+        $laporandarurat = PengangkutanDarurat::where('petugas_pengangkutan_id', $petugas->id)
+        ->where('status', 'Done')
+        ->count();
     
 
-    return view('petugas.dashboard', compact('jadwalHariIni', 'hariIni', 'petugas', 'laporanselesai', 'laporanpending', 'user'));
+    return view('petugas.dashboard', compact('jadwalHariIni', 'hariIni', 'petugas', 'laporanselesai', 'laporanpending', 'laporandarurat', 'user'));
     }
 
     public function jadwalRute()
